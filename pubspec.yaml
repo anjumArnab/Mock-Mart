@@ -1,0 +1,49 @@
+name: mock_mart
+description: ""
+
+publish_to: 'none'
+version: 1.0.0+1
+
+environment:
+  sdk: ^3.10.4
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  cupertino_icons: ^1.0.8
+  carousel_slider: ^5.1.1
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+  flutter_lints: ^6.0.0
+
+flutter:
+
+  uses-material-design: true
+
+  assets:
+    - assets/images/big_sale.png
+    - assets/images/img.png
+    - assets/images/banner.png
+    - assets/images/banner01.png
+    - assets/images/store_banner.png
+
+  fonts:
+    - family: Encode Sans
+      fonts:
+        - asset: assets/fonts/encode_sans.ttf
+
+    - family: Inter
+      fonts:
+        - asset: assets/fonts/inter.ttf
+
+    - family: SF Pro Rounded
+      fonts:
+        - asset: assets/fonts/sf_pro_rounded.ttf
+
+    - family: DM Sans
+      fonts:
+        - asset: assets/fonts/dm_sans.ttf
