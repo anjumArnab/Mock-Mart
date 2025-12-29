@@ -2,11 +2,10 @@
 
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:mock_mart/constants/size_config.dart';
 import 'package:mock_mart/constants/text_styles.dart';
 import 'package:mock_mart/constants/app_theme.dart';
 import 'package:mock_mart/widgets/deal_product_card.dart';
-import 'package:mock_mart/widgets/exclusive_product_card.dart';
-import 'package:mock_mart/widgets/featured_product_card.dart';
 import 'package:mock_mart/widgets/gradient_card.dart';
 import 'package:mock_mart/widgets/product_card.dart';
 import 'package:mock_mart/widgets/product_tab_button.dart';
@@ -38,6 +37,8 @@ class _MainHomePageState extends State<MainHomePage>
 
   @override
   Widget build(BuildContext context) {
+    SizeConfig.init(context);
+    
     return SafeArea(
       child: SingleChildScrollView(
         child: Column(
@@ -48,34 +49,35 @@ class _MainHomePageState extends State<MainHomePage>
             _buildNavTabs(),
 
             _buildSearchBar(),
-            const SizedBox(height: 20),
 
+            SizedBox(height: SizeConfig.blockHeight * 2.5),
             _buildOneTimeDeal(),
-            const SizedBox(height: 20),
 
+            SizedBox(height: SizeConfig.blockHeight * 2.5),
             _buildBigSaleBanner(),
-            const SizedBox(height: 20),
 
+            SizedBox(height: SizeConfig.blockHeight * 2.5),
             _buildFeaturedProduct(),
-            const SizedBox(height: 20),
 
+            SizedBox(height: SizeConfig.blockHeight * 2.5),
             _buildDealOfTheDay(),
-            const SizedBox(height: 20),
 
+            SizedBox(height: SizeConfig.blockHeight * 2.5),
             _buildBanner('assets/images/banner.png'),
-            const SizedBox(height: 20),
 
+            SizedBox(height: SizeConfig.blockHeight * 2.5),
             _buildNewUserExclusive(),
-            const SizedBox(height: 20),
 
+            SizedBox(height: SizeConfig.blockHeight * 2.5),
             _buildTopStores(),
-            const SizedBox(height: 20),
 
+            SizedBox(height: SizeConfig.blockHeight * 2.5),
             _buildBanner('assets/images/banner01.png'),
-            const SizedBox(height: 20),
 
+            SizedBox(height: SizeConfig.blockHeight * 2.5),
             _buildProductTabs(),
-            const SizedBox(height: 40),
+
+            SizedBox(height: SizeConfig.blockHeight * 5),
           ],
         ),
       ),
@@ -84,7 +86,7 @@ class _MainHomePageState extends State<MainHomePage>
 
   Widget _buildHeader() {
     return Container(
-      padding: const EdgeInsets.all(16),
+      padding: EdgeInsets.all(SizeConfig.blockWidth * 4),
       decoration: const BoxDecoration(color: AppTheme.primaryColor),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -94,25 +96,24 @@ class _MainHomePageState extends State<MainHomePage>
             children: [
               Text(
                 'Hello, Welcome',
-                style: helloWelcomeTextStyle.copyWith(
-                  color: AppTheme.lightCardWhite,
-                ),
+                style: helloWelcomeTextStyle
               ),
-              const SizedBox(height: 4),
 
+              SizedBox(height: SizeConfig.blockHeight * 0.5),
               Text(
                 'Albert Stevano',
-                style: userNameTextStyle.copyWith(
-                  color: AppTheme.lightCardWhite,
-                ),
+                style: userNameTextStyle
               ),
             ],
           ),
-
           CircleAvatar(
-            radius: 24,
+            radius: SizeConfig.blockWidth * 6,
             backgroundColor: AppTheme.lightCardWhite,
-            child: Icon(Icons.person, color: AppTheme.primaryColor),
+            child: Icon(
+              Icons.person, 
+              color: AppTheme.primaryColor,
+              size: SizeConfig.blockWidth * 6,
+            ),
           ),
         ],
       ),
@@ -124,7 +125,6 @@ class _MainHomePageState extends State<MainHomePage>
       color: AppTheme.primaryColor,
       child: TabBar(
         controller: _tabController,
-        //isScrollable: true,
         indicatorColor: AppTheme.lightSecondaryColor,
         indicatorWeight: 3,
         labelColor: AppTheme.lightCardWhite,
@@ -133,10 +133,15 @@ class _MainHomePageState extends State<MainHomePage>
         unselectedLabelStyle: tabBarTextStyle,
         tabs: const [
           Tab(text: 'Explore'),
+
           Tab(text: 'Sports'),
+
           Tab(text: 'Women\'s'),
+
           Tab(text: 'Kids'),
+
           Tab(text: 'Wigs'),
+
           Tab(text: 'Electronics'),
         ],
       ),
@@ -145,10 +150,10 @@ class _MainHomePageState extends State<MainHomePage>
 
   Widget _buildSearchBar() {
     return Container(
-      margin: const EdgeInsets.all(16),
+      margin: EdgeInsets.all(SizeConfig.blockWidth * 4),
       decoration: BoxDecoration(
         color: AppTheme.lightSubTitle,
-        borderRadius: BorderRadius.circular(8),
+        borderRadius: BorderRadius.circular(SizeConfig.blockWidth * 2),
         border: Border.all(color: AppTheme.lightInactive.withOpacity(0.3)),
       ),
       child: Row(
@@ -157,30 +162,33 @@ class _MainHomePageState extends State<MainHomePage>
             child: TextField(
               decoration: InputDecoration(
                 hintText: 'What are you looking for?',
-                hintStyle: TextStyle(color: Color(0xFFFFFFFF), fontSize: 16),
+                hintStyle: TextStyle(
+                  color: Color(0xFFFFFFFF), 
+                  fontSize: SizeConfig.blockWidth * 4,
+                ),
                 border: InputBorder.none,
-                contentPadding: const EdgeInsets.symmetric(
-                  horizontal: 16,
-                  vertical: 16,
+                contentPadding: EdgeInsets.symmetric(
+                  horizontal: SizeConfig.blockWidth * 4,
+                  vertical: SizeConfig.blockHeight * 2,
                 ),
               ),
             ),
           ),
 
           Container(
-            margin: const EdgeInsets.all(4),
+            margin: EdgeInsets.all(SizeConfig.blockWidth * 1),
             decoration: BoxDecoration(
               color: AppTheme.primaryColor,
-              borderRadius: BorderRadius.circular(6),
+              borderRadius: BorderRadius.circular(SizeConfig.blockWidth * 1.5),
             ),
             child: IconButton(
               onPressed: () {},
               icon: Icon(
                 Icons.search,
                 color: AppTheme.lightCardWhite,
-                size: 24,
+                size: SizeConfig.blockWidth * 6,
               ),
-              padding: const EdgeInsets.all(12),
+              padding: EdgeInsets.all(SizeConfig.blockWidth * 3),
               constraints: const BoxConstraints(),
             ),
           ),
@@ -191,7 +199,7 @@ class _MainHomePageState extends State<MainHomePage>
 
   Widget _buildFeaturedProduct() {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16),
+      padding: EdgeInsets.symmetric(horizontal: SizeConfig.blockWidth * 4),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -203,124 +211,29 @@ class _MainHomePageState extends State<MainHomePage>
               Text('View All', style: viewAllTextStyle),
             ],
           ),
-          const SizedBox(height: 16),
+          SizedBox(height: SizeConfig.blockHeight * 2),
           SizedBox(
-            height: 270,
-            child: ListView(
-              scrollDirection: Axis.horizontal,
-              children: [
-                FeaturedProductCard(
-                  title: 'Red Color Short Dress fo...',
-                  price: '\$323.87',
-                  oldPrice: '\$1100',
-                  discount: '-5%',
-                ),
-
-                FeaturedProductCard(
-                  title: 'Red Color Short Dress fo...',
-                  price: '\$323.87',
-                  oldPrice: '\$1100',
-                  discount: '-5%',
-                ),
-
-                FeaturedProductCard(
-                  title: 'Red Color Short Dress fo...',
-                  price: '\$323.87',
-                  oldPrice: '\$1100',
-                  discount: '-5%',
-                ),
-              ],
-
-            )
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildOneTimeDeal() {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Row(
-                children: [
-                  Text('One Time Deal', style: sectionTitleTextStyle),
-                  const SizedBox(width: 8),
-
-                  Stack(
-                    alignment: Alignment.center,
-                    children: [
-                      Icon(Icons.bolt, size: 40,color: AppTheme.lightSecondaryColor,),
-                      Container(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 8,
-                        vertical: 4,
-                      ),
-                      decoration: BoxDecoration(
-                        color: AppTheme.redTextColor,
-                        borderRadius: BorderRadius.circular(12),
-                      ),
-                      child: Text(
-                        'Upto 20%',
-                        style: discountPercentageTextStyle.copyWith(
-                          color: AppTheme.lightCardWhite,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ),
-                    ]
-                  ),
-                ],
-              ),
-              Container(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 10,
-                  vertical: 6,
-                ),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(6),
-                  border: Border.all(
-                    color: AppTheme.lightInactive.withOpacity(0.3),
-                  ),
-                ),
-                child: Row(
-                  children: [
-                    Text('Ends in ', style: endsInLabelTextStyle),
-
-                    Text('06:02:04:08', style: endsInTimeTextStyle),
-                  ],
-                ),
-              ),
-            ],
-          ),
-          const SizedBox(height: 16),
-          SizedBox(
-            height: 220,
+            height: SizeConfig.blockHeight * 28,
             child: ListView(
               scrollDirection: Axis.horizontal,
               children: [
                 ProductCard(
-                  title: 'Blue Color Short Dr...',
-                  price: '\$3237.87',
+                  title: 'Red Color Short Dress fo...',
+                  price: '\$323.87',
                   oldPrice: '\$1100',
                   discount: '-5%',
                 ),
 
                 ProductCard(
-                  title: 'Blue Color Short Dr...',
-                  price: '\$3237.87',
+                  title: 'Red Color Short Dress fo...',
+                  price: '\$323.87',
                   oldPrice: '\$1100',
                   discount: '-5%',
                 ),
 
                 ProductCard(
-                  title: 'Blue Color Short Dr...',
-                  price: '\$3237.87',
+                  title: 'Red Color Short Dress fo...',
+                  price: '\$323.87',
                   oldPrice: '\$1100',
                   discount: '-5%',
                 ),
@@ -332,10 +245,117 @@ class _MainHomePageState extends State<MainHomePage>
     );
   }
 
+  Widget _buildOneTimeDeal() {
+    return Container(
+        width: double.infinity,
+        decoration: BoxDecoration(color:AppTheme.lightInactive),
+        child: Padding(
+          padding: EdgeInsets.all(SizeConfig.blockWidth * 2),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Row(
+                    children: [
+                      Text('One Time Deal', style: sectionTitleTextStyle),
+
+                      SizedBox(width: SizeConfig.blockWidth * 2),
+                      Stack(
+                        alignment: Alignment.center,
+                        children: [
+                          Icon(
+                            Icons.bolt, 
+                            size: SizeConfig.blockWidth * 10,
+                            color: AppTheme.lightSecondaryColor,
+                          ),
+
+                          Container(
+                            padding: EdgeInsets.symmetric(
+                              horizontal: SizeConfig.blockWidth * 2,
+                              vertical: SizeConfig.blockHeight * 0.5,
+                            ),
+                            decoration: BoxDecoration(
+                              color: AppTheme.redTextColor,
+                              borderRadius: BorderRadius.circular(SizeConfig.blockWidth * 3),
+                            ),
+                            child: Text(
+                              'Upto 20%',
+                              style: discountPercentageTextStyle.copyWith(
+                                color: AppTheme.lightCardWhite,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+
+                  Container(
+                    padding: EdgeInsets.symmetric(
+                      horizontal: SizeConfig.blockWidth * 2.5,
+                      vertical: SizeConfig.blockHeight * 0.75,
+                    ),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(SizeConfig.blockWidth * 1.5),
+                      border: Border.all(
+                        color: AppTheme.lightInactive.withOpacity(0.3),
+                      ),
+                    ),
+                    child: Row(
+                      children: [
+                        Text('Ends in ', style: endsInLabelTextStyle),
+
+                        Text('06:02:04:08', style: endsInTimeTextStyle),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+              SizedBox(height: SizeConfig.blockHeight * 2),
+              SizedBox(
+                height: SizeConfig.blockHeight * 27,
+                child: ListView(
+                  scrollDirection: Axis.horizontal,
+                  children: [
+                    ProductCard(
+                      title: 'Blue Color Short Dr...',
+                      price: '\$3237.87',
+                      oldPrice: '\$1100',
+                      discount: '-5%',
+                    ),
+
+                    ProductCard(
+                      title: 'Blue Color Short Dr...',
+                      price: '\$3237.87',
+                      oldPrice: '\$1100',
+                      discount: '-5%',
+                    ),
+
+                    ProductCard(
+                      title: 'Blue Color Short Dr...',
+                      price: '\$3237.87',
+                      oldPrice: '\$1100',
+                      discount: '-5%',
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ),
+      
+    );
+  }
+
   Widget _buildBigSaleBanner() {
     final List<String> carouselImages = [
       'assets/images/big_sale.png',
+
       'assets/images/big_sale.png',
+
       'assets/images/big_sale.png',
     ];
 
@@ -343,7 +363,7 @@ class _MainHomePageState extends State<MainHomePage>
       children: [
         CarouselSlider(
           options: CarouselOptions(
-            height: 180,
+            height: SizeConfig.blockHeight * 22,
             autoPlay: true,
             autoPlayInterval: const Duration(seconds: 3),
             autoPlayAnimationDuration: const Duration(milliseconds: 800),
@@ -361,12 +381,12 @@ class _MainHomePageState extends State<MainHomePage>
               builder: (BuildContext context) {
                 return Container(
                   width: MediaQuery.of(context).size.width,
-                  margin: const EdgeInsets.symmetric(horizontal: 5.0),
+                  margin: EdgeInsets.symmetric(horizontal: SizeConfig.blockWidth * 1.25),
                   decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(12),
+                    borderRadius: BorderRadius.circular(SizeConfig.blockWidth * 3),
                   ),
                   child: ClipRRect(
-                    borderRadius: BorderRadius.circular(12),
+                    borderRadius: BorderRadius.circular(SizeConfig.blockWidth * 3),
                     child: Image.asset(imagePath, fit: BoxFit.cover),
                   ),
                 );
@@ -374,16 +394,16 @@ class _MainHomePageState extends State<MainHomePage>
             );
           }).toList(),
         ),
-        const SizedBox(height: 12),
+        SizedBox(height: SizeConfig.blockHeight * 1.5),
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: carouselImages.asMap().entries.map((entry) {
             return Container(
-              width: _currentCarouselIndex == entry.key ? 24.0 : 8.0,
-              height: 8.0,
-              margin: const EdgeInsets.symmetric(horizontal: 4.0),
+              width: _currentCarouselIndex == entry.key ? SizeConfig.blockWidth * 6 : SizeConfig.blockWidth * 2,
+              height: SizeConfig.blockHeight * 1,
+              margin: EdgeInsets.symmetric(horizontal: SizeConfig.blockWidth * 1),
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(4),
+                borderRadius: BorderRadius.circular(SizeConfig.blockWidth * 1),
                 color: _currentCarouselIndex == entry.key
                     ? AppTheme.primaryColor
                     : AppTheme.lightInactive.withOpacity(0.4),
@@ -397,24 +417,23 @@ class _MainHomePageState extends State<MainHomePage>
 
   Widget _buildDealOfTheDay() {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16),
+      padding: EdgeInsets.symmetric(horizontal: SizeConfig.blockWidth * 4),
       child: Container(
-        decoration: BoxDecoration(color: AppTheme.lightInactive),
+        decoration: BoxDecoration(color: AppTheme.lightInactive, borderRadius: BorderRadius.circular(SizeConfig.blockWidth * 1)),
         child: Padding(
-          padding: const EdgeInsets.all(8.0),
+          padding: EdgeInsets.all(SizeConfig.blockWidth * 2),
           child: Row(
             children: [
               Expanded(
-                flex: 1,
                 child: GradientCard(
                   title1: "Don't Miss",
                   title2: "Today's",
                   title3: "Deal",
                 ),
               ),
-              const SizedBox(width: 12),
+
+              SizedBox(width: SizeConfig.blockWidth * 3),
               Expanded(
-                flex: 1,
                 child: DealProductCard(
                   icon: Icons.watch,
                   iconColor: Colors.brown.shade700,
@@ -434,15 +453,15 @@ class _MainHomePageState extends State<MainHomePage>
 
   Widget _buildBanner(String imagePath) {
     return Container(
-      margin: const EdgeInsets.symmetric(horizontal: 16),
-      height: 140,
+      margin: EdgeInsets.symmetric(horizontal: SizeConfig.blockWidth * 4),
+      height: SizeConfig.blockHeight * 17,
       width: double.infinity,
       decoration: BoxDecoration(
         color: AppTheme.primaryColor,
-        borderRadius: BorderRadius.circular(12),
+        borderRadius: BorderRadius.circular(SizeConfig.blockWidth * 3),
       ),
       child: ClipRRect(
-        borderRadius: BorderRadius.circular(12),
+        borderRadius: BorderRadius.circular(SizeConfig.blockWidth * 3),
         child: Image.asset(imagePath, fit: BoxFit.cover),
       ),
     );
@@ -450,51 +469,44 @@ class _MainHomePageState extends State<MainHomePage>
 
   Widget _buildNewUserExclusive() {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16),
+      padding: EdgeInsets.symmetric(horizontal: SizeConfig.blockWidth * 4),
       child: Column(
         children: [
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text('New User Exclusive', style: sectionTitleTextStyle),
+
               TextButton(
                 onPressed: () {},
-                child: Text(
-                  'View all',
-                  style: viewAllTextStyle
-                ),
+                child: Text('View all', style: viewAllTextStyle),
               ),
             ],
           ),
-          const SizedBox(height: 12),
+
+          SizedBox(height: SizeConfig.blockHeight * 1.5),
           SizedBox(
-            height: 220,
+            height: SizeConfig.blockHeight * 27,
             child: ListView(
               scrollDirection: Axis.horizontal,
               children: [
-                ExclusiveProductCard(
+                ProductCard(
                   title: 'Red Color Short Dress fo...',
                   price: '\$323.87',
                   oldPrice: '\$1100',
                   discount: '-5%',
-                  bgColor: Colors.amber.shade100,
                 ),
-
-                ExclusiveProductCard(
+                ProductCard(
                   title: 'Red Color Short Dress fo...',
                   price: '\$323.87',
                   oldPrice: '\$1100',
                   discount: '-5%',
-                  badge: 'Sale',
-                  bgColor: Colors.amber.shade200,
                 ),
-
-                ExclusiveProductCard(
+                ProductCard(
                   title: 'Red Color Short Dress fo...',
                   price: '\$323.87',
                   oldPrice: '\$1100',
                   discount: '-5%',
-                  bgColor: Colors.amber.shade100,
                 ),
               ],
             ),
@@ -506,7 +518,7 @@ class _MainHomePageState extends State<MainHomePage>
 
   Widget _buildTopStores() {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16),
+      padding: EdgeInsets.symmetric(horizontal: SizeConfig.blockWidth * 4),
       child: Column(
         children: [
           Row(
@@ -516,16 +528,14 @@ class _MainHomePageState extends State<MainHomePage>
 
               TextButton(
                 onPressed: () {},
-                child: Text(
-                  'View all',
-                  style: viewAllTextStyle
-                ),
+                child: Text('View all', style: viewAllTextStyle),
               ),
             ],
           ),
-          const SizedBox(height: 12),
+
+          SizedBox(height: SizeConfig.blockHeight * 1.5),
           SizedBox(
-            height: 220,
+            height: SizeConfig.blockHeight * 27,
             child: ListView(
               scrollDirection: Axis.horizontal,
               children: [
@@ -535,7 +545,7 @@ class _MainHomePageState extends State<MainHomePage>
                   products: '100 Products',
                   reviews: '12 reviews',
                 ),
-
+                
                 StoreCard(
                   name: 'Morning Mart',
                   rating: 4.5,
@@ -552,7 +562,7 @@ class _MainHomePageState extends State<MainHomePage>
 
   Widget _buildProductTabs() {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16),
+      padding: EdgeInsets.symmetric(horizontal: SizeConfig.blockWidth * 4),
       child: Column(
         children: [
           SingleChildScrollView(
@@ -560,50 +570,49 @@ class _MainHomePageState extends State<MainHomePage>
             child: Row(
               children: [
                 ProductTabButton(text: 'New Arrivals', isActive: true),
-                const SizedBox(width: 12),
 
+                SizedBox(width: SizeConfig.blockWidth * 3),
                 ProductTabButton(text: 'Discounted Products', isActive: false),
-                const SizedBox(width: 12),
 
+                SizedBox(width: SizeConfig.blockWidth * 3),
                 ProductTabButton(text: 'Top Products', isActive: false),
               ],
             ),
           ),
-          const SizedBox(height: 16),
+          SizedBox(height: SizeConfig.blockHeight * 2),
           SizedBox(
-            height: 400,
+            height: SizeConfig.blockHeight * 50,
             child: GridView(
               shrinkWrap: true,
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 2,
-                mainAxisSpacing: 7,
-                crossAxisSpacing: 7,
-
+                mainAxisSpacing: SizeConfig.blockHeight * 0.9,
+                crossAxisSpacing: SizeConfig.blockWidth * 1.75,
               ),
               scrollDirection: Axis.horizontal,
               children: [
-                FeaturedProductCard(
-                  title: 'Red Color Short Dress fo...',
-                  price: '\$323.87',
-                  oldPrice: '\$1100',
-                  discount: '-5%'
-                ),
-
-                FeaturedProductCard(
+                ProductCard(
                   title: 'Red Color Short Dress fo...',
                   price: '\$323.87',
                   oldPrice: '\$1100',
                   discount: '-5%',
                 ),
 
-                FeaturedProductCard(
+                ProductCard(
                   title: 'Red Color Short Dress fo...',
                   price: '\$323.87',
                   oldPrice: '\$1100',
                   discount: '-5%',
                 ),
 
-                FeaturedProductCard(
+                ProductCard(
+                  title: 'Red Color Short Dress fo...',
+                  price: '\$323.87',
+                  oldPrice: '\$1100',
+                  discount: '-5%',
+                ),
+                
+                ProductCard(
                   title: 'Red Color Short Dress fo...',
                   price: '\$323.87',
                   oldPrice: '\$1100',

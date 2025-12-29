@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mock_mart/constants/app_theme.dart';
+import 'package:mock_mart/constants/size_config.dart';
 import 'package:mock_mart/constants/text_styles.dart';
 
 class ProductCard extends StatelessWidget {
@@ -7,7 +8,6 @@ class ProductCard extends StatelessWidget {
   final String price;
   final String oldPrice;
   final String discount;
-
 
   const ProductCard({
     super.key,
@@ -25,13 +25,15 @@ class ProductCard extends StatelessWidget {
         Stack(
           children: [
             Container(
-              height: 120,
-              width: 120,
+              height: SizeConfig.blockHeight * 15,
+              width: SizeConfig.blockWidth * 30,
               decoration: BoxDecoration(
-                borderRadius: const BorderRadius.all(Radius.circular(12)),
+                borderRadius: BorderRadius.all(
+                  Radius.circular(SizeConfig.blockWidth * 3),
+                ),
               ),
               child: ClipRRect(
-                borderRadius: BorderRadius.circular(12),
+                borderRadius: BorderRadius.circular(SizeConfig.blockWidth * 3),
                 child: Image.asset(
                   'assets/images/img.png',
                   fit: BoxFit.cover,
@@ -40,26 +42,25 @@ class ProductCard extends StatelessWidget {
             ),
 
             Positioned(
-              bottom: 8,
-              right: 8,
+              bottom: SizeConfig.blockHeight * 1,
+              right: SizeConfig.blockWidth * 2,
               child: Container(
-                padding: const EdgeInsets.all(6),
+                padding: EdgeInsets.all(SizeConfig.blockWidth * 1.5),
                 decoration: const BoxDecoration(
                   color: AppTheme.lightCardWhite,
                   shape: BoxShape.circle,
                 ),
-                child: const Icon(
+                child: Icon(
                   Icons.favorite_border,
-                  size: 18,
+                  size: SizeConfig.blockWidth * 4.5,
                   color: AppTheme.lightNegative,
                 ),
               ),
             ),
           ],
         ),
-
         Padding(
-          padding: const EdgeInsets.all(8),
+          padding: EdgeInsets.all(SizeConfig.blockWidth * 2),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -70,22 +71,22 @@ class ProductCard extends StatelessWidget {
                 overflow: TextOverflow.ellipsis,
               ),
 
-              const SizedBox(height: 4),
-
+              SizedBox(height: SizeConfig.blockHeight * 0.5),
               Text(price, style: productPriceTextStyle),
 
               Row(
                 children: [
                   Text(oldPrice, style: discountedPriceTextStyle),
-                  const SizedBox(width: 4),
+                  
+                  SizedBox(width: SizeConfig.blockWidth * 1),
                   Container(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 4,
-                      vertical: 2,
+                    padding: EdgeInsets.symmetric(
+                      horizontal: SizeConfig.blockWidth * 1,
+                      vertical: SizeConfig.blockHeight * 0.25,
                     ),
                     decoration: BoxDecoration(
                       color: AppTheme.lightNegative,
-                      borderRadius: BorderRadius.circular(4),
+                      borderRadius: BorderRadius.circular(SizeConfig.blockWidth * 1),
                     ),
                     child: Text(discount, style: discountPercentageTextStyle),
                   ),

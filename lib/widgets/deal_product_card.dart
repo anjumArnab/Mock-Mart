@@ -1,4 +1,7 @@
+// ignore_for_file: deprecated_member_use
+
 import 'package:flutter/material.dart';
+import 'package:mock_mart/constants/size_config.dart';
 import 'package:mock_mart/constants/text_styles.dart';
 
 class DealProductCard extends StatelessWidget {
@@ -24,14 +27,13 @@ class DealProductCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      //height: 200,
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(12),
+        borderRadius: BorderRadius.circular(SizeConfig.blockWidth * 3),
         boxShadow: [
           BoxShadow(
             color: Colors.black.withOpacity(0.1),
-            blurRadius: 8,
-            offset: const Offset(0, 2),
+            blurRadius: SizeConfig.blockWidth * 2,
+            offset: Offset(0, SizeConfig.blockHeight * 0.25),
           ),
         ],
       ),
@@ -41,40 +43,59 @@ class DealProductCard extends StatelessWidget {
           Stack(
             children: [
               Container(
-                height: 120,
+                height: SizeConfig.blockHeight * 15,
                 decoration: BoxDecoration(
-                  color: Colors.brown.shade300,
-                  borderRadius: const BorderRadius.all(Radius.circular(12)),
+                  borderRadius: BorderRadius.all(
+                    Radius.circular(SizeConfig.blockWidth * 3),
+                  ),
                 ),
                 child: Image.asset(
                   'assets/images/img.png',
                   fit: BoxFit.cover,
                 ),
               ),
+
               Positioned(
-                bottom: 8,
-                right: 8,
+                bottom: SizeConfig.blockHeight * 1,
+                right: SizeConfig.blockWidth * 2,
                 child: Container(
-                  padding: const EdgeInsets.all(6),
-                  decoration: BoxDecoration(
+                  padding: EdgeInsets.all(SizeConfig.blockWidth * 1.5),
+                  decoration: const BoxDecoration(
                     shape: BoxShape.circle,
                   ),
-                  child: const Icon(Icons.favorite, size: 18, color: Colors.red),
+                  child: Icon(
+                    Icons.favorite, 
+                    size: SizeConfig.blockWidth * 4.5, 
+                    color: Colors.red,
+                  ),
                 ),
               ),
             ],
           ),
           Padding(
-            padding: const EdgeInsets.all(8.0),
+            padding: EdgeInsets.all(SizeConfig.blockWidth * 2),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Row(
                   children: [
-                    Icon(Icons.star, color: Colors.amber),
-                    Text('$rating ($reviews Reviews)', style: productTitleTextStyle,),
-                    const SizedBox(width: 8),
-                    Icon(Icons.discount, color: Colors.green),
+                    Icon(
+                      Icons.star, 
+                      color: Colors.amber,
+                      size: SizeConfig.blockWidth * 4,
+                    ),
+
+                    Text(
+                      '$rating ($reviews Reviews)', 
+                      style: productTitleTextStyle,
+                    ),
+
+                    SizedBox(width: SizeConfig.blockWidth * 2),
+                    Icon(
+                      Icons.discount, 
+                      color: Colors.green,
+                      size: SizeConfig.blockWidth * 4,
+                    ),
                   ],
                 ),
                 Text(
@@ -83,6 +104,7 @@ class DealProductCard extends StatelessWidget {
                   overflow: TextOverflow.ellipsis,
                   style: productPriceTextStyle,
                 ),
+                
                 Text('\$$price', style: productPriceTextStyle),
               ],
             ),

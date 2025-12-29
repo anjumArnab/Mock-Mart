@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mock_mart/constants/app_theme.dart';
+import 'package:mock_mart/constants/size_config.dart';
 import 'package:mock_mart/constants/text_styles.dart';
 
 class StoreCard extends StatelessWidget {
@@ -19,69 +20,69 @@ class StoreCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 200,
-      height: 143,
-      margin: const EdgeInsets.only(right: 12),
+      width: SizeConfig.blockWidth * 50,
+      height: SizeConfig.blockHeight * 18,
+      margin: EdgeInsets.only(right: SizeConfig.blockWidth * 3),
       decoration: BoxDecoration(
         color: AppTheme.lightSubTitle,
-        borderRadius: BorderRadius.circular(12),
-        
+        borderRadius: BorderRadius.circular(SizeConfig.blockWidth * 3),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           SizedBox(
-            height: 100,
+            height: SizeConfig.blockHeight * 12.5,
             width: double.infinity,
             child: ClipRRect(
-                borderRadius: BorderRadius.vertical(top: Radius.circular(12)),
-                child: Image.asset(
-                  'assets/images/store_banner.png',
-                  fit: BoxFit.cover,
-                ),
+              borderRadius: BorderRadius.vertical(
+                top: Radius.circular(SizeConfig.blockWidth * 3),
               ),
+              child: Image.asset(
+                'assets/images/store_banner.png',
+                fit: BoxFit.cover,
+              ),
+            ),
           ),
-
+          
           Padding(
-            padding: const EdgeInsets.all(12),
+            padding: EdgeInsets.all(SizeConfig.blockWidth * 3),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Row(
                   children: [
                     Container(
-                      width: 40,
-                      height: 40,
+                      width: SizeConfig.blockWidth * 10,
+                      height: SizeConfig.blockWidth * 10,
                       decoration: BoxDecoration(
                         color: AppTheme.lightNegative,
-                        borderRadius: BorderRadius.circular(8),
+                        borderRadius: BorderRadius.circular(SizeConfig.blockWidth * 2),
                       ),
-                      child: const Icon(
+                      child: Icon(
                         Icons.store,
                         color: AppTheme.lightCardWhite,
-                        size: 24,
+                        size: SizeConfig.blockWidth * 6,
                       ),
                     ),
-                    const SizedBox(width: 12),
+                    SizedBox(width: SizeConfig.blockWidth * 3),
                     Expanded(
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(
-                            name,
-                            style: productTitleTextStyle
-                          ),
+                          Text(name, style: productTitleTextStyle),
+
                           Row(
                             children: [
-                              const Icon(
+                              Icon(
                                 Icons.star,
                                 color: AppTheme.lightWarning,
-                                size: 14,
+                                size: SizeConfig.blockWidth * 3.5,
                               ),
-                              const SizedBox(width: 4),
+
+                              SizedBox(width: SizeConfig.blockWidth * 1),
                               Text(
                                 rating.toString(),
-                                style: productTitleTextStyle
+                                style: productTitleTextStyle,
                               ),
                             ],
                           ),
@@ -90,20 +91,20 @@ class StoreCard extends StatelessWidget {
                     ),
                   ],
                 ),
-
-                const SizedBox(height: 12),
-                Divider(),
+                SizedBox(height: SizeConfig.blockHeight * 1.5),
+                const Divider(),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Row(
                       children: [
-                        const Icon(
+                        Icon(
                           Icons.inventory_2_outlined,
                           color: AppTheme.lightSuccess,
-                          size: 14,
+                          size: SizeConfig.blockWidth * 3.5,
                         ),
-                        const SizedBox(width: 4),
+
+                        SizedBox(width: SizeConfig.blockWidth * 1),
                         Text(
                           products,
                           style: discountedPriceTextStyle.copyWith(
@@ -113,6 +114,7 @@ class StoreCard extends StatelessWidget {
                         ),
                       ],
                     ),
+
                     Text(
                       reviews,
                       style: discountedPriceTextStyle.copyWith(

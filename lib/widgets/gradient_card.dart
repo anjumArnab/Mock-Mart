@@ -1,6 +1,5 @@
-
-
 import 'package:flutter/material.dart';
+import 'package:mock_mart/constants/size_config.dart';
 
 class GradientCard extends StatelessWidget {
   final String title1;
@@ -20,18 +19,39 @@ class GradientCard extends StatelessWidget {
       child: Container(
         decoration: BoxDecoration(
           color: Colors.blue,
-          
-          borderRadius: BorderRadius.circular(12),
+          borderRadius: BorderRadius.circular(SizeConfig.blockWidth * 3),
         ),
         child: Center(
           child: Padding(
-            padding: const EdgeInsets.all(16.0),
+            padding: EdgeInsets.all(SizeConfig.blockWidth * 4),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text(title1, style: TextStyle(color: Colors.white, fontSize: 18)),
-                Text(title2, style: TextStyle(color: Colors.white, fontSize: 24, fontWeight: FontWeight.bold)),
-                Text(title3, style: TextStyle(color: Colors.white, fontSize: 24, fontWeight: FontWeight.bold)),
+                Text(
+                  title1, 
+                  style: TextStyle(
+                    color: Colors.white, 
+                    fontSize: SizeConfig.blockWidth * 4.5,
+                  ),
+                ),
+
+                Text(
+                  title2, 
+                  style: TextStyle(
+                    color: Colors.white, 
+                    fontSize: SizeConfig.blockWidth * 6, 
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                
+                Text(
+                  title3, 
+                  style: TextStyle(
+                    color: Colors.white, 
+                    fontSize: SizeConfig.blockWidth * 6, 
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
               ],
             ),
           ),

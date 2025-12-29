@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:mock_mart/constants/app_theme.dart';
+import 'package:mock_mart/constants/size_config.dart';
 import 'package:mock_mart/constants/text_styles.dart';
 
 class SearchBar extends StatelessWidget {
@@ -17,10 +18,10 @@ class SearchBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.all(16),
+      margin: EdgeInsets.all(SizeConfig.blockWidth * 4),
       decoration: BoxDecoration(
         color: AppTheme.lightSubTitle,
-        borderRadius: BorderRadius.circular(8),
+        borderRadius: BorderRadius.circular(SizeConfig.blockWidth * 2),
         border: Border.all(
           color: AppTheme.lightInactive.withOpacity(0.3),
         ),
@@ -37,30 +38,31 @@ class SearchBar extends StatelessWidget {
                 hintText: 'What are you looking for?',
                 hintStyle: TextStyle(
                   color: AppTheme.lightInactive,
-                  fontSize: 16,
+                  fontSize: SizeConfig.blockWidth * 4,
                 ),
                 border: InputBorder.none,
-                contentPadding: const EdgeInsets.symmetric(
-                  horizontal: 16,
-                  vertical: 16,
+                contentPadding: EdgeInsets.symmetric(
+                  horizontal: SizeConfig.blockWidth * 4,
+                  vertical: SizeConfig.blockHeight * 2,
                 ),
               ),
             ),
           ),
+          
           Container(
-            margin: const EdgeInsets.all(4),
+            margin: EdgeInsets.all(SizeConfig.blockWidth * 1),
             decoration: BoxDecoration(
               color: AppTheme.primaryColor,
-              borderRadius: BorderRadius.circular(6),
+              borderRadius: BorderRadius.circular(SizeConfig.blockWidth * 1.5),
             ),
             child: IconButton(
               onPressed: onSearch,
-              icon: const Icon(
+              icon: Icon(
                 Icons.search,
                 color: AppTheme.lightCardWhite,
-                size: 24,
+                size: SizeConfig.blockWidth * 6,
               ),
-              padding: const EdgeInsets.all(12),
+              padding: EdgeInsets.all(SizeConfig.blockWidth * 3),
               constraints: const BoxConstraints(),
             ),
           ),

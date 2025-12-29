@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mock_mart/constants/app_theme.dart';
+import 'package:mock_mart/constants/size_config.dart';
 import 'package:mock_mart/constants/text_styles.dart';
 
 class ProductTabButton extends StatelessWidget {
@@ -19,24 +20,19 @@ class ProductTabButton extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        padding: const EdgeInsets.symmetric(
-          horizontal: 16,
-          vertical: 10,
+        padding: EdgeInsets.symmetric(
+          horizontal: SizeConfig.blockWidth * 4,
+          vertical: SizeConfig.blockHeight * 1.25,
         ),
         decoration: BoxDecoration(
-          color: isActive
-              ? AppTheme.primaryColor
-              : AppTheme.lightInactive,
-          borderRadius: BorderRadius.circular(8),
+          color: isActive ? AppTheme.primaryColor : AppTheme.lightInactive,
+          borderRadius: BorderRadius.circular(SizeConfig.blockWidth * 2),
         ),
         child: Text(
           text,
           style: productTabTextStyle.copyWith(
-            color: isActive
-                ? AppTheme.lightCardWhite
-                : AppTheme.lightSubTitle,
-            fontWeight:
-                isActive ? FontWeight.bold : FontWeight.w600,
+            color: isActive ? AppTheme.lightCardWhite : AppTheme.lightSubTitle,
+            fontWeight: isActive ? FontWeight.bold : FontWeight.w600,
           ),
         ),
       ),
