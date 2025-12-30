@@ -21,10 +21,12 @@ class _MainHomePageState extends State<MainHomePage>
   late TabController _tabController;
   int _currentCarouselIndex = 0;
 
+
   @override
   void initState() {
     super.initState();
     _tabController = TabController(length: 6, vsync: this);
+
   }
 
   @override
@@ -38,35 +40,39 @@ class _MainHomePageState extends State<MainHomePage>
     SizeConfig.init(context);
 
     return SafeArea(
-      child: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            _buildHeader(),
-            _buildNavTabs(),
-            _buildSearchBar(),
-            SizedBox(height: SizeConfig.blockHeight * 2.5),
-            _buildOneTimeDeal(),
-            SizedBox(height: SizeConfig.blockHeight * 2.5),
-            _buildBigSaleBanner(),
-            SizedBox(height: SizeConfig.blockHeight * 2.5),
-            _buildFeaturedProduct(),
-            SizedBox(height: SizeConfig.blockHeight * 2.5),
-            _buildDealOfTheDay(),
-            SizedBox(height: SizeConfig.blockHeight * 2.5),
-            _buildBanner('assets/images/banner.png'),
-            SizedBox(height: SizeConfig.blockHeight * 2.5),
-            _buildNewUserExclusive(),
-            SizedBox(height: SizeConfig.blockHeight * 2.5),
-            _buildTopStores(),
-            SizedBox(height: SizeConfig.blockHeight * 2.5),
-            _buildBanner('assets/images/banner01.png'),
-            SizedBox(height: SizeConfig.blockHeight * 2.5),
-            _buildProductTabs(),
-            SizedBox(height: SizeConfig.blockHeight * 5),
+      child: SafeArea(
+        child: CustomScrollView(
+          slivers: [
+            SliverToBoxAdapter(child: _buildHeader()),
+            SliverToBoxAdapter(child: _buildNavTabs()),
+            SliverPersistentHeader(
+              pinned: true,
+              delegate: _SearchBarDelegate(_buildSearchBar()),
+            ),
+            SliverToBoxAdapter(child: SizedBox(height: SizeConfig.blockHeight * 2.5)),
+            SliverToBoxAdapter(child: _buildOneTimeDeal()),
+            SliverToBoxAdapter(child: SizedBox(height: SizeConfig.blockHeight * 2.5)),
+            SliverToBoxAdapter(child: _buildBigSaleBanner()),
+            SliverToBoxAdapter(child: SizedBox(height: SizeConfig.blockHeight * 2.5)),
+            SliverToBoxAdapter(child: _buildFeaturedProduct()),
+            SliverToBoxAdapter(child: SizedBox(height: SizeConfig.blockHeight * 2.5)),
+            SliverToBoxAdapter(child: _buildDealOfTheDay()),
+            SliverToBoxAdapter(child: SizedBox(height: SizeConfig.blockHeight * 2.5)),
+            SliverToBoxAdapter(child: _buildBanner('assets/images/banner.png')),
+            SliverToBoxAdapter(child: SizedBox(height: SizeConfig.blockHeight * 2.5)),
+            SliverToBoxAdapter(child: _buildNewUserExclusive()),
+            SliverToBoxAdapter(child: SizedBox(height: SizeConfig.blockHeight * 2.5)),
+            SliverToBoxAdapter(child: _buildTopStores()),
+            SliverToBoxAdapter(child: SizedBox(height: SizeConfig.blockHeight * 2.5)),
+            SliverToBoxAdapter(child: _buildBanner('assets/images/banner01.png')),
+            SliverToBoxAdapter(child: SizedBox(height: SizeConfig.blockHeight * 2.5)),
+            SliverToBoxAdapter(child: _buildProductTabs()),
+            SliverToBoxAdapter(child: SizedBox(height: SizeConfig.blockHeight * 2.5)),
+            SliverToBoxAdapter(child: SizedBox(height: SizeConfig.blockHeight * 5)),
           ],
         ),
-      ),
+      )
+
     );
   }
 
@@ -205,7 +211,7 @@ class _MainHomePageState extends State<MainHomePage>
                   SizedBox(width: SizeConfig.blockWidth * 2.5),
               itemCount: 3,
               itemBuilder: (context, index) => ProductCard(
-                title: 'Red Color Short Dress fo...',
+                title: 'Red Color Short Dress for Girls',
                 price: '\$323.87',
                 oldPrice: '\$1100',
                 discount: '-5%',
@@ -306,32 +312,10 @@ class _MainHomePageState extends State<MainHomePage>
             SizedBox(height: SizeConfig.blockHeight * 2),
             SizedBox(
               height: SizeConfig.blockHeight * 27,
-              child: /*ListView(
-                scrollDirection: Axis.horizontal,
-                children: [
-                  ProductCard(
-                    title: 'Blue Color Short Dr...',
-                    price: '\$3237.87',
-                    oldPrice: '\$1100',
-                    discount: '-5%',
-                  ),
-                  ProductCard(
-                    title: 'Blue Color Short Dr...',
-                    price: '\$3237.87',
-                    oldPrice: '\$1100',
-                    discount: '-5%',
-                  ),
-                  ProductCard(
-                    title: 'Blue Color Short Dr...',
-                    price: '\$3237.87',
-                    oldPrice: '\$1100',
-                    discount: '-5%',
-                  ),
-                ],
-              ),*/ ListView.separated(
+              child: ListView.separated(
                 scrollDirection: Axis.horizontal,
                 itemBuilder: (context, index) => ProductCard(
-                  title: 'Blue Color Short Dr...',
+                  title: 'Blue Color Short Dress for boys',
                   price: '\$3237.87',
                   oldPrice: '\$1100',
                   discount: '-5%',
@@ -444,7 +428,7 @@ class _MainHomePageState extends State<MainHomePage>
                 child: DealProductCard(
                   icon: Icons.watch,
                   iconColor: Colors.brown.shade700,
-                  title: 'Red Color Short Dress for Girls...',
+                  title: 'Red Color Short Dress for Girls',
                   price: 323.87,
                   rating: 4.5,
                   reviews: 12,
@@ -508,7 +492,7 @@ class _MainHomePageState extends State<MainHomePage>
                   SizedBox(width: SizeConfig.blockWidth * 2.5),
               itemCount: 3,
               itemBuilder: (context, index) => ProductCard(
-                title: 'Red Color Short Dress fo...',
+                title: 'Red Color Short Dress for Girls',
                 price: '\$323.87',
                 oldPrice: '\$1100',
                 discount: '-5%',
@@ -594,25 +578,25 @@ class _MainHomePageState extends State<MainHomePage>
               scrollDirection: Axis.horizontal,
               children: [
                 ProductCard(
-                  title: 'Red Color Short Dress fo...',
+                  title: 'Red Color Short Dress for Girls',
                   price: '\$323.87',
                   oldPrice: '\$1100',
                   discount: '-5%',
                 ),
                 ProductCard(
-                  title: 'Red Color Short Dress fo...',
+                  title: 'Red Color Short Dress for Girls',
                   price: '\$323.87',
                   oldPrice: '\$1100',
                   discount: '-5%',
                 ),
                 ProductCard(
-                  title: 'Red Color Short Dress fo...',
+                  title: 'Red Color Short Dress for Girls',
                   price: '\$323.87',
                   oldPrice: '\$1100',
                   discount: '-5%',
                 ),
                 ProductCard(
-                  title: 'Red Color Short Dress fo...',
+                  title: 'Red Color Short Dress for Girls',
                   price: '\$323.87',
                   oldPrice: '\$1100',
                   discount: '-5%',
@@ -624,4 +608,24 @@ class _MainHomePageState extends State<MainHomePage>
       ),
     );
   }
+}
+
+class _SearchBarDelegate extends SliverPersistentHeaderDelegate {
+  final Widget child;
+
+  _SearchBarDelegate(this.child);
+
+  @override
+  double get minExtent => 90;
+
+  @override
+  double get maxExtent => 90;
+
+  @override
+  Widget build(BuildContext context, double shrinkOffset, bool overlapsContent) {
+    return child;
+  }
+
+  @override
+  bool shouldRebuild(_) => false;
 }
