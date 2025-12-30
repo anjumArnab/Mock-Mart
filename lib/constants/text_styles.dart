@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:mock_mart/constants/app_theme.dart';
 
 const encodeSansRegular = TextStyle(
   fontFamily: 'Encode Sans',
@@ -47,124 +46,108 @@ const dmSansBold = TextStyle(
   fontWeight: FontWeight.w700,
 );
 
-/// Header: "Hello, Welcome"
+/// Header: "Hello, Welcome" - NO COLOR (will be set dynamically)
 const helloWelcomeTextStyle = TextStyle(
   fontFamily: 'Encode Sans',
   fontWeight: FontWeight.w400,
   fontSize: 12,
-  color: AppTheme.whiteTextColor
 );
 
-/// Header: User Name
+/// Header: User Name - NO COLOR (will be set dynamically)
 const userNameTextStyle = TextStyle(
   fontFamily: 'Encode Sans',
   fontWeight: FontWeight.w700,
   fontSize: 14,
-  color: AppTheme.whiteTextColor
 );
 
-/// Tab Bar Text
+/// Tab Bar Text - NO COLOR (will be set dynamically)
 const tabBarTextStyle = TextStyle(
   fontFamily: 'Inter',
   fontWeight: FontWeight.w400,
   fontSize: 12,
-  color: AppTheme.whiteTextColor
 );
 
-/// Search Bar Text
+/// Search Bar Text - NO COLOR (will be set dynamically)
 const searchBarTextStyle = TextStyle(
   fontFamily: 'Inter',
   fontWeight: FontWeight.w600,
   fontSize: 13,
-  color: AppTheme.whiteTextColor
 );
 
-/// Section Title ("One Time Deal", "Top Stores")
+/// Section Title - NO COLOR (will be set dynamically)
 const sectionTitleTextStyle = TextStyle(
   fontFamily: 'Inter',
   fontWeight: FontWeight.w400,
   fontSize: 14,
-  color: AppTheme.whiteSectionTextColor,
 );
 
-/// "View All" Button Text
+/// "View All" Button Text - NO COLOR (will be set dynamically)
 const viewAllTextStyle = TextStyle(
   fontFamily: 'Inter',
   fontWeight: FontWeight.w700,
   fontSize: 14,
-  color: AppTheme.whiteSectionTextColor,
-
 );
 
-/// Bottom Navigation Bar Selected Item
+/// Bottom Navigation Bar Selected Item - NO COLOR (will be set dynamically)
 const bottomNavSelectedTextStyle = TextStyle(
   fontFamily: 'Inter',
   fontWeight: FontWeight.w600,
   fontSize: 12,
-  color: AppTheme.whiteTextColor
 );
 
-/// "Ends in" Label Text
+/// "Ends in" Label Text - NO COLOR (will be set dynamically)
 const endsInLabelTextStyle = TextStyle(
   fontFamily: 'SF Pro Rounded',
   fontWeight: FontWeight.w400,
   fontSize: 10,
-  color: AppTheme.whiteSectionTextColor,
-
 );
 
-/// "Ends in" Time Text
+/// "Ends in" Time Text - NO COLOR (will be set dynamically)
 const endsInTimeTextStyle = TextStyle(
   fontFamily: 'SF Pro Rounded',
   fontWeight: FontWeight.w600,
   fontSize: 11,
-  color: AppTheme.whiteSectionTextColor,
 );
 
-/// Product Title
+/// Product Title - NO COLOR (will be set dynamically)
 const productTitleTextStyle = TextStyle(
   fontFamily: 'Inter',
   fontWeight: FontWeight.w400,
   fontSize: 12,
-  color: AppTheme.whiteSectionTextColor,
 );
 
-/// Product Price
+/// Product Price - NO COLOR (will be set dynamically)
 const productPriceTextStyle = TextStyle(
   fontFamily: 'DM Sans',
   fontWeight: FontWeight.w700,
   fontSize: 13,
-  color: AppTheme.whiteSectionTextColor,
 );
 
-/// Discounted Price (Old Price)
+/// Discounted Price (Old Price) - NO COLOR (will be set dynamically)
 const discountedPriceTextStyle = TextStyle(
   fontFamily: 'Inter',
   fontWeight: FontWeight.w400,
   fontSize: 11,
   decoration: TextDecoration.lineThrough,
-  color: AppTheme.greyTextColor
 );
 
-/// Discount Percentage Badge
+/// Discount Percentage Badge - NO COLOR (will be set dynamically)
 const discountPercentageTextStyle = TextStyle(
   fontFamily: 'Inter',
   fontWeight: FontWeight.w700,
   fontSize: 10,
-  color: AppTheme.redTextColor
 );
 
-/// Product Tab Buttons (New Arrivals, Discounted Products, Top Products)
+/// Product Tab Buttons - NO COLOR (will be set dynamically)
 const productTabTextStyle = TextStyle(
   fontFamily: 'Inter',
   fontWeight: FontWeight.w600,
   fontSize: 12,
-  color: AppTheme.whiteTextColor
 );
 
+/// Review Text - NO COLOR (will be set dynamically)
 const reviewTextStyle = TextStyle(
   fontFamily: 'DM Sans',
   fontWeight: FontWeight.w400,
   fontSize: 11,
-  color: AppTheme.reviewTextColor
 );
