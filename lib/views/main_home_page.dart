@@ -80,15 +80,9 @@ class _MainHomePageState extends State<MainHomePage>
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
-                'Hello, Welcome',
-                style: helloWelcomeTextStyle,
-              ),
+              Text('Hello, Welcome', style: helloWelcomeTextStyle),
               SizedBox(height: SizeConfig.blockHeight * 0.5),
-              Text(
-                'Albert Stevano',
-                style: userNameTextStyle,
-              ),
+              Text('Albert Stevano', style: userNameTextStyle),
             ],
           ),
           CircleAvatar(
@@ -205,28 +199,17 @@ class _MainHomePageState extends State<MainHomePage>
           SizedBox(height: SizeConfig.blockHeight * 2),
           SizedBox(
             height: SizeConfig.blockHeight * 28,
-            child: ListView(
+            child: ListView.separated(
               scrollDirection: Axis.horizontal,
-              children: [
-                ProductCard(
-                  title: 'Red Color Short Dress fo...',
-                  price: '\$323.87',
-                  oldPrice: '\$1100',
-                  discount: '-5%',
-                ),
-                ProductCard(
-                  title: 'Red Color Short Dress fo...',
-                  price: '\$323.87',
-                  oldPrice: '\$1100',
-                  discount: '-5%',
-                ),
-                ProductCard(
-                  title: 'Red Color Short Dress fo...',
-                  price: '\$323.87',
-                  oldPrice: '\$1100',
-                  discount: '-5%',
-                ),
-              ],
+              separatorBuilder: (BuildContext context, int index) =>
+                  SizedBox(width: SizeConfig.blockWidth * 2.5),
+              itemCount: 3,
+              itemBuilder: (context, index) => ProductCard(
+                title: 'Red Color Short Dress fo...',
+                price: '\$323.87',
+                oldPrice: '\$1100',
+                discount: '-5%',
+              ),
             ),
           ),
         ],
@@ -237,9 +220,7 @@ class _MainHomePageState extends State<MainHomePage>
   Widget _buildOneTimeDeal() {
     return Container(
       width: double.infinity,
-      decoration: BoxDecoration(
-        color: AppTheme.getSectionBackground(context),
-      ),
+      decoration: BoxDecoration(color: AppTheme.getSectionBackground(context)),
       child: Padding(
         padding: EdgeInsets.all(SizeConfig.blockWidth * 2),
         child: Column(
@@ -272,7 +253,9 @@ class _MainHomePageState extends State<MainHomePage>
                           ),
                           decoration: BoxDecoration(
                             color: AppTheme.red,
-                            borderRadius: BorderRadius.circular(SizeConfig.blockWidth * 3),
+                            borderRadius: BorderRadius.circular(
+                              SizeConfig.blockWidth * 3,
+                            ),
                           ),
                           child: Text(
                             'Upto 20%',
@@ -292,9 +275,13 @@ class _MainHomePageState extends State<MainHomePage>
                     vertical: SizeConfig.blockHeight * 0.75,
                   ),
                   decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(SizeConfig.blockWidth * 1.5),
+                    borderRadius: BorderRadius.circular(
+                      SizeConfig.blockWidth * 1.5,
+                    ),
                     border: Border.all(
-                      color: AppTheme.getInactiveColor(context).withOpacity(0.3),
+                      color: AppTheme.getInactiveColor(
+                        context,
+                      ).withOpacity(0.3),
                     ),
                   ),
                   child: Row(
@@ -319,7 +306,7 @@ class _MainHomePageState extends State<MainHomePage>
             SizedBox(height: SizeConfig.blockHeight * 2),
             SizedBox(
               height: SizeConfig.blockHeight * 27,
-              child: ListView(
+              child: /*ListView(
                 scrollDirection: Axis.horizontal,
                 children: [
                   ProductCard(
@@ -341,6 +328,17 @@ class _MainHomePageState extends State<MainHomePage>
                     discount: '-5%',
                   ),
                 ],
+              ),*/ ListView.separated(
+                scrollDirection: Axis.horizontal,
+                itemBuilder: (context, index) => ProductCard(
+                  title: 'Blue Color Short Dr...',
+                  price: '\$3237.87',
+                  oldPrice: '\$1100',
+                  discount: '-5%',
+                ),
+                separatorBuilder: (BuildContext context, int index) =>
+                    SizedBox(width: SizeConfig.blockWidth * 2.5),
+                itemCount: 3,
               ),
             ),
           ],
@@ -378,12 +376,18 @@ class _MainHomePageState extends State<MainHomePage>
               builder: (BuildContext context) {
                 return Container(
                   width: MediaQuery.of(context).size.width,
-                  margin: EdgeInsets.symmetric(horizontal: SizeConfig.blockWidth * 1.25),
+                  margin: EdgeInsets.symmetric(
+                    horizontal: SizeConfig.blockWidth * 1.25,
+                  ),
                   decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(SizeConfig.blockWidth * 3),
+                    borderRadius: BorderRadius.circular(
+                      SizeConfig.blockWidth * 3,
+                    ),
                   ),
                   child: ClipRRect(
-                    borderRadius: BorderRadius.circular(SizeConfig.blockWidth * 3),
+                    borderRadius: BorderRadius.circular(
+                      SizeConfig.blockWidth * 3,
+                    ),
                     child: Image.asset(imagePath, fit: BoxFit.cover),
                   ),
                 );
@@ -396,9 +400,13 @@ class _MainHomePageState extends State<MainHomePage>
           mainAxisAlignment: MainAxisAlignment.center,
           children: carouselImages.asMap().entries.map((entry) {
             return Container(
-              width: _currentCarouselIndex == entry.key ? SizeConfig.blockWidth * 6 : SizeConfig.blockWidth * 2,
+              width: _currentCarouselIndex == entry.key
+                  ? SizeConfig.blockWidth * 6
+                  : SizeConfig.blockWidth * 2,
               height: SizeConfig.blockHeight * 1,
-              margin: EdgeInsets.symmetric(horizontal: SizeConfig.blockWidth * 1),
+              margin: EdgeInsets.symmetric(
+                horizontal: SizeConfig.blockWidth * 1,
+              ),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(SizeConfig.blockWidth * 1),
                 color: _currentCarouselIndex == entry.key
@@ -494,28 +502,17 @@ class _MainHomePageState extends State<MainHomePage>
           SizedBox(height: SizeConfig.blockHeight * 1.5),
           SizedBox(
             height: SizeConfig.blockHeight * 27,
-            child: ListView(
+            child: ListView.separated(
               scrollDirection: Axis.horizontal,
-              children: [
-                ProductCard(
-                  title: 'Red Color Short Dress fo...',
-                  price: '\$323.87',
-                  oldPrice: '\$1100',
-                  discount: '-5%',
-                ),
-                ProductCard(
-                  title: 'Red Color Short Dress fo...',
-                  price: '\$323.87',
-                  oldPrice: '\$1100',
-                  discount: '-5%',
-                ),
-                ProductCard(
-                  title: 'Red Color Short Dress fo...',
-                  price: '\$323.87',
-                  oldPrice: '\$1100',
-                  discount: '-5%',
-                ),
-              ],
+              separatorBuilder: (BuildContext context, int index) =>
+                  SizedBox(width: SizeConfig.blockWidth * 2.5),
+              itemCount: 3,
+              itemBuilder: (context, index) => ProductCard(
+                title: 'Red Color Short Dress fo...',
+                price: '\$323.87',
+                oldPrice: '\$1100',
+                discount: '-5%',
+              ),
             ),
           ),
         ],
@@ -551,22 +548,17 @@ class _MainHomePageState extends State<MainHomePage>
           SizedBox(height: SizeConfig.blockHeight * 1.5),
           SizedBox(
             height: SizeConfig.blockHeight * 27,
-            child: ListView(
+            child: ListView.separated(
               scrollDirection: Axis.horizontal,
-              children: [
-                StoreCard(
-                  name: 'Morning Mart',
-                  rating: 4.5,
-                  products: '100 Products',
-                  reviews: '12 reviews',
-                ),
-                StoreCard(
-                  name: 'Morning Mart',
-                  rating: 4.5,
-                  products: '100 Products',
-                  reviews: '12 reviews',
-                ),
-              ],
+              separatorBuilder: (BuildContext context, int index) =>
+                  SizedBox(width: SizeConfig.blockWidth * 2.5),
+              itemCount: 3,
+              itemBuilder: (context, index) => StoreCard(
+                name: 'Morning Mart',
+                rating: 4.5,
+                products: '100 Products',
+                reviews: '12 reviews',
+              ),
             ),
           ),
         ],
