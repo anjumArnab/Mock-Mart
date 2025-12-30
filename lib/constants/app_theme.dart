@@ -1,38 +1,85 @@
 import 'package:flutter/material.dart';
 
 class AppTheme {
-// Light Theme
+  // Common Colors
   static const Color primaryColor = Color(0xFF1455AC);
-  static const Color scaffoldBgColor = Color(0xFF0A1128);
-  static const Color lightSecondaryColor = Color(0xFFF58300);
+  static const Color secondaryColor = Color(0xFFF58300);
+  static const Color red = Color(0xFFFF5555);
+  static const Color success = Color(0xFF00AA6D);
+  static const Color warning = Color(0xFFFFAD31);
 
-  static const Color lightCardWhite = Color(0xFFFFFFFF);
+  // Light Theme
+  static ThemeData lightTheme = ThemeData(
+    brightness: Brightness.light,
+    primaryColor: primaryColor,
+    scaffoldBackgroundColor: Color(0xFFFFFFFF),
+    colorScheme: ColorScheme.light(
+      primary: primaryColor,
+      secondary: secondaryColor,
+      error: red,
+    ),
+  );
 
-  static const Color lightNegative = Color(0x99FF5555);
-  static const Color lightNegativeBackground = Color(0xFFFFF4F3);
+  // Dark Theme
+  static ThemeData darkTheme = ThemeData(
+    brightness: Brightness.dark,
+    primaryColor: primaryColor,
+    scaffoldBackgroundColor: Color(0xFF02070E),
+    colorScheme: ColorScheme.dark(
+      primary: primaryColor,
+      secondary: secondaryColor,
+      error: red,
+    ),
+  );
 
-  static const Color lightTextColor = Color(0xFF000000);
-  static const Color lightSubTitle = Color(0xFF595959);
+  // Helper method to get colors based on theme
+  static Color getBackgroundColor(BuildContext context) {
+    return Theme.of(context).brightness == Brightness.dark
+        ? Color(0xFF02070E)
+        : Color(0xFFFFFFFF);
+  }
 
-  static const Color lightInactive = Color(0x1AAFAFAF);
+  static Color getCardColor(BuildContext context) {
+    return Theme.of(context).brightness == Brightness.dark
+        ? Color(0xFF1A1F2E)
+        : Color(0xFFFFFFFF);
+  }
 
-  static const Color lightSuccess = Color(0xFF00AA6D);
-  static const Color lightWarning = Color(0xFFFFAD31);
+  static Color getTextColor(BuildContext context) {
 
+    return Theme.of(context).brightness == Brightness.dark
+        ? Color(0xFFFCFCFC)
+        : Color(0xFF000000);
+  }
 
-  /// NEW FOR TEXT RELATED COLORS
-  //welcome text, name text, tabbar text, search hint text, selected nav button, new arrival,
-  static const Color whiteTextColor =  Color(0xFFFFFFFF);
+  static Color getSecondaryTextColor(BuildContext context) {
+    return Theme.of(context).brightness == Brightness.dark
+        ? Color(0xFFAFB1B5)
+        : Color(0xFF595959);
+  }
 
-  // secttion text(one time deal, featured product, view all, ends in, product title, product price)
-  static const Color whiteSectionTextColor = Color(0xFFFCFCFC);
+  static Color getInactiveColor(BuildContext context) {
+    return Theme.of(context).brightness == Brightness.dark
+        ? Color(0x1AE9F3FF)
+        : Color(0x1AAFAFAF);
+  }
 
-  static const Color greyTextColor = Color(0xFF808080);
+  static Color getSectionBackground(BuildContext context) {
+    return Theme.of(context).brightness == Brightness.dark
+        ? Color(0x1AAFAFAF)
+        : Color(0xFFF3F6F8);
+  }
 
-  static const Color redTextColor = Color(0xFFFF5555);
+  static Color getSearchBarBackground(BuildContext context) {
+    //return Color(0xFF595959);
+    return Theme.of(context).brightness == Brightness.dark ? Color(0xFF595959) : Color(0xFFFCFCFC);
+  }
 
-  static const Color reviewTextColor = Color(0xFFAFB1B5);
+  static Color getGreyTextColor(BuildContext context) {
+    return Color(0xFF808080);
+  }
 
-
-
+  static Color getNegativeColor(BuildContext context) {
+    return Color(0x99FF5555);
+  }
 }
