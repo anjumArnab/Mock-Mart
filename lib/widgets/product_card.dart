@@ -40,6 +40,7 @@ class ProductCard extends StatelessWidget {
                 ),
               ),
             ),
+
             Positioned(
               bottom: SizeConfig.blockHeight * 1,
               right: SizeConfig.blockWidth * 2,
@@ -58,6 +59,7 @@ class ProductCard extends StatelessWidget {
             ),
           ],
         ),
+
         Padding(
           padding: EdgeInsets.all(SizeConfig.blockWidth * 2),
           child: Column(
@@ -71,6 +73,7 @@ class ProductCard extends StatelessWidget {
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
               ),
+
               SizedBox(height: SizeConfig.blockHeight * 0.5),
               Text(
                 price,
@@ -78,6 +81,7 @@ class ProductCard extends StatelessWidget {
                   color: AppTheme.getTextColor(context),
                 ),
               ),
+
               Row(
                 children: [
                   Text(
@@ -86,6 +90,7 @@ class ProductCard extends StatelessWidget {
                       color: AppTheme.getGreyTextColor(context),
                     ),
                   ),
+
                   SizedBox(width: SizeConfig.blockWidth * 1),
                   Container(
                     padding: EdgeInsets.symmetric(

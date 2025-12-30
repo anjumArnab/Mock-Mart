@@ -44,29 +44,41 @@ class _MainHomePageState extends State<MainHomePage>
         child: CustomScrollView(
           slivers: [
             SliverToBoxAdapter(child: _buildHeader()),
+
             SliverToBoxAdapter(child: _buildNavTabs()),
+
             SliverPersistentHeader(
               pinned: true,
               delegate: _SearchBarDelegate(_buildSearchBar()),
             ),
+
             SliverToBoxAdapter(child: SizedBox(height: SizeConfig.blockHeight * 2.5)),
             SliverToBoxAdapter(child: _buildOneTimeDeal()),
+
             SliverToBoxAdapter(child: SizedBox(height: SizeConfig.blockHeight * 2.5)),
             SliverToBoxAdapter(child: _buildBigSaleBanner()),
+
             SliverToBoxAdapter(child: SizedBox(height: SizeConfig.blockHeight * 2.5)),
             SliverToBoxAdapter(child: _buildFeaturedProduct()),
+
             SliverToBoxAdapter(child: SizedBox(height: SizeConfig.blockHeight * 2.5)),
             SliverToBoxAdapter(child: _buildDealOfTheDay()),
+
             SliverToBoxAdapter(child: SizedBox(height: SizeConfig.blockHeight * 2.5)),
             SliverToBoxAdapter(child: _buildBanner('assets/images/banner.png')),
+
             SliverToBoxAdapter(child: SizedBox(height: SizeConfig.blockHeight * 2.5)),
             SliverToBoxAdapter(child: _buildNewUserExclusive()),
+
             SliverToBoxAdapter(child: SizedBox(height: SizeConfig.blockHeight * 2.5)),
             SliverToBoxAdapter(child: _buildTopStores()),
+
             SliverToBoxAdapter(child: SizedBox(height: SizeConfig.blockHeight * 2.5)),
             SliverToBoxAdapter(child: _buildBanner('assets/images/banner01.png')),
+
             SliverToBoxAdapter(child: SizedBox(height: SizeConfig.blockHeight * 2.5)),
             SliverToBoxAdapter(child: _buildProductTabs()),
+
             SliverToBoxAdapter(child: SizedBox(height: SizeConfig.blockHeight * 2.5)),
             SliverToBoxAdapter(child: SizedBox(height: SizeConfig.blockHeight * 5)),
           ],
@@ -87,6 +99,7 @@ class _MainHomePageState extends State<MainHomePage>
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text('Hello, Welcome', style: helloWelcomeTextStyle),
+
               SizedBox(height: SizeConfig.blockHeight * 0.5),
               Text('Albert Stevano', style: userNameTextStyle),
             ],
@@ -194,6 +207,7 @@ class _MainHomePageState extends State<MainHomePage>
                   color: AppTheme.getTextColor(context),
                 ),
               ),
+
               Text(
                 'View All',
                 style: viewAllTextStyle.copyWith(
@@ -252,6 +266,7 @@ class _MainHomePageState extends State<MainHomePage>
                           size: SizeConfig.blockWidth * 10,
                           color: AppTheme.secondaryColor,
                         ),
+
                         Container(
                           padding: EdgeInsets.symmetric(
                             horizontal: SizeConfig.blockWidth * 2,
@@ -298,6 +313,7 @@ class _MainHomePageState extends State<MainHomePage>
                           color: AppTheme.getTextColor(context),
                         ),
                       ),
+
                       Text(
                         '06:02:04:08',
                         style: endsInTimeTextStyle.copyWith(
@@ -423,6 +439,7 @@ class _MainHomePageState extends State<MainHomePage>
                   title3: "Deal",
                 ),
               ),
+
               SizedBox(width: SizeConfig.blockWidth * 3),
               Expanded(
                 child: DealProductCard(
@@ -472,6 +489,7 @@ class _MainHomePageState extends State<MainHomePage>
                   color: AppTheme.getTextColor(context),
                 ),
               ),
+
               TextButton(
                 onPressed: () {},
                 child: Text(
@@ -483,6 +501,7 @@ class _MainHomePageState extends State<MainHomePage>
               ),
             ],
           ),
+
           SizedBox(height: SizeConfig.blockHeight * 1.5),
           SizedBox(
             height: SizeConfig.blockHeight * 27,
@@ -518,6 +537,7 @@ class _MainHomePageState extends State<MainHomePage>
                   color: AppTheme.getTextColor(context),
                 ),
               ),
+
               TextButton(
                 onPressed: () {},
                 child: Text(
@@ -529,6 +549,7 @@ class _MainHomePageState extends State<MainHomePage>
               ),
             ],
           ),
+
           SizedBox(height: SizeConfig.blockHeight * 1.5),
           SizedBox(
             height: SizeConfig.blockHeight * 27,
@@ -560,8 +581,10 @@ class _MainHomePageState extends State<MainHomePage>
             child: Row(
               children: [
                 ProductTabButton(text: 'New Arrivals', isActive: true),
+
                 SizedBox(width: SizeConfig.blockWidth * 3),
                 ProductTabButton(text: 'Discounted Products', isActive: false),
+
                 SizedBox(width: SizeConfig.blockWidth * 3),
                 ProductTabButton(text: 'Top Products', isActive: false),
               ],
@@ -583,12 +606,14 @@ class _MainHomePageState extends State<MainHomePage>
                   oldPrice: '\$1100',
                   discount: '-5%',
                 ),
+
                 ProductCard(
                   title: 'Red Color Short Dress for Girls',
                   price: '\$323.87',
                   oldPrice: '\$1100',
                   discount: '-5%',
                 ),
+
                 ProductCard(
                   title: 'Red Color Short Dress for Girls',
                   price: '\$323.87',

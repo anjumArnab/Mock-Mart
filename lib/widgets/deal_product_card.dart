@@ -53,6 +53,7 @@ class DealProductCard extends StatelessWidget {
                   fit: BoxFit.cover,
                 ),
               ),
+
               Positioned(
                 bottom: SizeConfig.blockHeight * 1,
                 right: SizeConfig.blockWidth * 2,
@@ -70,6 +71,7 @@ class DealProductCard extends StatelessWidget {
               ),
             ],
           ),
+
           Padding(
             padding: EdgeInsets.all(SizeConfig.blockWidth * 2),
             child: Column(
@@ -82,12 +84,14 @@ class DealProductCard extends StatelessWidget {
                       color: Colors.amber,
                       size: SizeConfig.blockWidth * 4,
                     ),
+
                     Text(
                       '$rating ($reviews Reviews)',
                       style: productTitleTextStyle.copyWith(
                         color: AppTheme.getTextColor(context),
                       ),
                     ),
+
                     SizedBox(width: SizeConfig.blockWidth * 2),
                     Icon(
                       Icons.discount,
@@ -96,6 +100,7 @@ class DealProductCard extends StatelessWidget {
                     ),
                   ],
                 ),
+
                 Text(
                   title,
                   maxLines: 1,
@@ -104,6 +109,7 @@ class DealProductCard extends StatelessWidget {
                     color: AppTheme.getTextColor(context),
                   ),
                 ),
+
                 Text(
                   '\$price',
                   style: productPriceTextStyle.copyWith(

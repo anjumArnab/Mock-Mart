@@ -43,6 +43,7 @@ class StoreCard extends StatelessWidget {
               ),
             ),
           ),
+
           Padding(
             padding: EdgeInsets.all(SizeConfig.blockWidth * 3),
             child: Column(
@@ -63,6 +64,7 @@ class StoreCard extends StatelessWidget {
                         size: SizeConfig.blockWidth * 6,
                       ),
                     ),
+
                     SizedBox(width: SizeConfig.blockWidth * 3),
                     Expanded(
                       child: Column(
@@ -74,6 +76,7 @@ class StoreCard extends StatelessWidget {
                               color: AppTheme.getTextColor(context),
                             ),
                           ),
+
                           Row(
                             children: [
                               Icon(
@@ -81,6 +84,7 @@ class StoreCard extends StatelessWidget {
                                 color: AppTheme.warning,
                                 size: SizeConfig.blockWidth * 3.5,
                               ),
+
                               SizedBox(width: SizeConfig.blockWidth * 1),
                               Text(
                                 rating.toString(),
@@ -95,8 +99,10 @@ class StoreCard extends StatelessWidget {
                     ),
                   ],
                 ),
+
                 SizedBox(height: SizeConfig.blockHeight * 1.5),
                 Divider(color: AppTheme.getInactiveColor(context)),
+
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -107,6 +113,7 @@ class StoreCard extends StatelessWidget {
                           color: AppTheme.success,
                           size: SizeConfig.blockWidth * 3.5,
                         ),
+
                         SizedBox(width: SizeConfig.blockWidth * 1),
                         Text(
                           products,
@@ -117,6 +124,7 @@ class StoreCard extends StatelessWidget {
                         ),
                       ],
                     ),
+
                     Text(
                       reviews,
                       style: discountedPriceTextStyle.copyWith(

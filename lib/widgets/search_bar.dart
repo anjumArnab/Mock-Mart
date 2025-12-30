@@ -43,6 +43,7 @@ class SearchBar extends StatelessWidget {
               ),
             ),
           ),
+
           Container(
             margin: EdgeInsets.all(SizeConfig.blockWidth * 1),
             decoration: BoxDecoration(
