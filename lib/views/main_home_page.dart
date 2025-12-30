@@ -1,5 +1,3 @@
-// ignore_for_file: deprecated_member_use
-
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:mock_mart/constants/size_config.dart';
@@ -38,45 +36,33 @@ class _MainHomePageState extends State<MainHomePage>
   @override
   Widget build(BuildContext context) {
     SizeConfig.init(context);
-    
+
     return SafeArea(
       child: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             _buildHeader(),
-
             _buildNavTabs(),
-
             _buildSearchBar(),
-
             SizedBox(height: SizeConfig.blockHeight * 2.5),
             _buildOneTimeDeal(),
-
             SizedBox(height: SizeConfig.blockHeight * 2.5),
             _buildBigSaleBanner(),
-
             SizedBox(height: SizeConfig.blockHeight * 2.5),
             _buildFeaturedProduct(),
-
             SizedBox(height: SizeConfig.blockHeight * 2.5),
             _buildDealOfTheDay(),
-
             SizedBox(height: SizeConfig.blockHeight * 2.5),
             _buildBanner('assets/images/banner.png'),
-
             SizedBox(height: SizeConfig.blockHeight * 2.5),
             _buildNewUserExclusive(),
-
             SizedBox(height: SizeConfig.blockHeight * 2.5),
             _buildTopStores(),
-
             SizedBox(height: SizeConfig.blockHeight * 2.5),
             _buildBanner('assets/images/banner01.png'),
-
             SizedBox(height: SizeConfig.blockHeight * 2.5),
             _buildProductTabs(),
-
             SizedBox(height: SizeConfig.blockHeight * 5),
           ],
         ),
@@ -87,7 +73,7 @@ class _MainHomePageState extends State<MainHomePage>
   Widget _buildHeader() {
     return Container(
       padding: EdgeInsets.all(SizeConfig.blockWidth * 4),
-      decoration: const BoxDecoration(color: AppTheme.primaryColor),
+      decoration: BoxDecoration(color: AppTheme.primaryColor),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
@@ -96,21 +82,20 @@ class _MainHomePageState extends State<MainHomePage>
             children: [
               Text(
                 'Hello, Welcome',
-                style: helloWelcomeTextStyle
+                style: helloWelcomeTextStyle,
               ),
-
               SizedBox(height: SizeConfig.blockHeight * 0.5),
               Text(
                 'Albert Stevano',
-                style: userNameTextStyle
+                style: userNameTextStyle,
               ),
             ],
           ),
           CircleAvatar(
             radius: SizeConfig.blockWidth * 6,
-            backgroundColor: AppTheme.lightCardWhite,
+            backgroundColor: Colors.white,
             child: Icon(
-              Icons.person, 
+              Icons.person,
               color: AppTheme.primaryColor,
               size: SizeConfig.blockWidth * 6,
             ),
@@ -125,23 +110,18 @@ class _MainHomePageState extends State<MainHomePage>
       color: AppTheme.primaryColor,
       child: TabBar(
         controller: _tabController,
-        indicatorColor: AppTheme.lightSecondaryColor,
+        indicatorColor: AppTheme.secondaryColor,
         indicatorWeight: 3,
-        labelColor: AppTheme.lightCardWhite,
-        unselectedLabelColor: AppTheme.lightCardWhite.withOpacity(0.6),
+        labelColor: Colors.white,
+        unselectedLabelColor: Colors.white.withOpacity(0.6),
         labelStyle: tabBarTextStyle.copyWith(fontWeight: FontWeight.bold),
         unselectedLabelStyle: tabBarTextStyle,
         tabs: const [
           Tab(text: 'Explore'),
-
           Tab(text: 'Sports'),
-
           Tab(text: 'Women\'s'),
-
           Tab(text: 'Kids'),
-
           Tab(text: 'Wigs'),
-
           Tab(text: 'Electronics'),
         ],
       ),
@@ -152,18 +132,21 @@ class _MainHomePageState extends State<MainHomePage>
     return Container(
       margin: EdgeInsets.all(SizeConfig.blockWidth * 4),
       decoration: BoxDecoration(
-        color: AppTheme.lightSubTitle,
+        color: AppTheme.getSearchBarBackground(context),
         borderRadius: BorderRadius.circular(SizeConfig.blockWidth * 2),
-        border: Border.all(color: AppTheme.lightInactive.withOpacity(0.3)),
+        border: Border.all(
+          color: AppTheme.getInactiveColor(context).withOpacity(0.3),
+        ),
       ),
       child: Row(
         children: [
           Expanded(
             child: TextField(
+              style: TextStyle(color: Colors.white),
               decoration: InputDecoration(
                 hintText: 'What are you looking for?',
                 hintStyle: TextStyle(
-                  color: Color(0xFFFFFFFF), 
+                  color: Colors.white.withOpacity(0.7),
                   fontSize: SizeConfig.blockWidth * 4,
                 ),
                 border: InputBorder.none,
@@ -174,7 +157,6 @@ class _MainHomePageState extends State<MainHomePage>
               ),
             ),
           ),
-
           Container(
             margin: EdgeInsets.all(SizeConfig.blockWidth * 1),
             decoration: BoxDecoration(
@@ -185,7 +167,7 @@ class _MainHomePageState extends State<MainHomePage>
               onPressed: () {},
               icon: Icon(
                 Icons.search,
-                color: AppTheme.lightCardWhite,
+                color: Colors.white,
                 size: SizeConfig.blockWidth * 6,
               ),
               padding: EdgeInsets.all(SizeConfig.blockWidth * 3),
@@ -206,9 +188,18 @@ class _MainHomePageState extends State<MainHomePage>
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text('Featured Products', style: sectionTitleTextStyle),
-
-              Text('View All', style: viewAllTextStyle),
+              Text(
+                'Featured Products',
+                style: sectionTitleTextStyle.copyWith(
+                  color: AppTheme.getTextColor(context),
+                ),
+              ),
+              Text(
+                'View All',
+                style: viewAllTextStyle.copyWith(
+                  color: AppTheme.getTextColor(context),
+                ),
+              ),
             ],
           ),
           SizedBox(height: SizeConfig.blockHeight * 2),
@@ -223,14 +214,12 @@ class _MainHomePageState extends State<MainHomePage>
                   oldPrice: '\$1100',
                   discount: '-5%',
                 ),
-
                 ProductCard(
                   title: 'Red Color Short Dress fo...',
                   price: '\$323.87',
                   oldPrice: '\$1100',
                   discount: '-5%',
                 ),
-
                 ProductCard(
                   title: 'Red Color Short Dress fo...',
                   price: '\$323.87',
@@ -247,115 +236,123 @@ class _MainHomePageState extends State<MainHomePage>
 
   Widget _buildOneTimeDeal() {
     return Container(
-        width: double.infinity,
-        decoration: BoxDecoration(color:AppTheme.lightInactive),
-        child: Padding(
-          padding: EdgeInsets.all(SizeConfig.blockWidth * 2),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Row(
-                    children: [
-                      Text('One Time Deal', style: sectionTitleTextStyle),
-
-                      SizedBox(width: SizeConfig.blockWidth * 2),
-                      Stack(
-                        alignment: Alignment.center,
-                        children: [
-                          Icon(
-                            Icons.bolt, 
-                            size: SizeConfig.blockWidth * 10,
-                            color: AppTheme.lightSecondaryColor,
-                          ),
-
-                          Container(
-                            padding: EdgeInsets.symmetric(
-                              horizontal: SizeConfig.blockWidth * 2,
-                              vertical: SizeConfig.blockHeight * 0.5,
-                            ),
-                            decoration: BoxDecoration(
-                              color: AppTheme.redTextColor,
-                              borderRadius: BorderRadius.circular(SizeConfig.blockWidth * 3),
-                            ),
-                            child: Text(
-                              'Upto 20%',
-                              style: discountPercentageTextStyle.copyWith(
-                                color: AppTheme.lightCardWhite,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-
-                  Container(
-                    padding: EdgeInsets.symmetric(
-                      horizontal: SizeConfig.blockWidth * 2.5,
-                      vertical: SizeConfig.blockHeight * 0.75,
-                    ),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(SizeConfig.blockWidth * 1.5),
-                      border: Border.all(
-                        color: AppTheme.lightInactive.withOpacity(0.3),
-                      ),
-                    ),
-                    child: Row(
-                      children: [
-                        Text('Ends in ', style: endsInLabelTextStyle),
-
-                        Text('06:02:04:08', style: endsInTimeTextStyle),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-              SizedBox(height: SizeConfig.blockHeight * 2),
-              SizedBox(
-                height: SizeConfig.blockHeight * 27,
-                child: ListView(
-                  scrollDirection: Axis.horizontal,
+      width: double.infinity,
+      decoration: BoxDecoration(
+        color: AppTheme.getSectionBackground(context),
+      ),
+      child: Padding(
+        padding: EdgeInsets.all(SizeConfig.blockWidth * 2),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Row(
                   children: [
-                    ProductCard(
-                      title: 'Blue Color Short Dr...',
-                      price: '\$3237.87',
-                      oldPrice: '\$1100',
-                      discount: '-5%',
+                    Text(
+                      'One Time Deal',
+                      style: sectionTitleTextStyle.copyWith(
+                        color: AppTheme.getTextColor(context),
+                      ),
                     ),
-
-                    ProductCard(
-                      title: 'Blue Color Short Dr...',
-                      price: '\$3237.87',
-                      oldPrice: '\$1100',
-                      discount: '-5%',
-                    ),
-
-                    ProductCard(
-                      title: 'Blue Color Short Dr...',
-                      price: '\$3237.87',
-                      oldPrice: '\$1100',
-                      discount: '-5%',
+                    SizedBox(width: SizeConfig.blockWidth * 2),
+                    Stack(
+                      alignment: Alignment.center,
+                      children: [
+                        Icon(
+                          Icons.bolt,
+                          size: SizeConfig.blockWidth * 10,
+                          color: AppTheme.secondaryColor,
+                        ),
+                        Container(
+                          padding: EdgeInsets.symmetric(
+                            horizontal: SizeConfig.blockWidth * 2,
+                            vertical: SizeConfig.blockHeight * 0.5,
+                          ),
+                          decoration: BoxDecoration(
+                            color: AppTheme.red,
+                            borderRadius: BorderRadius.circular(SizeConfig.blockWidth * 3),
+                          ),
+                          child: Text(
+                            'Upto 20%',
+                            style: discountPercentageTextStyle.copyWith(
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
                   ],
                 ),
+                Container(
+                  padding: EdgeInsets.symmetric(
+                    horizontal: SizeConfig.blockWidth * 2.5,
+                    vertical: SizeConfig.blockHeight * 0.75,
+                  ),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(SizeConfig.blockWidth * 1.5),
+                    border: Border.all(
+                      color: AppTheme.getInactiveColor(context).withOpacity(0.3),
+                    ),
+                  ),
+                  child: Row(
+                    children: [
+                      Text(
+                        'Ends in ',
+                        style: endsInLabelTextStyle.copyWith(
+                          color: AppTheme.getTextColor(context),
+                        ),
+                      ),
+                      Text(
+                        '06:02:04:08',
+                        style: endsInTimeTextStyle.copyWith(
+                          color: AppTheme.getTextColor(context),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+            SizedBox(height: SizeConfig.blockHeight * 2),
+            SizedBox(
+              height: SizeConfig.blockHeight * 27,
+              child: ListView(
+                scrollDirection: Axis.horizontal,
+                children: [
+                  ProductCard(
+                    title: 'Blue Color Short Dr...',
+                    price: '\$3237.87',
+                    oldPrice: '\$1100',
+                    discount: '-5%',
+                  ),
+                  ProductCard(
+                    title: 'Blue Color Short Dr...',
+                    price: '\$3237.87',
+                    oldPrice: '\$1100',
+                    discount: '-5%',
+                  ),
+                  ProductCard(
+                    title: 'Blue Color Short Dr...',
+                    price: '\$3237.87',
+                    oldPrice: '\$1100',
+                    discount: '-5%',
+                  ),
+                ],
               ),
-            ],
-          ),
+            ),
+          ],
         ),
-      
+      ),
     );
   }
 
   Widget _buildBigSaleBanner() {
     final List<String> carouselImages = [
       'assets/images/big_sale.png',
-
       'assets/images/big_sale.png',
-
       'assets/images/big_sale.png',
     ];
 
@@ -406,7 +403,7 @@ class _MainHomePageState extends State<MainHomePage>
                 borderRadius: BorderRadius.circular(SizeConfig.blockWidth * 1),
                 color: _currentCarouselIndex == entry.key
                     ? AppTheme.primaryColor
-                    : AppTheme.lightInactive.withOpacity(0.4),
+                    : AppTheme.getInactiveColor(context).withOpacity(0.4),
               ),
             );
           }).toList(),
@@ -419,7 +416,10 @@ class _MainHomePageState extends State<MainHomePage>
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: SizeConfig.blockWidth * 4),
       child: Container(
-        decoration: BoxDecoration(color: AppTheme.lightInactive, borderRadius: BorderRadius.circular(SizeConfig.blockWidth * 1)),
+        decoration: BoxDecoration(
+          color: AppTheme.getSectionBackground(context),
+          borderRadius: BorderRadius.circular(SizeConfig.blockWidth * 1),
+        ),
         child: Padding(
           padding: EdgeInsets.all(SizeConfig.blockWidth * 2),
           child: Row(
@@ -431,7 +431,6 @@ class _MainHomePageState extends State<MainHomePage>
                   title3: "Deal",
                 ),
               ),
-
               SizedBox(width: SizeConfig.blockWidth * 3),
               Expanded(
                 child: DealProductCard(
@@ -475,15 +474,23 @@ class _MainHomePageState extends State<MainHomePage>
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text('New User Exclusive', style: sectionTitleTextStyle),
-
+              Text(
+                'New User Exclusive',
+                style: sectionTitleTextStyle.copyWith(
+                  color: AppTheme.getTextColor(context),
+                ),
+              ),
               TextButton(
                 onPressed: () {},
-                child: Text('View all', style: viewAllTextStyle),
+                child: Text(
+                  'View all',
+                  style: viewAllTextStyle.copyWith(
+                    color: AppTheme.getTextColor(context),
+                  ),
+                ),
               ),
             ],
           ),
-
           SizedBox(height: SizeConfig.blockHeight * 1.5),
           SizedBox(
             height: SizeConfig.blockHeight * 27,
@@ -524,15 +531,23 @@ class _MainHomePageState extends State<MainHomePage>
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text('Top Stores', style: sectionTitleTextStyle),
-
+              Text(
+                'Top Stores',
+                style: sectionTitleTextStyle.copyWith(
+                  color: AppTheme.getTextColor(context),
+                ),
+              ),
               TextButton(
                 onPressed: () {},
-                child: Text('View all', style: viewAllTextStyle),
+                child: Text(
+                  'View all',
+                  style: viewAllTextStyle.copyWith(
+                    color: AppTheme.getTextColor(context),
+                  ),
+                ),
               ),
             ],
           ),
-
           SizedBox(height: SizeConfig.blockHeight * 1.5),
           SizedBox(
             height: SizeConfig.blockHeight * 27,
@@ -545,7 +560,6 @@ class _MainHomePageState extends State<MainHomePage>
                   products: '100 Products',
                   reviews: '12 reviews',
                 ),
-                
                 StoreCard(
                   name: 'Morning Mart',
                   rating: 4.5,
@@ -570,10 +584,8 @@ class _MainHomePageState extends State<MainHomePage>
             child: Row(
               children: [
                 ProductTabButton(text: 'New Arrivals', isActive: true),
-
                 SizedBox(width: SizeConfig.blockWidth * 3),
                 ProductTabButton(text: 'Discounted Products', isActive: false),
-
                 SizedBox(width: SizeConfig.blockWidth * 3),
                 ProductTabButton(text: 'Top Products', isActive: false),
               ],
@@ -586,8 +598,6 @@ class _MainHomePageState extends State<MainHomePage>
               shrinkWrap: true,
               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 2,
-                mainAxisSpacing: SizeConfig.blockHeight * 0.9,
-                crossAxisSpacing: SizeConfig.blockWidth * 1.75,
               ),
               scrollDirection: Axis.horizontal,
               children: [
@@ -597,21 +607,18 @@ class _MainHomePageState extends State<MainHomePage>
                   oldPrice: '\$1100',
                   discount: '-5%',
                 ),
-
                 ProductCard(
                   title: 'Red Color Short Dress fo...',
                   price: '\$323.87',
                   oldPrice: '\$1100',
                   discount: '-5%',
                 ),
-
                 ProductCard(
                   title: 'Red Color Short Dress fo...',
                   price: '\$323.87',
                   oldPrice: '\$1100',
                   discount: '-5%',
                 ),
-                
                 ProductCard(
                   title: 'Red Color Short Dress fo...',
                   price: '\$323.87',

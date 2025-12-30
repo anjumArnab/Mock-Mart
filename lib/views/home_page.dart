@@ -7,7 +7,9 @@ import 'package:mock_mart/views/menu_page.dart';
 import 'package:mock_mart/views/stores_page.dart';
 
 class HomePage extends StatefulWidget {
-  const HomePage({super.key});
+  final VoidCallback onThemeToggle;
+
+  const HomePage({super.key, required this.onThemeToggle});
 
   @override
   State<HomePage> createState() => _HomePageState();
@@ -16,16 +18,16 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   int _selectedIndex = 0;
 
-  final List<Widget> _screens = [
-    const MainHomePage(),
-    const CategoriesPage(),
-    const CartPage(),
-    const StoresPage(),
-    const MenuPage(),
-  ];
-
   @override
   Widget build(BuildContext context) {
+    final List<Widget> _screens = [
+      const MainHomePage(),
+      const CategoriesPage(),
+      const CartPage(),
+      const StoresPage(),
+      MenuPage(onThemeToggle: widget.onThemeToggle),
+    ];
+
     return Scaffold(
       body: _screens[_selectedIndex],
       bottomNavigationBar: _buildCustomBottomNav(),
@@ -33,13 +35,15 @@ class _HomePageState extends State<HomePage> {
   }
 
   Widget _buildCustomBottomNav() {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+
     return Container(
       height: 70,
       decoration: BoxDecoration(
-        color: AppTheme.scaffoldBgColor,
+        color: AppTheme.getBackgroundColor(context),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.1),
+            color: Colors.black.withOpacity(isDark ? 0.3 : 0.1),
             blurRadius: 10,
             offset: const Offset(0, -5),
           ),
@@ -60,7 +64,7 @@ class _HomePageState extends State<HomePage> {
 
   Widget _buildNavItem(IconData icon, String label, int index, int? badgeCount) {
     bool isSelected = _selectedIndex == index;
-    
+
     return GestureDetector(
       onTap: () {
         setState(() {
@@ -70,7 +74,7 @@ class _HomePageState extends State<HomePage> {
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
         decoration: BoxDecoration(
-          color: isSelected ? const Color(0xFF1E5BC6) : Colors.transparent,
+          color: isSelected ? AppTheme.primaryColor : Colors.transparent,
           borderRadius: BorderRadius.circular(20),
         ),
         child: Row(
@@ -81,13 +85,16 @@ class _HomePageState extends State<HomePage> {
               children: [
                 Icon(
                   icon,
-                  color: isSelected ? Colors.white : Colors.grey,
+                  color: isSelected
+                      ? Colors.white
+                      : AppTheme.getSecondaryTextColor(context),
                   size: 24,
                 ),
                 if (badgeCount != null)
                   Badge.count(
-                    backgroundColor: AppTheme.primaryColor
-                    ,count: badgeCount),
+                    backgroundColor: AppTheme.primaryColor,
+                    count: badgeCount,
+                  ),
               ],
             ),
             if (isSelected) ...[

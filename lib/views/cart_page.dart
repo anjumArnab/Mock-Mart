@@ -5,8 +5,6 @@ class CartPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Center(
-      child: Text('Cart Screen', style: TextStyle(color: Colors.white, fontSize: 24)),
-    );
+    return const Scaffold();
   }
 }

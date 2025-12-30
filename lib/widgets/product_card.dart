@@ -26,7 +26,7 @@ class ProductCard extends StatelessWidget {
           children: [
             Container(
               height: SizeConfig.blockHeight * 15,
-              width: SizeConfig.blockWidth * 30,
+             // width:  double.infinity, //SizeConfig.blockWidth * 30,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.all(
                   Radius.circular(SizeConfig.blockWidth * 3),
@@ -40,20 +40,19 @@ class ProductCard extends StatelessWidget {
                 ),
               ),
             ),
-
             Positioned(
               bottom: SizeConfig.blockHeight * 1,
               right: SizeConfig.blockWidth * 2,
               child: Container(
                 padding: EdgeInsets.all(SizeConfig.blockWidth * 1.5),
-                decoration: const BoxDecoration(
-                  color: AppTheme.lightCardWhite,
+                decoration: BoxDecoration(
+                  color: AppTheme.getCardColor(context),
                   shape: BoxShape.circle,
                 ),
                 child: Icon(
                   Icons.favorite_border,
                   size: SizeConfig.blockWidth * 4.5,
-                  color: AppTheme.lightNegative,
+                  color: AppTheme.getNegativeColor(context),
                 ),
               ),
             ),
@@ -66,18 +65,27 @@ class ProductCard extends StatelessWidget {
             children: [
               Text(
                 title,
-                style: productTitleTextStyle,
+                style: productTitleTextStyle.copyWith(
+                  color: AppTheme.getTextColor(context),
+                ),
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
               ),
-
               SizedBox(height: SizeConfig.blockHeight * 0.5),
-              Text(price, style: productPriceTextStyle),
-
+              Text(
+                price,
+                style: productPriceTextStyle.copyWith(
+                  color: AppTheme.getTextColor(context),
+                ),
+              ),
               Row(
                 children: [
-                  Text(oldPrice, style: discountedPriceTextStyle),
-                  
+                  Text(
+                    oldPrice,
+                    style: discountedPriceTextStyle.copyWith(
+                      color: AppTheme.getGreyTextColor(context),
+                    ),
+                  ),
                   SizedBox(width: SizeConfig.blockWidth * 1),
                   Container(
                     padding: EdgeInsets.symmetric(
@@ -85,10 +93,15 @@ class ProductCard extends StatelessWidget {
                       vertical: SizeConfig.blockHeight * 0.25,
                     ),
                     decoration: BoxDecoration(
-                      color: AppTheme.lightNegative,
+                      color: AppTheme.getNegativeColor(context),
                       borderRadius: BorderRadius.circular(SizeConfig.blockWidth * 1),
                     ),
-                    child: Text(discount, style: discountPercentageTextStyle),
+                    child: Text(
+                      discount,
+                      style: discountPercentageTextStyle.copyWith(
+                        color: AppTheme.red,
+                      ),
+                    ),
                   ),
                 ],
               ),

@@ -24,7 +24,7 @@ class StoreCard extends StatelessWidget {
       height: SizeConfig.blockHeight * 18,
       margin: EdgeInsets.only(right: SizeConfig.blockWidth * 3),
       decoration: BoxDecoration(
-        color: AppTheme.lightSubTitle,
+        color: AppTheme.getCardColor(context),
         borderRadius: BorderRadius.circular(SizeConfig.blockWidth * 3),
       ),
       child: Column(
@@ -43,7 +43,6 @@ class StoreCard extends StatelessWidget {
               ),
             ),
           ),
-          
           Padding(
             padding: EdgeInsets.all(SizeConfig.blockWidth * 3),
             child: Column(
@@ -55,12 +54,12 @@ class StoreCard extends StatelessWidget {
                       width: SizeConfig.blockWidth * 10,
                       height: SizeConfig.blockWidth * 10,
                       decoration: BoxDecoration(
-                        color: AppTheme.lightNegative,
+                        color: AppTheme.getNegativeColor(context),
                         borderRadius: BorderRadius.circular(SizeConfig.blockWidth * 2),
                       ),
                       child: Icon(
                         Icons.store,
-                        color: AppTheme.lightCardWhite,
+                        color: Colors.white,
                         size: SizeConfig.blockWidth * 6,
                       ),
                     ),
@@ -69,20 +68,25 @@ class StoreCard extends StatelessWidget {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(name, style: productTitleTextStyle),
-
+                          Text(
+                            name,
+                            style: productTitleTextStyle.copyWith(
+                              color: AppTheme.getTextColor(context),
+                            ),
+                          ),
                           Row(
                             children: [
                               Icon(
                                 Icons.star,
-                                color: AppTheme.lightWarning,
+                                color: AppTheme.warning,
                                 size: SizeConfig.blockWidth * 3.5,
                               ),
-
                               SizedBox(width: SizeConfig.blockWidth * 1),
                               Text(
                                 rating.toString(),
-                                style: productTitleTextStyle,
+                                style: productTitleTextStyle.copyWith(
+                                  color: AppTheme.getTextColor(context),
+                                ),
                               ),
                             ],
                           ),
@@ -92,7 +96,7 @@ class StoreCard extends StatelessWidget {
                   ],
                 ),
                 SizedBox(height: SizeConfig.blockHeight * 1.5),
-                const Divider(),
+                Divider(color: AppTheme.getInactiveColor(context)),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -100,25 +104,23 @@ class StoreCard extends StatelessWidget {
                       children: [
                         Icon(
                           Icons.inventory_2_outlined,
-                          color: AppTheme.lightSuccess,
+                          color: AppTheme.success,
                           size: SizeConfig.blockWidth * 3.5,
                         ),
-
                         SizedBox(width: SizeConfig.blockWidth * 1),
                         Text(
                           products,
                           style: discountedPriceTextStyle.copyWith(
-                            color: AppTheme.lightSuccess,
+                            color: AppTheme.success,
                             decoration: TextDecoration.none,
                           ),
                         ),
                       ],
                     ),
-
                     Text(
                       reviews,
                       style: discountedPriceTextStyle.copyWith(
-                        color: AppTheme.lightSubTitle,
+                        color: AppTheme.getSecondaryTextColor(context),
                         decoration: TextDecoration.none,
                       ),
                     ),

@@ -25,13 +25,17 @@ class ProductTabButton extends StatelessWidget {
           vertical: SizeConfig.blockHeight * 1.25,
         ),
         decoration: BoxDecoration(
-          color: isActive ? AppTheme.primaryColor : AppTheme.lightInactive,
+          color: isActive
+              ? AppTheme.primaryColor
+              : AppTheme.getInactiveColor(context),
           borderRadius: BorderRadius.circular(SizeConfig.blockWidth * 2),
         ),
         child: Text(
           text,
           style: productTabTextStyle.copyWith(
-            color: isActive ? AppTheme.lightCardWhite : AppTheme.lightSubTitle,
+            color: isActive
+                ? Colors.white
+                : AppTheme.getSecondaryTextColor(context),
             fontWeight: isActive ? FontWeight.bold : FontWeight.w600,
           ),
         ),

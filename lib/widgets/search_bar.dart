@@ -1,5 +1,3 @@
-// ignore_for_file: deprecated_member_use
-
 import 'package:flutter/material.dart';
 import 'package:mock_mart/constants/app_theme.dart';
 import 'package:mock_mart/constants/size_config.dart';
@@ -20,10 +18,10 @@ class SearchBar extends StatelessWidget {
     return Container(
       margin: EdgeInsets.all(SizeConfig.blockWidth * 4),
       decoration: BoxDecoration(
-        color: AppTheme.lightSubTitle,
+        color: AppTheme.getSearchBarBackground(context),
         borderRadius: BorderRadius.circular(SizeConfig.blockWidth * 2),
         border: Border.all(
-          color: AppTheme.lightInactive.withOpacity(0.3),
+          color: AppTheme.getInactiveColor(context).withOpacity(0.3),
         ),
       ),
       child: Row(
@@ -31,14 +29,11 @@ class SearchBar extends StatelessWidget {
           Expanded(
             child: TextField(
               controller: controller,
-              style: searchBarTextStyle.copyWith(
-                color: AppTheme.lightTextColor,
-              ),
+
               decoration: InputDecoration(
                 hintText: 'What are you looking for?',
-                hintStyle: TextStyle(
-                  color: AppTheme.lightInactive,
-                  fontSize: SizeConfig.blockWidth * 4,
+                hintStyle: searchBarTextStyle.copyWith(
+                  color: AppTheme.getTextColor(context),
                 ),
                 border: InputBorder.none,
                 contentPadding: EdgeInsets.symmetric(
@@ -48,7 +43,6 @@ class SearchBar extends StatelessWidget {
               ),
             ),
           ),
-          
           Container(
             margin: EdgeInsets.all(SizeConfig.blockWidth * 1),
             decoration: BoxDecoration(
@@ -59,7 +53,7 @@ class SearchBar extends StatelessWidget {
               onPressed: onSearch,
               icon: Icon(
                 Icons.search,
-                color: AppTheme.lightCardWhite,
+                color: Colors.white,
                 size: SizeConfig.blockWidth * 6,
               ),
               padding: EdgeInsets.all(SizeConfig.blockWidth * 3),

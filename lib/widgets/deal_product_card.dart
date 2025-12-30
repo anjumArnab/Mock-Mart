@@ -1,6 +1,5 @@
-// ignore_for_file: deprecated_member_use
-
 import 'package:flutter/material.dart';
+import 'package:mock_mart/constants/app_theme.dart';
 import 'package:mock_mart/constants/size_config.dart';
 import 'package:mock_mart/constants/text_styles.dart';
 
@@ -54,7 +53,6 @@ class DealProductCard extends StatelessWidget {
                   fit: BoxFit.cover,
                 ),
               ),
-
               Positioned(
                 bottom: SizeConfig.blockHeight * 1,
                 right: SizeConfig.blockWidth * 2,
@@ -64,8 +62,8 @@ class DealProductCard extends StatelessWidget {
                     shape: BoxShape.circle,
                   ),
                   child: Icon(
-                    Icons.favorite, 
-                    size: SizeConfig.blockWidth * 4.5, 
+                    Icons.favorite,
+                    size: SizeConfig.blockWidth * 4.5,
                     color: Colors.red,
                   ),
                 ),
@@ -80,19 +78,19 @@ class DealProductCard extends StatelessWidget {
                 Row(
                   children: [
                     Icon(
-                      Icons.star, 
+                      Icons.star,
                       color: Colors.amber,
                       size: SizeConfig.blockWidth * 4,
                     ),
-
                     Text(
-                      '$rating ($reviews Reviews)', 
-                      style: productTitleTextStyle,
+                      '$rating ($reviews Reviews)',
+                      style: productTitleTextStyle.copyWith(
+                        color: AppTheme.getTextColor(context),
+                      ),
                     ),
-
                     SizedBox(width: SizeConfig.blockWidth * 2),
                     Icon(
-                      Icons.discount, 
+                      Icons.discount,
                       color: Colors.green,
                       size: SizeConfig.blockWidth * 4,
                     ),
@@ -102,10 +100,16 @@ class DealProductCard extends StatelessWidget {
                   title,
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
-                  style: productPriceTextStyle,
+                  style: productPriceTextStyle.copyWith(
+                    color: AppTheme.getTextColor(context),
+                  ),
                 ),
-                
-                Text('\$$price', style: productPriceTextStyle),
+                Text(
+                  '\$price',
+                  style: productPriceTextStyle.copyWith(
+                    color: AppTheme.getTextColor(context),
+                  ),
+                ),
               ],
             ),
           ),
