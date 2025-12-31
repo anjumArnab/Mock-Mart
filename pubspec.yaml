@@ -25,11 +25,7 @@ flutter:
   uses-material-design: true
 
   assets:
-    - assets/images/big_sale.png
-    - assets/images/img.png
-    - assets/images/banner.png
-    - assets/images/banner01.png
-    - assets/images/store_banner.png
+    - assets/images/
 
   fonts:
     - family: Encode Sans
