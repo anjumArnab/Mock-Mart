@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:mock_mart/constants/app_theme.dart';
-import 'package:mock_mart/views/home_page.dart';
+import 'package:mock_mart/theme/app_theme.dart';
+import 'package:mock_mart/features/homepage/home_page.dart';
 
 void main() {
   runApp(const MockMart());
