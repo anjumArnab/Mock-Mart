@@ -13,6 +13,7 @@ dependencies:
 
   cupertino_icons: ^1.0.8
   carousel_slider: ^5.1.1
+  get: ^4.7.3
 
 dev_dependencies:
   flutter_test:
@@ -26,6 +27,7 @@ flutter:
 
   assets:
     - assets/images/
+    - assets/languages/
 
   fonts:
     - family: Encode Sans
