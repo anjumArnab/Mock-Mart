@@ -21,5 +21,6 @@
   "stores": "Stores",
   "menu": "Menu",
   "dark_mode": "Dark Mode",
-  "enabled": "Enabled"
+  "enabled": "Enabled",
+  "disabled": "Disabled"
 }
