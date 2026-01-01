@@ -580,7 +580,7 @@ class _MainHomePageState extends State<MainHomePage>
       ),
     );
   }
-
+/// new_arrivals, discounted_price, top_products
   Widget _buildProductTabs() {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: Dimensions.paddingSizeDefault),
@@ -591,7 +591,7 @@ class _MainHomePageState extends State<MainHomePage>
             child: Row(
               children: [
                 ProductTabButton(
-                  text: "new_arrivals".tr,
+                  text: "cat_new_arrival".tr,
                   onTap: () {
                     setState(() {
                       _selectedProductTab = 0;
@@ -601,7 +601,7 @@ class _MainHomePageState extends State<MainHomePage>
                 ),
                 SizedBox(width: Dimensions.spacingDefault),
                 ProductTabButton(
-                  text: "discounted_price".tr,
+                  text: "cat_discounted_products".tr,
                   onTap: () {
                     setState(() {
                       _selectedProductTab = 1;
@@ -611,7 +611,7 @@ class _MainHomePageState extends State<MainHomePage>
                 ),
                 SizedBox(width: Dimensions.spacingDefault),
                 ProductTabButton(
-                  text: "top_products".tr,
+                  text: "cat_top_products".tr,
                   onTap: () {
                     setState(() {
                       _selectedProductTab = 2;

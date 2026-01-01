@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import '../../../utils/app_constants.dart';
 
 class LanguageController extends GetxController {
-  Locale _locale = Locale(AppConstants.languages[0].languageCode!);
+  Locale _locale = Locale(AppConstants.languages[1].languageCode!);
 
   Locale get locale => _locale;
 
