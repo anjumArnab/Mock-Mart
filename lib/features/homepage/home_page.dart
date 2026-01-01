@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get_utils/src/extensions/internacionalization.dart';
 import 'package:mock_mart/theme/app_theme.dart';
 import 'package:mock_mart/utils/dimensions.dart';
 import 'package:mock_mart/features/cart/cart_page.dart';
@@ -46,11 +47,11 @@ class _HomePageState extends State<HomePage> {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
-          _buildNavItem(Icons.home, 'Home', 0, null),
-          _buildNavItem(Icons.grid_view_rounded, 'Categories', 1, null),
-          _buildNavItem(Icons.shopping_bag_outlined, 'Cart', 2, 6),
-          _buildNavItem(Icons.store_outlined, 'Stores', 3, null),
-          _buildNavItem(Icons.menu, 'Menu', 4, null),
+          _buildNavItem(Icons.home, "home".tr, 0, null),
+          _buildNavItem(Icons.grid_view_rounded, "categories".tr, 1, null),
+          _buildNavItem(Icons.shopping_bag_outlined, "cart".tr, 2, 6),
+          _buildNavItem(Icons.store_outlined, "stores".tr, 3, null),
+          _buildNavItem(Icons.menu, "menu".tr, 4, null),
         ],
       ),
     );
