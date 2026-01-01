@@ -1,14 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:get/get_utils/src/extensions/internacionalization.dart';
+import 'package:mock_mart/common/models/product_model.dart';
 import 'package:mock_mart/constants/size_config.dart';
+import 'package:mock_mart/helpers/discounted_price_calc.dart';
 import 'package:mock_mart/theme/app_theme.dart';
 import 'package:mock_mart/utils/dimensions.dart';
+import 'package:mock_mart/utils/gaps.dart';
 import 'package:mock_mart/utils/text_styles.dart';
 import 'package:mock_mart/common/widgets/deal_product_card.dart';
 import 'package:mock_mart/common/widgets/gradient_card.dart';
 import 'package:mock_mart/common/widgets/product_card.dart';
 import 'package:mock_mart/common/widgets/product_tab_button.dart';
 import 'package:mock_mart/common/widgets/store_card.dart';
+
+import '../../utils/images.dart';
 
 class MainHomePage extends StatefulWidget {
   const MainHomePage({super.key});
@@ -19,8 +25,31 @@ class MainHomePage extends StatefulWidget {
 
 class _MainHomePageState extends State<MainHomePage>
     with SingleTickerProviderStateMixin {
+  List<ProductModel> products = [
+    ProductModel(
+      title: 'Blue Color Short Dress for boys',
+      image: Images.productImg,
+      price: '\$3237.87',
+      discountedPercentage: '5',
+    ),
+    ProductModel(
+      title: 'Red Color Short Dress for Girls',
+      image: Images.productImg,
+      price: '\$323.87',
+      discountedPercentage: '5',
+    ),
+    ProductModel(
+      title: 'Red ',
+      image: Images.productImg,
+      price: '\$323.87',
+      rating: '4.5',
+      totalReviews: 12,
+    ),
+  ];
+
   late TabController _tabController;
   int _currentCarouselIndex = 0;
+  int _selectedProductTab = 0;
 
   @override
   void initState() {
@@ -47,26 +76,30 @@ class _MainHomePageState extends State<MainHomePage>
             pinned: true,
             delegate: _SearchBarDelegate(_buildSearchBar()),
           ),
-          SliverToBoxAdapter(child: SizedBox(height: Dimensions.spacingLarge)),
+          SliverToBoxAdapter(child: Gaps.verticalGapOf(Dimensions.spacingLarge)), // SizedBox(height: Dimensions.spacingLarge)
           SliverToBoxAdapter(child: _buildOneTimeDeal()),
-          SliverToBoxAdapter(child: SizedBox(height: Dimensions.spacingLarge)),
+          SliverToBoxAdapter(child: Gaps.verticalGapOf(Dimensions.spacingLarge)), // SliverToBoxAdapter(child: SizedBox(height: Dimensions.spacingLarge))
           SliverToBoxAdapter(child: _buildBigSaleBanner()),
-          SliverToBoxAdapter(child: SizedBox(height: Dimensions.spacingLarge)),
+          SliverToBoxAdapter(child: Gaps.verticalGapOf(Dimensions.spacingLarge)),
           SliverToBoxAdapter(child: _buildFeaturedProduct()),
-          SliverToBoxAdapter(child: SizedBox(height: Dimensions.spacingLarge)),
+          SliverToBoxAdapter(child: Gaps.verticalGapOf(Dimensions.spacingLarge)),
           SliverToBoxAdapter(child: _buildDealOfTheDay()),
-          SliverToBoxAdapter(child: SizedBox(height: Dimensions.spacingLarge)),
-          SliverToBoxAdapter(child: _buildBanner('assets/images/banner.png')),
-          SliverToBoxAdapter(child: SizedBox(height: Dimensions.spacingLarge)),
+          SliverToBoxAdapter(child: Gaps.verticalGapOf(Dimensions.spacingLarge)),
+          SliverToBoxAdapter(child: _buildBanner(Images.banner)),
+          SliverToBoxAdapter(child: Gaps.verticalGapOf(Dimensions.spacingLarge)),
           SliverToBoxAdapter(child: _buildNewUserExclusive()),
-          SliverToBoxAdapter(child: SizedBox(height: Dimensions.spacingLarge)),
+          SliverToBoxAdapter(child: Gaps.verticalGapOf(Dimensions.spacingLarge)),
           SliverToBoxAdapter(child: _buildTopStores()),
-          SliverToBoxAdapter(child: SizedBox(height: Dimensions.spacingLarge)),
-          SliverToBoxAdapter(child: _buildBanner('assets/images/banner01.png')),
-          SliverToBoxAdapter(child: SizedBox(height: Dimensions.spacingLarge)),
-          SliverToBoxAdapter(child: _buildProductTabs()),
-          SliverToBoxAdapter(child: SizedBox(height: Dimensions.spacingLarge)),
-          SliverToBoxAdapter(child: SizedBox(height: Dimensions.scrollBottomPadding)),
+          SliverToBoxAdapter(child: Gaps.verticalGapOf(Dimensions.spacingLarge)),
+          SliverToBoxAdapter(child: _buildBanner(Images.banner01)),
+          SliverToBoxAdapter(child: Gaps.verticalGapOf(Dimensions.spacingLarge)),
+          SliverPersistentHeader(
+            delegate: _ProductTabDelegate(_buildProductTabs()),
+          ),
+          SliverToBoxAdapter(child: Gaps.verticalGapOf(Dimensions.spacingLarge)),
+          SliverToBoxAdapter(
+            child: SizedBox(height: Dimensions.scrollBottomPadding),
+          ),
         ],
       ),
     );
@@ -82,9 +115,9 @@ class _MainHomePageState extends State<MainHomePage>
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text('Hello, Welcome', style: helloWelcomeTextStyle),
+              Text("welcome_text".tr, style: helloWelcomeTextStyle),
               SizedBox(height: Dimensions.headerSpacing),
-              Text('Albert Stevano', style: userNameTextStyle),
+              Text("name".tr, style: userNameTextStyle),
             ],
           ),
           CircleAvatar(
@@ -112,13 +145,13 @@ class _MainHomePageState extends State<MainHomePage>
         unselectedLabelColor: Colors.white,
         labelStyle: tabBarTextStyle.copyWith(fontWeight: FontWeight.bold),
         unselectedLabelStyle: tabBarTextStyle,
-        tabs: const [
-          Tab(text: 'Explore'),
-          Tab(text: 'Sports'),
-          Tab(text: 'Women\'s'),
-          Tab(text: 'Kids'),
-          Tab(text: 'Wigs'),
-          Tab(text: 'Electronics'),
+        tabs: [
+          Tab(text: "tab01".tr),
+          Tab(text: "tab02".tr),
+          Tab(text: "tab03".tr),
+          Tab(text: "tab04".tr),
+          Tab(text: "tab05".tr),
+          Tab(text: "tab06".tr),
         ],
       ),
     );
@@ -130,9 +163,7 @@ class _MainHomePageState extends State<MainHomePage>
       decoration: BoxDecoration(
         color: AppTheme.getSearchBarBackground(context),
         borderRadius: BorderRadius.circular(Dimensions.searchBarBorderRadius),
-        border: Border.all(
-          color: AppTheme.getInactiveColor(context),
-        ),
+        border: Border.all(color: AppTheme.getInactiveColor(context)),
       ),
       child: Row(
         children: [
@@ -140,7 +171,7 @@ class _MainHomePageState extends State<MainHomePage>
             child: TextField(
               style: TextStyle(color: Colors.white),
               decoration: InputDecoration(
-                hintText: 'What are you looking for?',
+                hintText: "search_bar_text".tr,
                 hintStyle: TextStyle(
                   color: Colors.white,
                   fontSize: Dimensions.fontSizeMedium,
@@ -185,13 +216,13 @@ class _MainHomePageState extends State<MainHomePage>
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                'Featured Products',
+                "featured_products".tr,
                 style: sectionTitleTextStyle.copyWith(
                   color: AppTheme.getTextColor(context),
                 ),
               ),
               Text(
-                'View All',
+                "view_all".tr,
                 style: viewAllTextStyle.copyWith(
                   color: AppTheme.getTextColor(context),
                 ),
@@ -207,10 +238,12 @@ class _MainHomePageState extends State<MainHomePage>
                   SizedBox(width: Dimensions.listViewSeparator),
               itemCount: 3,
               itemBuilder: (context, index) => ProductCard(
-                title: 'Red Color Short Dress for Girls',
-                price: '\$323.87',
-                oldPrice: '\$1100',
-                discount: '-5%',
+                title: products[0].title,
+                price: products[0].price,
+                oldPrice: '5'
+                    .applyDiscount(products[0].price)
+                    .toStringAsFixed(2),
+                discount: '-${products[0].discountedPercentage}%',
               ),
             ),
           ),
@@ -309,10 +342,12 @@ class _MainHomePageState extends State<MainHomePage>
               child: ListView.separated(
                 scrollDirection: Axis.horizontal,
                 itemBuilder: (context, index) => ProductCard(
-                  title: 'Blue Color Short Dress for boys',
-                  price: '\$3237.87',
-                  oldPrice: '\$1100',
-                  discount: '-5%',
+                  title: products[0].title,
+                  price: products[0].price,
+                  oldPrice: '5'
+                      .applyDiscount(products[0].price)
+                      .toStringAsFixed(2),
+                  discount: '-${products[0].discountedPercentage}%',
                 ),
                 separatorBuilder: (BuildContext context, int index) =>
                     SizedBox(width: Dimensions.listViewSeparator),
@@ -327,9 +362,9 @@ class _MainHomePageState extends State<MainHomePage>
 
   Widget _buildBigSaleBanner() {
     final List<String> carouselImages = [
-      'assets/images/big_sale.png',
-      'assets/images/big_sale.png',
-      'assets/images/big_sale.png',
+      Images.bigSale,
+      Images.bigSale,
+      Images.bigSale,
     ];
 
     return Column(
@@ -386,7 +421,9 @@ class _MainHomePageState extends State<MainHomePage>
                 horizontal: Dimensions.carouselIndicatorMargin,
               ),
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(Dimensions.carouselIndicatorBorderRadius),
+                borderRadius: BorderRadius.circular(
+                  Dimensions.carouselIndicatorBorderRadius,
+                ),
                 color: _currentCarouselIndex == entry.key
                     ? AppTheme.primaryColor
                     : AppTheme.getInactiveColor(context),
@@ -412,9 +449,6 @@ class _MainHomePageState extends State<MainHomePage>
             children: [
               Expanded(
                 child: GradientCard(
-                  title1: "Don't Miss",
-                  title2: "Today's",
-                  title3: "Deal",
                 ),
               ),
               SizedBox(width: Dimensions.spacingDefault),
@@ -461,7 +495,7 @@ class _MainHomePageState extends State<MainHomePage>
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                'New User Exclusive',
+               "new_user_exclusive".tr,
                 style: sectionTitleTextStyle.copyWith(
                   color: AppTheme.getTextColor(context),
                 ),
@@ -469,7 +503,7 @@ class _MainHomePageState extends State<MainHomePage>
               TextButton(
                 onPressed: () {},
                 child: Text(
-                  'View all',
+                  'view_all'.tr,
                   style: viewAllTextStyle.copyWith(
                     color: AppTheme.getTextColor(context),
                   ),
@@ -486,10 +520,12 @@ class _MainHomePageState extends State<MainHomePage>
                   SizedBox(width: Dimensions.listViewSeparator),
               itemCount: 3,
               itemBuilder: (context, index) => ProductCard(
-                title: 'Red Color Short Dress for Girls',
-                price: '\$323.87',
-                oldPrice: '\$1100',
-                discount: '-5%',
+                title: products[0].title,
+                price: products[0].price,
+                oldPrice: '5'
+                    .applyDiscount(products[0].price)
+                    .toStringAsFixed(2),
+                discount: '-${products[0].discountedPercentage}%',
               ),
             ),
           ),
@@ -498,6 +534,7 @@ class _MainHomePageState extends State<MainHomePage>
     );
   }
 
+  ///
   Widget _buildTopStores() {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: Dimensions.paddingSizeDefault),
@@ -507,7 +544,7 @@ class _MainHomePageState extends State<MainHomePage>
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                'Top Stores',
+                "top_stores".tr,
                 style: sectionTitleTextStyle.copyWith(
                   color: AppTheme.getTextColor(context),
                 ),
@@ -515,7 +552,7 @@ class _MainHomePageState extends State<MainHomePage>
               TextButton(
                 onPressed: () {},
                 child: Text(
-                  'View all',
+                  "view_all".tr,
                   style: viewAllTextStyle.copyWith(
                     color: AppTheme.getTextColor(context),
                   ),
@@ -543,7 +580,7 @@ class _MainHomePageState extends State<MainHomePage>
       ),
     );
   }
-
+  /*
   Widget _buildProductTabs() {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: Dimensions.paddingSizeDefault),
@@ -553,11 +590,11 @@ class _MainHomePageState extends State<MainHomePage>
             scrollDirection: Axis.horizontal,
             child: Row(
               children: [
-                ProductTabButton(text: 'New Arrivals', isActive: true),
+                ProductTabButton(text: 'New Arrivals', onTap: (){}, isActive: true),
                 SizedBox(width: Dimensions.spacingDefault),
-                ProductTabButton(text: 'Discounted Products', isActive: false),
+                ProductTabButton(text: 'Discounted Products', onTap:(){}, isActive: false),
                 SizedBox(width: Dimensions.spacingDefault),
-                ProductTabButton(text: 'Top Products', isActive: false),
+                ProductTabButton(text: 'Top Products', onTap:(){},  isActive: false),
               ],
             ),
           ),
@@ -571,36 +608,127 @@ class _MainHomePageState extends State<MainHomePage>
               ),
               scrollDirection: Axis.horizontal,
               children: [
+
                 ProductCard(
-                  title: 'Red Color Short Dress for Girls',
-                  price: '\$323.87',
-                  oldPrice: '\$1100',
-                  discount: '-5%',
+                  title: products[0].title,
+                  price: products[0].price,
+                  oldPrice: '5'
+                      .applyDiscount(products[0].price)
+                      .toStringAsFixed(2),
+                  discount: '-${products[0].discountedPercentage}%',
                 ),
+
                 ProductCard(
-                  title: 'Red Color Short Dress for Girls',
-                  price: '\$323.87',
-                  oldPrice: '\$1100',
-                  discount: '-5%',
+                  title: products[0].title,
+                  price: products[0].price,
+                  oldPrice: '5'
+                      .applyDiscount(products[0].price)
+                      .toStringAsFixed(2),
+                  discount: '-${products[0].discountedPercentage}%',
                 ),
+
                 ProductCard(
-                  title: 'Red Color Short Dress for Girls',
-                  price: '\$323.87',
-                  oldPrice: '\$1100',
-                  discount: '-5%',
+                  title: products[0].title,
+                  price: products[0].price,
+                  oldPrice: '5'
+                      .applyDiscount(products[0].price)
+                      .toStringAsFixed(2),
+                  discount: '-${products[0].discountedPercentage}%',
                 ),
-                ProductCard(
-                  title: 'Red Color Short Dress for Girls',
-                  price: '\$323.87',
-                  oldPrice: '\$1100',
-                  discount: '-5%',
-                ),
+
               ],
             ),
           ),
         ],
       ),
     );
+  }*/
+
+  Widget _buildProductTabs() {
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: Dimensions.paddingSizeDefault),
+      child: Column(
+        children: [
+          SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            child: Row(
+              children: [
+                ProductTabButton(
+                  text: "new_arrivals".tr,
+                  onTap: () {
+                    setState(() {
+                      _selectedProductTab = 0;
+                    });
+                  },
+                  isActive: _selectedProductTab == 0,
+                ),
+                SizedBox(width: Dimensions.spacingDefault),
+                ProductTabButton(
+                  text: "discounted_price".tr,
+                  onTap: () {
+                    setState(() {
+                      _selectedProductTab = 1;
+                    });
+                  },
+                  isActive: _selectedProductTab == 1,
+                ),
+                SizedBox(width: Dimensions.spacingDefault),
+                ProductTabButton(
+                  text: "top_products".tr,
+                  onTap: () {
+                    setState(() {
+                      _selectedProductTab = 2;
+                    });
+                  },
+                  isActive: _selectedProductTab == 2,
+                ),
+              ],
+            ),
+          ),
+          SizedBox(height: Dimensions.sectionTitleSpacing),
+          _buildProductGridView(), // Extract grid view to separate method
+        ],
+      ),
+    );
+  }
+
+  Widget _buildProductGridView() {
+    List<ProductModel> displayProducts = _getProductsForTab(
+      _selectedProductTab,
+    );
+
+    return SizedBox(
+      height: Dimensions.gridViewHeight,
+      child: GridView.builder(
+        shrinkWrap: true,
+        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: Dimensions.gridViewCrossAxisCount.toInt(),
+        ),
+        scrollDirection: Axis.horizontal,
+        itemCount: displayProducts.length,
+        itemBuilder: (context, index) {
+          return ProductCard(
+            title: displayProducts[index].title,
+            price: displayProducts[index].price,
+            oldPrice: '5'.applyDiscount(products[0].price).toStringAsFixed(2),
+            discount: '-${products[0].discountedPercentage}%',
+          );
+        },
+      ),
+    );
+  }
+
+  List<ProductModel> _getProductsForTab(int tabIndex) {
+    switch (tabIndex) {
+      case 0: // New Arrivals
+        return products;
+      case 1: // Discounted Products
+        return products; // products.where((p) => p.discountedPercentage != null).toList()
+      case 2: // Top Products
+        return products;
+      default:
+        return products;
+    }
   }
 }
 
@@ -616,7 +744,35 @@ class _SearchBarDelegate extends SliverPersistentHeaderDelegate {
   double get maxExtent => Dimensions.persistentHeaderHeight;
 
   @override
-  Widget build(BuildContext context, double shrinkOffset, bool overlapsContent) {
+  Widget build(
+    BuildContext context,
+    double shrinkOffset,
+    bool overlapsContent,
+  ) {
+    return child;
+  }
+
+  @override
+  bool shouldRebuild(_) => false;
+}
+
+class _ProductTabDelegate extends SliverPersistentHeaderDelegate {
+  final Widget child;
+
+  _ProductTabDelegate(this.child);
+
+  @override
+  double get minExtent => 650;
+
+  @override
+  double get maxExtent => 650;
+
+  @override
+  Widget build(
+    BuildContext context,
+    double shrinkOffset,
+    bool overlapsContent,
+  ) {
     return child;
   }
 

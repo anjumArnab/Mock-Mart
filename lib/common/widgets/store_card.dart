@@ -3,6 +3,8 @@ import 'package:mock_mart/theme/app_theme.dart';
 import 'package:mock_mart/utils/dimensions.dart';
 import 'package:mock_mart/utils/text_styles.dart';
 
+import '../../utils/images.dart';
+
 class StoreCard extends StatelessWidget {
   final String name;
   final double rating;
@@ -38,7 +40,7 @@ class StoreCard extends StatelessWidget {
                 top: Radius.circular(Dimensions.storeCardBorderRadius),
               ),
               child: Image.asset(
-                'assets/images/store_banner.png',
+                Images.storeBanner,
                 fit: BoxFit.cover,
               ),
             ),

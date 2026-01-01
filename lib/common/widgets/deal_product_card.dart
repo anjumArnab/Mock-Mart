@@ -3,6 +3,8 @@ import 'package:mock_mart/theme/app_theme.dart';
 import 'package:mock_mart/utils/dimensions.dart';
 import 'package:mock_mart/utils/text_styles.dart';
 
+import '../../utils/images.dart';
+
 class DealProductCard extends StatelessWidget {
   final IconData icon;
   final Color iconColor;
@@ -42,7 +44,7 @@ class DealProductCard extends StatelessWidget {
                   ),
                 ),
                 child: Image.asset(
-                  'assets/images/img.png',
+                  Images.productImg,
                   fit: BoxFit.cover,
                 ),
               ),

@@ -1,60 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:mock_mart/utils/dimensions.dart';
 
-class GradientCard extends StatelessWidget {
-  final String title1;
-  final String title2;
-  final String title3;
+import '../../utils/images.dart';
 
-  const GradientCard({
-    super.key,
-    required this.title1,
-    required this.title2,
-    required this.title3,
-  });
+class GradientCard extends StatelessWidget {
+  const GradientCard({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      child: Container(
-        decoration: BoxDecoration(
-          color: Colors.blue,
-          borderRadius: BorderRadius.circular(Dimensions.gradientCardBorderRadius),
-        ),
-        child: Center(
-          child: Padding(
-            padding: EdgeInsets.all(Dimensions.gradientCardPadding),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(
-                  title1,
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: Dimensions.fontSizeMedium,
-                  ),
-                ),
-                Text(
-                  title2,
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: Dimensions.fontSizeExtraLarge,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                Text(
-                  title3,
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: Dimensions.fontSizeExtraLarge,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ),
-      ),
+    return ClipRRect(
+        borderRadius: BorderRadius.circular(Dimensions.productCardBorderRadius),
+        child: Image.asset(Images.todayDealBanner, fit: BoxFit.cover),
+
     );
   }
 }
