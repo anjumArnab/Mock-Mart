@@ -456,11 +456,15 @@ class _MainHomePageState extends State<MainHomePage>
                 child: DealProductCard(
                   icon: Icons.watch,
                   iconColor: Colors.brown.shade700,
-                  title: 'Red Color Short Dress for Girls',
-                  price: 323.87,
+                  title: products[0].title,
+                  price: products[0].price,
                   rating: 4.5,
                   reviews: 12,
                   discountColor: Colors.green,
+                  oldPrice:'5'
+                      .applyDiscount(products[0].price)
+                      .toStringAsFixed(2),
+                    discount: '-${products[0].discountedPercentage}%',
                 ),
               ),
             ],
@@ -586,41 +590,38 @@ class _MainHomePageState extends State<MainHomePage>
       padding: EdgeInsets.symmetric(horizontal: Dimensions.paddingSizeDefault),
       child: Column(
         children: [
-          SingleChildScrollView(
-            scrollDirection: Axis.horizontal,
-            child: Row(
-              children: [
-                ProductTabButton(
-                  text: "cat_new_arrival".tr,
-                  onTap: () {
-                    setState(() {
-                      _selectedProductTab = 0;
-                    });
-                  },
-                  isActive: _selectedProductTab == 0,
-                ),
-                SizedBox(width: Dimensions.spacingDefault),
-                ProductTabButton(
-                  text: "cat_discounted_products".tr,
-                  onTap: () {
-                    setState(() {
-                      _selectedProductTab = 1;
-                    });
-                  },
-                  isActive: _selectedProductTab == 1,
-                ),
-                SizedBox(width: Dimensions.spacingDefault),
-                ProductTabButton(
-                  text: "cat_top_products".tr,
-                  onTap: () {
-                    setState(() {
-                      _selectedProductTab = 2;
-                    });
-                  },
-                  isActive: _selectedProductTab == 2,
-                ),
-              ],
-            ),
+          Row(
+            children: [
+              ProductTabButton(
+                text: "cat_new_arrival".tr,
+                onTap: () {
+                  setState(() {
+                    _selectedProductTab = 0;
+                  });
+                },
+                isActive: _selectedProductTab == 0,
+              ),
+              SizedBox(width: Dimensions.spacingDefault),
+              ProductTabButton(
+                text: "cat_discounted_products".tr,
+                onTap: () {
+                  setState(() {
+                    _selectedProductTab = 1;
+                  });
+                },
+                isActive: _selectedProductTab == 1,
+              ),
+              SizedBox(width: Dimensions.spacingDefault),
+              ProductTabButton(
+                text: "cat_top_products".tr,
+                onTap: () {
+                  setState(() {
+                    _selectedProductTab = 2;
+                  });
+                },
+                isActive: _selectedProductTab == 2,
+              ),
+            ],
           ),
           SizedBox(height: Dimensions.sectionTitleSpacing),
           _buildProductGridView(), // Extract grid view to separate method
