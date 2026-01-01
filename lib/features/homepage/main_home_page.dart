@@ -580,69 +580,6 @@ class _MainHomePageState extends State<MainHomePage>
       ),
     );
   }
-  /*
-  Widget _buildProductTabs() {
-    return Padding(
-      padding: EdgeInsets.symmetric(horizontal: Dimensions.paddingSizeDefault),
-      child: Column(
-        children: [
-          SingleChildScrollView(
-            scrollDirection: Axis.horizontal,
-            child: Row(
-              children: [
-                ProductTabButton(text: 'New Arrivals', onTap: (){}, isActive: true),
-                SizedBox(width: Dimensions.spacingDefault),
-                ProductTabButton(text: 'Discounted Products', onTap:(){}, isActive: false),
-                SizedBox(width: Dimensions.spacingDefault),
-                ProductTabButton(text: 'Top Products', onTap:(){},  isActive: false),
-              ],
-            ),
-          ),
-          SizedBox(height: Dimensions.sectionTitleSpacing),
-          SizedBox(
-            height: Dimensions.gridViewHeight,
-            child: GridView(
-              shrinkWrap: true,
-              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: Dimensions.gridViewCrossAxisCount.toInt(),
-              ),
-              scrollDirection: Axis.horizontal,
-              children: [
-
-                ProductCard(
-                  title: products[0].title,
-                  price: products[0].price,
-                  oldPrice: '5'
-                      .applyDiscount(products[0].price)
-                      .toStringAsFixed(2),
-                  discount: '-${products[0].discountedPercentage}%',
-                ),
-
-                ProductCard(
-                  title: products[0].title,
-                  price: products[0].price,
-                  oldPrice: '5'
-                      .applyDiscount(products[0].price)
-                      .toStringAsFixed(2),
-                  discount: '-${products[0].discountedPercentage}%',
-                ),
-
-                ProductCard(
-                  title: products[0].title,
-                  price: products[0].price,
-                  oldPrice: '5'
-                      .applyDiscount(products[0].price)
-                      .toStringAsFixed(2),
-                  discount: '-${products[0].discountedPercentage}%',
-                ),
-
-              ],
-            ),
-          ),
-        ],
-      ),
-    );
-  }*/
 
   Widget _buildProductTabs() {
     return Padding(
