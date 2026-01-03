@@ -5,13 +5,11 @@ import 'package:mock_mart/utils/dimensions.dart';
 import 'package:mock_mart/features/cart/cart_page.dart';
 import 'package:mock_mart/features/categories/categories_page.dart';
 import 'package:mock_mart/features/homepage/main_home_page.dart';
-import 'package:mock_mart/features/menu/menu_page.dart';
+import 'package:mock_mart/features/menu/views/menu_page.dart';
 import 'package:mock_mart/features/store/stores_page.dart';
 
 class HomePage extends StatefulWidget {
-  final VoidCallback onThemeToggle;
-
-  const HomePage({super.key, required this.onThemeToggle});
+  const HomePage({super.key});
 
   @override
   State<HomePage> createState() => _HomePageState();
@@ -27,7 +25,7 @@ class _HomePageState extends State<HomePage> {
       const CategoriesPage(),
       const CartPage(),
       const StoresPage(),
-      MenuPage(onThemeToggle: widget.onThemeToggle),
+      MenuPage(),
     ];
 
     return Scaffold(
