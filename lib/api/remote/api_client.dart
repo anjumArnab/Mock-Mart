@@ -34,21 +34,24 @@ class ApiClient extends GetxService {
     };
   }
 
-  Future<Response> getData(String uri, {Map<String, dynamic>? query, Map<String, String>? headers}) async {
+  Future<Response> getData(
+    String uri, {
+    Map<String, dynamic>? query,
+    Map<String, String>? headers,
+  }) async {
     try {
       if (kDebugMode) {
         print('===== API Call: $uri\nHeader: $_mainHeaders =====');
       }
-      
+
       Uri apiUri = Uri.parse(appBaseUrl + uri);
       if (query != null) {
         apiUri = apiUri.replace(queryParameters: query);
       }
 
-      http.Response response = await http.get(
-        apiUri,
-        headers: headers ?? _mainHeaders,
-      ).timeout(Duration(seconds: timeoutInSeconds));
+      http.Response response = await http
+          .get(apiUri, headers: headers ?? _mainHeaders)
+          .timeout(Duration(seconds: timeoutInSeconds));
 
       return handleResponse(response, uri);
     } catch (e) {
@@ -59,18 +62,24 @@ class ApiClient extends GetxService {
     }
   }
 
-  Future<Response> postData(String uri, dynamic body, {Map<String, String>? headers}) async {
+  Future<Response> postData(
+    String uri,
+    dynamic body, {
+    Map<String, String>? headers,
+  }) async {
     try {
       if (kDebugMode) {
         print('===== API Call: $uri\nHeader: $_mainHeaders =====');
         print('===== Body: ${body.toString()} =====');
       }
 
-      http.Response response = await http.post(
-        Uri.parse(appBaseUrl + uri),
-        body: jsonEncode(body),
-        headers: headers ?? _mainHeaders,
-      ).timeout(Duration(seconds: timeoutInSeconds));
+      http.Response response = await http
+          .post(
+            Uri.parse(appBaseUrl + uri),
+            body: jsonEncode(body),
+            headers: headers ?? _mainHeaders,
+          )
+          .timeout(Duration(seconds: timeoutInSeconds));
 
       return handleResponse(response, uri);
     } catch (e) {
@@ -84,12 +93,15 @@ class ApiClient extends GetxService {
   Future<Response> postMultipartData(
     String uri,
     Map<String, String> body,
-    List<MultipartBody>? multipartBody,
-    {Map<String, String>? headers}
-  ) async {
+    List<MultipartBody>? multipartBody, {
+    Map<String, String>? headers,
+  }) async {
     try {
-      http.MultipartRequest request = http.MultipartRequest('PUT', Uri.parse(appBaseUrl + uri));
-      
+      http.MultipartRequest request = http.MultipartRequest(
+        'POST',
+        Uri.parse(appBaseUrl + uri),
+      );
+
       Map<String, String> multipartHeaders = Map.from(headers ?? _mainHeaders);
       multipartHeaders.remove('Content-Type');
       request.headers.addAll(multipartHeaders);
@@ -107,16 +119,19 @@ class ApiClient extends GetxService {
             request.files.add(part);
           } else {
             File file = File(multipart.file.path);
-            request.files.add(http.MultipartFile(
-              multipart.key,
-              file.readAsBytes().asStream(),
-              file.lengthSync(),
-              filename: file.path.split('/').last,
-            ));
+            request.files.add(
+              http.MultipartFile(
+                multipart.key,
+                file.readAsBytes().asStream(),
+                file.lengthSync(),
+                filename: file.path.split('/').last,
+              ),
+            );
           }
         }
       }
 
+      body['_method'] = 'PUT';
       request.fields.addAll(body);
 
       if (kDebugMode) {
@@ -124,7 +139,9 @@ class ApiClient extends GetxService {
         print('===== Fields: $body =====');
       }
 
-      http.Response response = await http.Response.fromStream(await request.send());
+      http.Response response = await http.Response.fromStream(
+        await request.send(),
+      );
       return handleResponse(response, uri);
     } catch (e) {
       if (kDebugMode) {
@@ -155,7 +172,9 @@ class ApiClient extends GetxService {
       statusText: response.reasonPhrase,
     );
 
-    if (response0.statusCode != 200 && response0.body != null && response0.body is Map) {
+    if (response0.statusCode != 200 &&
+        response0.body != null &&
+        response0.body is Map) {
       if (response0.body.containsKey('message')) {
         response0 = Response(
           statusCode: response0.statusCode,
