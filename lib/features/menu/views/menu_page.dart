@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:mock_mart/features/auth/controller/auth_controller.dart';
 import 'package:mock_mart/features/language/controllers/language_controller.dart';
 import 'package:mock_mart/theme/app_theme.dart';
 import 'package:mock_mart/theme/theme_controller.dart';
@@ -66,22 +65,6 @@ class MenuPage extends StatelessWidget {
                     },
                   ),
                 ],
-              ),
-              ListTile(
-                leading: Icon(
-                  Icons.logout,
-                  color: Colors.red,
-                ),
-                title: Text(
-                  "logout".tr,
-                  style: TextStyle(
-                    fontSize: 16,
-                    color: Colors.red,
-                  ),
-                ),
-                onTap: () {
-                  Get.find<AuthController>().logOut();
-                },
               ),
             ],
           ),
