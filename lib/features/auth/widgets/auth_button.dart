@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:mock_mart/constants/size_config.dart';
 import 'package:mock_mart/theme/app_theme.dart';
+import 'package:mock_mart/utils/dimensions.dart';
 import 'package:mock_mart/utils/text_styles.dart';
 
 class AuthButton extends StatelessWidget {
@@ -22,7 +24,7 @@ class AuthButton extends StatelessWidget {
     this.width = double.infinity,
     this.backgroundColor,
     this.foregroundColor,
-    this.borderRadius = 12,
+    this.borderRadius = Dimensions.radiusDefault,
     this.padding,
   });
 
@@ -44,8 +46,8 @@ class AuthButton extends StatelessWidget {
         ),
         child: isLoading
             ? SizedBox(
-                height: 20,
-                width: 20,
+                height: SizeConfig.blockWidth * .2,
+                width: SizeConfig.blockWidth * .2,
                 child: CircularProgressIndicator(
                   strokeWidth: 2,
                   valueColor: AlwaysStoppedAnimation<Color>(
@@ -55,10 +57,7 @@ class AuthButton extends StatelessWidget {
               )
             : Text(
                 text,
-                style: interSemiBold.copyWith(
-                  fontSize: 16,
-                  color: foregroundColor ?? Colors.white,
-                ),
+                style: interSemiBold
               ),
       ),
     );

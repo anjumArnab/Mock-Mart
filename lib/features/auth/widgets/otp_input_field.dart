@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:mock_mart/constants/size_config.dart';
 import 'package:mock_mart/theme/app_theme.dart';
+import 'package:mock_mart/utils/dimensions.dart';
 import 'package:mock_mart/utils/text_styles.dart';
 
 class OTPInputField extends StatelessWidget {
@@ -17,8 +19,8 @@ class OTPInputField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: 50,
-      height: 60,
+      width: SizeConfig.blockWidth * .5,
+      height: SizeConfig.blockWidth * .6,
       child: TextFormField(
         controller: controller,
         focusNode: focusNode,
@@ -34,19 +36,19 @@ class OTPInputField extends StatelessWidget {
           filled: true,
           fillColor: AppTheme.getCardColor(context),
           border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(12),
+            borderRadius: BorderRadius.circular(Dimensions.radiusDefault),
             borderSide: BorderSide(
               color: AppTheme.getInactiveColor(context),
             ),
           ),
           enabledBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(12),
+            borderRadius: BorderRadius.circular(Dimensions.radiusDefault),
             borderSide: BorderSide(
               color: AppTheme.getInactiveColor(context),
             ),
           ),
           focusedBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(12),
+            borderRadius: BorderRadius.circular(Dimensions.radiusDefault),
             borderSide: BorderSide(
               color: AppTheme.primaryColor,
               width: 2,

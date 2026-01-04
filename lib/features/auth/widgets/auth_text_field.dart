@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mock_mart/theme/app_theme.dart';
+import 'package:mock_mart/utils/dimensions.dart';
+import 'package:mock_mart/utils/gaps.dart';
 import 'package:mock_mart/utils/text_styles.dart';
 
 class AuthTextField extends StatefulWidget {
@@ -40,12 +42,9 @@ class _AuthTextFieldState extends State<AuthTextField> {
       children: [
         Text(
           widget.label,
-          style: interSemiBold.copyWith(
-            fontSize: 14,
-            color: AppTheme.getTextColor(context),
-          ),
+          style: interSemiBold
         ),
-        const SizedBox(height: 8),
+        Gaps.verticalGapOf(Dimensions.spacingSmall),
         TextFormField(
           controller: widget.controller,
           keyboardType: widget.keyboardType,
@@ -58,10 +57,7 @@ class _AuthTextFieldState extends State<AuthTextField> {
           decoration: InputDecoration(
             hintText: widget.hint,
             counterText: widget.maxLength != null ? '' : null,
-            hintStyle: interRegular.copyWith(
-              fontSize: 14,
-              color: AppTheme.getSecondaryTextColor(context),
-            ),
+            hintStyle: interRegular,
             prefixIcon: Icon(
               widget.icon,
               color: AppTheme.primaryColor,
@@ -84,28 +80,25 @@ class _AuthTextFieldState extends State<AuthTextField> {
             filled: true,
             fillColor: AppTheme.getCardColor(context),
             border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(12),
+              borderRadius: BorderRadius.circular(Dimensions.radiusDefault),
               borderSide: BorderSide(
                 color: AppTheme.getInactiveColor(context),
               ),
             ),
             enabledBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(12),
+              borderRadius: BorderRadius.circular(Dimensions.radiusDefault),
               borderSide: BorderSide(
                 color: AppTheme.getInactiveColor(context),
               ),
             ),
             focusedBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(12),
+              borderRadius: BorderRadius.circular(Dimensions.radiusDefault),
               borderSide: BorderSide(
                 color: AppTheme.primaryColor,
                 width: 2,
               ),
             ),
-            errorStyle: interRegular.copyWith(
-              fontSize: 12,
-              color: AppTheme.red,
-            ),
+            errorStyle: interRegular
           ),
           validator: widget.isRequired ? widget.validator : null,
         ),
