@@ -2,7 +2,7 @@ import 'package:get/get.dart';
 import 'package:mock_mart/features/auth/views/sign_in_screen.dart';
 import 'package:mock_mart/features/auth/views/sign_up_screen.dart';
 import 'package:mock_mart/features/auth/views/verification_screen.dart';
-import 'package:mock_mart/features/homepage/home_page.dart';
+import 'package:mock_mart/features/homepage/views/home_page.dart';
 
 class RouteHelper {
   static const String _home = '/home';
