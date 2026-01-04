@@ -21,7 +21,6 @@ class CustomTextField extends StatelessWidget {
           borderRadius: BorderRadius.circular(Dimensions.radiusDefault),
         ),
       ),
-      keyboardType: TextInputType.phone,
     );
   }
 }
