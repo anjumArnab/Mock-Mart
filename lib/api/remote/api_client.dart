@@ -88,7 +88,7 @@ class ApiClient extends GetxService {
     {Map<String, String>? headers}
   ) async {
     try {
-      http.MultipartRequest request = http.MultipartRequest('POST', Uri.parse(appBaseUrl + uri));
+      http.MultipartRequest request = http.MultipartRequest('PUT', Uri.parse(appBaseUrl + uri));
       
       Map<String, String> multipartHeaders = Map.from(headers ?? _mainHeaders);
       multipartHeaders.remove('Content-Type');
