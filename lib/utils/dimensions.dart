@@ -142,6 +142,8 @@ class Dimensions {
   static const double headerAvatarIconSize = 24.0;
   static const double headerSpacing = 4.0;
 
+  static const double expandedHeight = 130;
+
   // Persistent Header
   static const double persistentHeaderHeight = 90.0;
 
