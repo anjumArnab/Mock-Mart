@@ -13,6 +13,7 @@ class AppConstants {
   static const String verifyPhoneUri = '/api/v1/auth/verify-phone';
   static const String customerInfoUri = '/api/v1/customer/info';
   static const String updateProfileUri = '/api/v1/customer/update-profile';
+  static const String customerImgUrl = "/storage/app/public/profile";
   
   // SharedPreferences Keys
   static const String token = 'token';
