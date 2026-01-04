@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mock_mart/features/language/controllers/language_controller.dart';
+import 'package:mock_mart/features/profile/controllers/user_controller.dart';
+import 'package:mock_mart/features/profile/repo/user_repo.dart';
 import 'package:mock_mart/theme/app_theme.dart';
 import 'package:mock_mart/theme/theme_controller.dart';
 import 'package:mock_mart/helpers/route_helper.dart';
@@ -25,10 +27,13 @@ void main() async {
     apiClient: apiClient,
     sharedPreferences: sharedPreferences,
   );
+
+  final userRepo = UserRepo(apiClient: apiClient);
   
   Get.put(LanguageController());
   Get.put(ThemeController(sharedPreferences: sharedPreferences));
   Get.put(AuthController(authRepo: authRepo));
+  Get.put(UserController(userRepo: userRepo, authRepo: authRepo));
   
   runApp(const MockMart());
 }
@@ -53,7 +58,7 @@ class MockMart extends StatelessWidget {
           darkTheme: AppTheme.darkTheme,
           themeMode: themeController.themeMode,
           
-          initialRoute: authController.isLoggedIn() 
+         initialRoute: authController.isLoggedIn() 
               ? RouteHelper.getMainRoute() 
               : RouteHelper.getSignInRoute(),
           getPages: RouteHelper.routes,
