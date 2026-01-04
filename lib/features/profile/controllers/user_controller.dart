@@ -80,51 +80,53 @@ class UserController extends GetxController implements GetxService {
   }
 
   Future<void> updateProfile({
-    String? fName,
-    String? lName,
-    String? email,
-    String? phone,
-  }) async {
-    _isUpdating = true;
-    update();
+  String? fName,
+  String? lName,
+  String? email,
+  String? phone,
+}) async {
+  _isUpdating = true;
+  update();
 
-    try {
-      Map<String, String> body = {
-        'f_name': fName ?? _profileModel?.fName ?? '',
-        'l_name': lName ?? _profileModel?.lName ?? '',
-        'email': email ?? _profileModel?.email ?? '',
-        'phone': phone ?? _profileModel?.phone ?? '',
-      };
+  try {
+    Map<String, String> body = {
+      'f_name': fName ?? _profileModel?.fName ?? '',
+      'l_name': lName ?? _profileModel?.lName ?? '',
+      'email': email ?? _profileModel?.email ?? '',
+      'phone': phone ?? _profileModel?.phone ?? '',
+    };
 
-      List<MultipartBody>? multipartBody;
-      if (_pickedFile != null) {
-        multipartBody = [MultipartBody('image', _pickedFile!)];
-      }
-
-      Response response = await userRepo.updateUserProfile(body, multipartBody);
-
-      if (response.statusCode == 200) {
-        _profileModel = ProfileModel.fromJson(response.body);
-        _pickedFile = null;
-        customSnackBar("profile_updated_successfully".tr, type: ToasterMessageType.success);
-        Get.back();
-      } else {
-        String errorMessage = "failed_to_update_profile".tr;
-        if (response.body != null && response.body is Map) {
-          errorMessage =
-              response.body['message'] ?? response.statusText ?? errorMessage;
-        }
-        customSnackBar(errorMessage);
-      }
-    } catch (e) {
-      customSnackBar("an_error_occurred_during_updating_profile".tr);
-      if (kDebugMode) {
-        print('Update profile error: $e');
-      }
+    List<MultipartBody>? multipartBody;
+    if (_pickedFile != null) {
+      multipartBody = [MultipartBody('image', _pickedFile!)];
     }
-    _isUpdating = false;
-    update();
+
+    Response response = await userRepo.updateUserProfile(body, multipartBody);
+
+    if (response.statusCode == 200) {
+      _pickedFile = null;
+      
+      await getUserData();
+      
+      customSnackBar("profile_updated_successfully".tr, type: ToasterMessageType.success);
+      Get.back();
+    } else {
+      String errorMessage = "failed_to_update_profile".tr;
+      if (response.body != null && response.body is Map) {
+        errorMessage =
+            response.body['message'] ?? response.statusText ?? errorMessage;
+      }
+      customSnackBar(errorMessage);
+    }
+  } catch (e) {
+    customSnackBar("an_error_occurred_during_updating_profile".tr);
+    if (kDebugMode) {
+      print('Update profile error: $e');
+    }
   }
+  _isUpdating = false;
+  update();
+}
 
   Future<void> logOut() async {
     await authRepo.clearSharedData();
