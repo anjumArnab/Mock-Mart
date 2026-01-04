@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:get/get_utils/src/extensions/internacionalization.dart';
 import 'package:mock_mart/common/models/product_model.dart';
 import 'package:mock_mart/constants/size_config.dart';
@@ -11,6 +12,7 @@ import 'package:mock_mart/features/homepage/widgets/one_time_deal.dart';
 import 'package:mock_mart/features/homepage/widgets/product_tab.dart';
 import 'package:mock_mart/features/homepage/widgets/top_stores.dart';
 import 'package:mock_mart/features/homepage/widgets/user_exclusive.dart';
+import 'package:mock_mart/helpers/route_helper.dart';
 import 'package:mock_mart/theme/app_theme.dart';
 import 'package:mock_mart/utils/dimensions.dart';
 import 'package:mock_mart/utils/gaps.dart';
@@ -153,13 +155,16 @@ class _MainHomePageState extends State<MainHomePage>
               Text("name".tr, style: userNameTextStyle),
             ],
           ),
-          CircleAvatar(
-            radius: Dimensions.headerAvatarRadius,
-            backgroundColor: Colors.white,
-            child: Icon(
-              Icons.person,
-              color: AppTheme.primaryColor,
-              size: Dimensions.headerAvatarIconSize,
+          GestureDetector(
+            onTap:() => Get.offAllNamed(RouteHelper.getUserProfilePageRoute()),
+            child: CircleAvatar(
+              radius: Dimensions.headerAvatarRadius,
+              backgroundColor: Colors.white,
+              child: Icon(
+                Icons.person,
+                color: AppTheme.primaryColor,
+                size: Dimensions.headerAvatarIconSize,
+              ),
             ),
           ),
         ],
