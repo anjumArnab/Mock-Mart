@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_utils/src/extensions/internacionalization.dart';
 import 'package:mock_mart/common/models/product_model.dart';
 import 'package:mock_mart/constants/size_config.dart';
 import 'package:mock_mart/features/homepage/widgets/build_banner.dart';
@@ -16,9 +15,9 @@ import 'package:mock_mart/helpers/route_helper.dart';
 import 'package:mock_mart/theme/app_theme.dart';
 import 'package:mock_mart/utils/dimensions.dart';
 import 'package:mock_mart/utils/gaps.dart';
+import 'package:mock_mart/utils/images.dart';
 import 'package:mock_mart/utils/text_styles.dart';
 
-import '../../../utils/images.dart';
 
 class MainHomePage extends StatefulWidget {
   const MainHomePage({super.key});
@@ -53,10 +52,19 @@ class _MainHomePageState extends State<MainHomePage>
 
   late TabController _tabController;
 
+  final List<String> _tabs = [
+    "tab01",
+    "tab02",
+    "tab03",
+    "tab04",
+    "tab05",
+    "tab06",
+  ];
+
   @override
   void initState() {
     super.initState();
-    _tabController = TabController(length: 6, vsync: this);
+    _tabController = TabController(length: _tabs.length, vsync: this);
   }
 
   @override
@@ -72,8 +80,61 @@ class _MainHomePageState extends State<MainHomePage>
     return SafeArea(
       child: CustomScrollView(
         slivers: [
-          SliverToBoxAdapter(child: _buildHeader()),
-          SliverToBoxAdapter(child: _buildNavTabs()),
+          SliverAppBar(
+            expandedHeight: Dimensions.expandedHeight,
+            floating: false,
+            backgroundColor: AppTheme.primaryColor,
+            flexibleSpace: FlexibleSpaceBar(
+              background: Padding(
+                padding: EdgeInsets.all(Dimensions.headerPadding),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text("welcome_text".tr, style: helloWelcomeTextStyle),
+                        SizedBox(height: Dimensions.headerSpacing),
+                        Text("name".tr, style: userNameTextStyle),
+                      ],
+                    ),
+                    GestureDetector(
+                      onTap: () => Get.offAllNamed(
+                        RouteHelper.getUserProfilePageRoute(),
+                      ),
+                      child: CircleAvatar(
+                        radius: Dimensions.headerAvatarRadius,
+                        backgroundColor: Colors.white,
+                        child: Icon(
+                          Icons.person,
+                          color: AppTheme.primaryColor,
+                          size: Dimensions.headerAvatarIconSize,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            bottom: TabBar(
+              controller: _tabController,
+              indicatorColor: AppTheme.secondaryColor,
+              indicatorWeight: Dimensions.tabBarIndicatorWeight,
+              labelColor: Colors.white,
+              unselectedLabelColor: Colors.white,
+              labelStyle: tabBarTextStyle.copyWith(fontWeight: FontWeight.bold),
+              unselectedLabelStyle: tabBarTextStyle,
+              tabs: [
+                Tab(text: _tabs[0].tr),
+                Tab(text: _tabs[1].tr),
+                Tab(text: _tabs[2].tr),
+                Tab(text: _tabs[3].tr),
+                Tab(text: _tabs[4].tr),
+                Tab(text: _tabs[5].tr),
+              ],
+            ),
+          ),
           SliverPersistentHeader(
             pinned: true,
             delegate: _SearchBarDelegate(CustomSearchBar()),
@@ -135,61 +196,6 @@ class _MainHomePageState extends State<MainHomePage>
           SliverToBoxAdapter(
             child: SizedBox(height: Dimensions.scrollBottomPadding),
           ),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildHeader() {
-    return Container(
-      padding: EdgeInsets.all(Dimensions.headerPadding),
-      decoration: BoxDecoration(color: AppTheme.primaryColor),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text("welcome_text".tr, style: helloWelcomeTextStyle),
-              SizedBox(height: Dimensions.headerSpacing),
-              Text("name".tr, style: userNameTextStyle),
-            ],
-          ),
-          GestureDetector(
-            onTap:() => Get.offAllNamed(RouteHelper.getUserProfilePageRoute()),
-            child: CircleAvatar(
-              radius: Dimensions.headerAvatarRadius,
-              backgroundColor: Colors.white,
-              child: Icon(
-                Icons.person,
-                color: AppTheme.primaryColor,
-                size: Dimensions.headerAvatarIconSize,
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildNavTabs() {
-    return Container(
-      color: AppTheme.primaryColor,
-      child: TabBar(
-        controller: _tabController,
-        indicatorColor: AppTheme.secondaryColor,
-        indicatorWeight: Dimensions.tabBarIndicatorWeight,
-        labelColor: Colors.white,
-        unselectedLabelColor: Colors.white,
-        labelStyle: tabBarTextStyle.copyWith(fontWeight: FontWeight.bold),
-        unselectedLabelStyle: tabBarTextStyle,
-        tabs: [
-          Tab(text: "tab01".tr),
-          Tab(text: "tab02".tr),
-          Tab(text: "tab03".tr),
-          Tab(text: "tab04".tr),
-          Tab(text: "tab05".tr),
-          Tab(text: "tab06".tr),
         ],
       ),
     );
