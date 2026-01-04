@@ -1,3 +1,5 @@
+import 'package:mock_mart/utils/app_constants.dart';
+
 class ProfileModel {
   final int? id;
   final String? fName;
@@ -18,6 +20,10 @@ class ProfileModel {
   });
 
   String get fullName => '${fName ?? ''} ${lName ?? ''}'.trim();
+  
+  String? get imageUrl {
+    return '${AppConstants.baseUrl}${AppConstants.customerImgUrl}/$image';
+  }
 
   factory ProfileModel.fromJson(Map<String, dynamic> json) {
     return ProfileModel(
