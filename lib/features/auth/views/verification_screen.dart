@@ -4,6 +4,8 @@ import 'package:mock_mart/features/auth/controller/auth_controller.dart';
 import 'package:mock_mart/features/auth/widgets/auth_button.dart';
 import 'package:mock_mart/features/auth/widgets/otp_input_field.dart';
 import 'package:mock_mart/theme/app_theme.dart';
+import 'package:mock_mart/utils/dimensions.dart';
+import 'package:mock_mart/utils/gaps.dart';
 import 'package:mock_mart/utils/text_styles.dart';
 
 class VerificationScreen extends StatefulWidget {
@@ -60,7 +62,7 @@ class _VerificationScreenState extends State<VerificationScreen> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  const SizedBox(height: 20),
+                  Gaps.verticalGapOf(Dimensions.paddingSizeMedium),
                   
                   Container(
                     width: 80,
@@ -76,7 +78,7 @@ class _VerificationScreenState extends State<VerificationScreen> {
                     ),
                   ),
                   
-                  const SizedBox(height: 32),
+                 const SizedBox(height: 32),
                   
                   Text(
                     'verification_code'.tr,
@@ -137,6 +139,7 @@ class _VerificationScreenState extends State<VerificationScreen> {
                   ),
                   
                   const SizedBox(height: 32),
+                  Gaps.verticalGapOf(Dimensions.paddingSizeMedium),
                   
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -170,6 +173,7 @@ class _VerificationScreenState extends State<VerificationScreen> {
                   ),
                   
                   const SizedBox(height: 32),
+                  Gaps.verticalGapOf(Dimensions.paddingSizeMedium),
                   
                   AuthButton(
                     text: 'verify'.tr,
