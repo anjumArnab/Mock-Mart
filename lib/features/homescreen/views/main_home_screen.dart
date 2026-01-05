@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mock_mart/common/models/product_model.dart';
 import 'package:mock_mart/constants/size_config.dart';
+import 'package:mock_mart/features/homescreen/controllers/product_controller.dart';
 import 'package:mock_mart/features/homescreen/widgets/banner_widget.dart';
 import 'package:mock_mart/features/homescreen/widgets/big_sale_banner_widget.dart';
 import 'package:mock_mart/features/homescreen/widgets/custom_search_bar_widget.dart';
@@ -18,7 +19,6 @@ import 'package:mock_mart/utils/gaps.dart';
 import 'package:mock_mart/utils/images.dart';
 import 'package:mock_mart/utils/text_styles.dart';
 
-
 class MainHomeScreen extends StatefulWidget {
   const MainHomeScreen({super.key});
 
@@ -28,28 +28,6 @@ class MainHomeScreen extends StatefulWidget {
 
 class _MainHomeScreenState extends State<MainHomeScreen>
     with SingleTickerProviderStateMixin {
-  List<ProductModel> products = [
-    ProductModel(
-      title: 'Blue Color Short Dress for boys',
-      image: Images.productImg,
-      price: '\$3237.87',
-      discountedPercentage: '5',
-    ),
-    ProductModel(
-      title: 'Red Color Short Dress for Girls',
-      image: Images.productImg,
-      price: '\$323.87',
-      discountedPercentage: '5',
-    ),
-    ProductModel(
-      title: 'Red ',
-      image: Images.productImg,
-      price: '\$323.87',
-      rating: '4.5',
-      totalReviews: 12,
-    ),
-  ];
-
   late TabController _tabController;
 
   final List<String> _tabs = [
@@ -77,127 +55,159 @@ class _MainHomeScreenState extends State<MainHomeScreen>
   Widget build(BuildContext context) {
     SizeConfig.init(context);
 
-    return SafeArea(
-      child: CustomScrollView(
-        slivers: [
-          SliverAppBar(
-            expandedHeight: Dimensions.expandedHeight,
-            floating: false,
-            backgroundColor: AppTheme.primaryColor,
-            flexibleSpace: FlexibleSpaceBar(
-              background: Padding(
-                padding: EdgeInsets.all(Dimensions.headerPadding),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.center,
+    return GetBuilder<ProductController>(
+      builder: (productController) {
+        return SafeArea(
+          child: CustomScrollView(
+            slivers: [
+              SliverAppBar(
+                expandedHeight: Dimensions.expandedHeight,
+                floating: false,
+                backgroundColor: AppTheme.primaryColor,
+                flexibleSpace: FlexibleSpaceBar(
+                  background: Padding(
+                    padding: EdgeInsets.all(Dimensions.headerPadding),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text("welcome_text".tr, style: helloWelcomeTextStyle),
-                        SizedBox(height: Dimensions.headerSpacing),
-                        Text("name".tr, style: userNameTextStyle),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              "welcome_text".tr,
+                              style: helloWelcomeTextStyle,
+                            ),
+                            SizedBox(height: Dimensions.headerSpacing),
+                            Text("name".tr, style: userNameTextStyle),
+                          ],
+                        ),
+                        GestureDetector(
+                          onTap: () => Get.toNamed(
+                            RouteHelper.getUserProfilePageRoute(),
+                          ),
+                          child: CircleAvatar(
+                            radius: Dimensions.headerAvatarRadius,
+                            backgroundColor: Colors.white,
+                            child: Icon(
+                              Icons.person,
+                              color: AppTheme.primaryColor,
+                              size: Dimensions.headerAvatarIconSize,
+                            ),
+                          ),
+                        ),
                       ],
                     ),
-                    GestureDetector(
-                      onTap: () => Get.toNamed(
-                        RouteHelper.getUserProfilePageRoute(),
-                      ),
-                      child: CircleAvatar(
-                        radius: Dimensions.headerAvatarRadius,
-                        backgroundColor: Colors.white,
-                        child: Icon(
-                          Icons.person,
-                          color: AppTheme.primaryColor,
-                          size: Dimensions.headerAvatarIconSize,
-                        ),
-                      ),
-                    ),
+                  ),
+                ),
+                bottom: TabBar(
+                  controller: _tabController,
+                  indicatorColor: AppTheme.secondaryColor,
+                  indicatorWeight: Dimensions.tabBarIndicatorWeight,
+                  labelColor: Colors.white,
+                  unselectedLabelColor: Colors.white,
+                  labelStyle: tabBarTextStyle.copyWith(
+                    fontWeight: FontWeight.bold,
+                  ),
+                  unselectedLabelStyle: tabBarTextStyle,
+                  tabs: [
+                    Tab(text: _tabs[0].tr),
+                    Tab(text: _tabs[1].tr),
+                    Tab(text: _tabs[2].tr),
+                    Tab(text: _tabs[3].tr),
+                    Tab(text: _tabs[4].tr),
+                    Tab(text: _tabs[5].tr),
                   ],
                 ),
               ),
-            ),
-            bottom: TabBar(
-              controller: _tabController,
-              indicatorColor: AppTheme.secondaryColor,
-              indicatorWeight: Dimensions.tabBarIndicatorWeight,
-              labelColor: Colors.white,
-              unselectedLabelColor: Colors.white,
-              labelStyle: tabBarTextStyle.copyWith(fontWeight: FontWeight.bold),
-              unselectedLabelStyle: tabBarTextStyle,
-              tabs: [
-                Tab(text: _tabs[0].tr),
-                Tab(text: _tabs[1].tr),
-                Tab(text: _tabs[2].tr),
-                Tab(text: _tabs[3].tr),
-                Tab(text: _tabs[4].tr),
-                Tab(text: _tabs[5].tr),
-              ],
-            ),
-          ),
-          SliverPersistentHeader(
-            pinned: true,
-            delegate: _SearchBarDelegate(CustomSearchBarWidget()),
-          ),
-          SliverToBoxAdapter(
-            child: Gaps.verticalGapOf(Dimensions.spacingLarge),
-          ),
+              SliverPersistentHeader(
+                pinned: true,
+                delegate: _SearchBarDelegate(CustomSearchBarWidget()),
+              ),
+              SliverToBoxAdapter(
+                child: Gaps.verticalGapOf(Dimensions.spacingLarge),
+              ),
 
-          SliverToBoxAdapter(child: OneTimeDealWidget(product: products[0])),
-          SliverToBoxAdapter(
-            child: Gaps.verticalGapOf(Dimensions.spacingLarge),
-          ),
+              SliverToBoxAdapter(
+                child: OneTimeDealWidget(
+                  product: productController.products[0],
+                ),
+              ),
 
-          SliverToBoxAdapter(child: BigSaleBannerWidget()),
-          SliverToBoxAdapter(
-            child: Gaps.verticalGapOf(Dimensions.spacingLarge),
-          ),
+              ///products[0]
+              SliverToBoxAdapter(
+                child: Gaps.verticalGapOf(Dimensions.spacingLarge),
+              ),
 
-          SliverToBoxAdapter(child: FeaturedProductWidget(product: products[0])),
-          SliverToBoxAdapter(
-            child: Gaps.verticalGapOf(Dimensions.spacingLarge),
-          ),
+              SliverToBoxAdapter(child: BigSaleBannerWidget()),
+              SliverToBoxAdapter(
+                child: Gaps.verticalGapOf(Dimensions.spacingLarge),
+              ),
 
-          SliverToBoxAdapter(child: DealOfTodayWidget(product: products[1])),
+              SliverToBoxAdapter(
+                child: FeaturedProductWidget(
+                  product: productController.products[0],
+                ),
+              ),
+              SliverToBoxAdapter(
+                child: Gaps.verticalGapOf(Dimensions.spacingLarge),
+              ),
 
-          SliverToBoxAdapter(
-            child: Gaps.verticalGapOf(Dimensions.spacingLarge),
-          ),
+              SliverToBoxAdapter(
+                child: DealOfTodayWidget(
+                  product: productController.products[1],
+                ),
+              ),
 
-          SliverToBoxAdapter(child: BannerWidget(imagePath: Images.banner)),
-          SliverToBoxAdapter(
-            child: Gaps.verticalGapOf(Dimensions.spacingLarge),
-          ),
+              SliverToBoxAdapter(
+                child: Gaps.verticalGapOf(Dimensions.spacingLarge),
+              ),
 
-          SliverToBoxAdapter(child: UserExclusiveWidget(product: products[2])),
-          SliverToBoxAdapter(
-            child: Gaps.verticalGapOf(Dimensions.spacingLarge),
-          ),
-          SliverToBoxAdapter(child: TopStoresWidget()),
+              SliverToBoxAdapter(child: BannerWidget(imagePath: Images.banner)),
+              SliverToBoxAdapter(
+                child: Gaps.verticalGapOf(Dimensions.spacingLarge),
+              ),
 
-          SliverToBoxAdapter(
-            child: Gaps.verticalGapOf(Dimensions.spacingLarge),
-          ),
+              SliverToBoxAdapter(
+                child: UserExclusiveWidget(
+                  product: productController.products[2],
+                ),
+              ),
+              SliverToBoxAdapter(
+                child: Gaps.verticalGapOf(Dimensions.spacingLarge),
+              ),
+              SliverToBoxAdapter(child: TopStoresWidget()),
 
-          SliverToBoxAdapter(child: BannerWidget(imagePath: Images.banner01)),
-          SliverToBoxAdapter(
-            child: Gaps.verticalGapOf(Dimensions.spacingLarge),
-          ),
+              SliverToBoxAdapter(
+                child: Gaps.verticalGapOf(Dimensions.spacingLarge),
+              ),
 
-          SliverPersistentHeader(
-            delegate: _ProductTabDelegate(
-              ProductTabWidget(product: products[0], products: products),
-            ),
-          ),
+              SliverToBoxAdapter(
+                child: BannerWidget(imagePath: Images.banner01),
+              ),
+              SliverToBoxAdapter(
+                child: Gaps.verticalGapOf(Dimensions.spacingLarge),
+              ),
 
-          SliverToBoxAdapter(
-            child: Gaps.verticalGapOf(Dimensions.spacingLarge),
+              SliverPersistentHeader(
+                delegate: _ProductTabDelegate(
+                  ProductTabWidget(
+                    product: productController.products[0],
+                    products: productController.products,
+                  ),
+                ),
+              ),
+
+              SliverToBoxAdapter(
+                child: Gaps.verticalGapOf(Dimensions.spacingLarge),
+              ),
+              SliverToBoxAdapter(
+                child: SizedBox(height: Dimensions.scrollBottomPadding),
+              ),
+            ],
           ),
-          SliverToBoxAdapter(
-            child: SizedBox(height: Dimensions.scrollBottomPadding),
-          ),
-        ],
-      ),
+        );
+      },
     );
   }
 }
