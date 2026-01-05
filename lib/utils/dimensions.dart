@@ -145,7 +145,9 @@ class Dimensions {
   static const double expandedHeight = 130;
 
   // Persistent Header
-  static const double persistentHeaderHeight = 90.0;
+  static const double persistentHeaderExtent = 90.0;
+
+  static const double productTabExtent = 650.0;
 
   // Bottom Padding for Scroll
   static const double scrollBottomPadding = 40.0;
