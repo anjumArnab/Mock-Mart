@@ -8,10 +8,10 @@ import 'package:mock_mart/theme/app_theme.dart';
 import 'package:mock_mart/utils/dimensions.dart';
 import 'package:mock_mart/utils/text_styles.dart';
 
-class FeaturedProduct extends StatelessWidget{
+class FeaturedProductWidget extends StatelessWidget{
   final ProductModel product;
 
-  const FeaturedProduct({super.key, required this.product});
+  const FeaturedProductWidget({super.key, required this.product});
 
 
   @override

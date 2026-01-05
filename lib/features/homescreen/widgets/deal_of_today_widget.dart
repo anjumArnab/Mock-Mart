@@ -6,10 +6,10 @@ import 'package:mock_mart/helpers/discounted_price_calc.dart';
 import 'package:mock_mart/theme/app_theme.dart';
 import 'package:mock_mart/utils/dimensions.dart';
 
-class DealOfToday extends StatelessWidget{
+class DealOfTodayWidget extends StatelessWidget{
   final ProductModel product;
 
-  const DealOfToday({super.key, required this.product});
+  const DealOfTodayWidget({super.key, required this.product});
 
   
 

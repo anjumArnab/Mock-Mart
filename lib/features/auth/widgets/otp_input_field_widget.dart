@@ -4,12 +4,12 @@ import 'package:mock_mart/theme/app_theme.dart';
 import 'package:mock_mart/utils/dimensions.dart';
 import 'package:mock_mart/utils/text_styles.dart';
 
-class OTPInputField extends StatelessWidget {
+class OTPInputFieldWidget extends StatelessWidget {
   final TextEditingController controller;
   final FocusNode focusNode;
   final Function(String) onChanged;
 
-  const OTPInputField({
+  const OTPInputFieldWidget({
     super.key,
     required this.controller,
     required this.focusNode,

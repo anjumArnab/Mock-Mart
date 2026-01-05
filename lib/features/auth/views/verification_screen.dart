@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mock_mart/features/auth/controller/auth_controller.dart';
-import 'package:mock_mart/features/auth/widgets/auth_button.dart';
-import 'package:mock_mart/features/auth/widgets/otp_input_field.dart';
+import 'package:mock_mart/features/auth/widgets/auth_button_widget.dart';
+import 'package:mock_mart/features/auth/widgets/otp_input_field_widget.dart';
 import 'package:mock_mart/theme/app_theme.dart';
 import 'package:mock_mart/utils/dimensions.dart';
 import 'package:mock_mart/utils/gaps.dart';
@@ -114,7 +114,7 @@ class _VerificationScreenState extends State<VerificationScreen> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: List.generate(6, (index) {
-                      return OTPInputField(
+                      return OTPInputFieldWidget(
                         controller: _otpControllers[index],
                         focusNode: _focusNodes[index],
                         onChanged: (value) {
@@ -175,7 +175,7 @@ class _VerificationScreenState extends State<VerificationScreen> {
                   const SizedBox(height: 32),
                   Gaps.verticalGapOf(Dimensions.paddingSizeMedium),
                   
-                  AuthButton(
+                  AuthButtonWidget(
                     text: 'verify'.tr,
                     isLoading: authController.isLoading,
                     onPressed: () {

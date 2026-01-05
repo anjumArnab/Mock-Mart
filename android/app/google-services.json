@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "541298258980",
+    "project_id": "mock-mart",
+    "storage_bucket": "mock-mart.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:541298258980:android:504d924604f02c066194b1",
+        "android_client_info": {
+          "package_name": "com.example.mock_mart"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDf6EqKPo85RuESPfxTM9JHETVEB2K6T4k"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

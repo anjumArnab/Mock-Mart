@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mock_mart/features/auth/controller/auth_controller.dart';
 import 'package:mock_mart/features/auth/models/sign_up_body.dart';
-import 'package:mock_mart/features/auth/widgets/auth_button.dart';
-import 'package:mock_mart/features/auth/widgets/auth_text_field.dart';
+import 'package:mock_mart/features/auth/widgets/auth_button_widget.dart';
+import 'package:mock_mart/features/auth/widgets/auth_text_field_widget.dart';
 import 'package:mock_mart/theme/app_theme.dart';
 import 'package:mock_mart/utils/text_styles.dart';
 
@@ -79,7 +79,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     
                     const SizedBox(height: 32),
                     
-                    AuthTextField(
+                    AuthTextFieldWidget(
                       controller: _firstNameController,
                       label: 'first_name'.tr,
                       hint: 'enter_your_first_name'.tr,
@@ -94,7 +94,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     
                     const SizedBox(height: 20),
                     
-                    AuthTextField(
+                    AuthTextFieldWidget(
                       controller: _lastNameController,
                       label: 'last_name'.tr,
                       hint: 'enter_your_last_name'.tr,
@@ -109,7 +109,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     
                     const SizedBox(height: 20),
                     
-                    AuthTextField(
+                    AuthTextFieldWidget(
                       controller: _phoneController,
                       label: 'phone_number'.tr,
                       hint: 'hint_text'.tr,
@@ -125,7 +125,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     
                     const SizedBox(height: 20),
                     
-                    AuthTextField(
+                    AuthTextFieldWidget(
                       controller: _emailController,
                       label: 'email'.tr,
                       hint: 'enter_your_email'.tr,
@@ -144,7 +144,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     
                     const SizedBox(height: 20),
                     
-                    AuthTextField(
+                    AuthTextFieldWidget(
                       controller: _passwordController,
                       label: 'password'.tr,
                       hint: 'enter_your_password'.tr,
@@ -163,7 +163,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     
                     const SizedBox(height: 20),
                     
-                    AuthTextField(
+                    AuthTextFieldWidget(
                       controller: _referralCodeController,
                       label: 'referral_code_optional'.tr,
                       hint: 'enter_referral_code'.tr,
@@ -219,7 +219,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     
                     const SizedBox(height: 32),
                     
-                    AuthButton(
+                    AuthButtonWidget(
                       text: 'sign_up'.tr,
                       isLoading: authController.isLoading,
                       onPressed: () {

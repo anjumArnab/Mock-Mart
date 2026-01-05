@@ -1,5 +1,8 @@
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:mock_mart/features/homescreen/controllers/product_conroller.dart';
 import 'package:mock_mart/features/language/controllers/language_controller.dart';
 import 'package:mock_mart/features/profile/controllers/user_controller.dart';
 import 'package:mock_mart/features/profile/repo/user_repo.dart';
@@ -12,9 +15,43 @@ import 'package:mock_mart/api/remote/api_client.dart';
 import 'package:mock_mart/features/auth/repo/auth_repo.dart';
 import 'package:mock_mart/features/auth/controller/auth_controller.dart';
 import 'package:mock_mart/utils/app_constants.dart';
+import 'firebase_options.dart';
+import 'helpers/notification_helper.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+
+  await NotificationHelper.initialize();
+
+  FirebaseMessaging.onBackgroundMessage(firebaseMessagingBackgroundHandler);
+  await FirebaseMessaging.instance.requestPermission(
+    alert: true,
+    badge: true,
+    sound: true,
+  );
+  await FirebaseMessaging.instance.setForegroundNotificationPresentationOptions(
+    alert: true,
+    badge: true,
+    sound: true,
+  );
+
+  final fcmToken = await FirebaseMessaging.instance.getToken();
+  print('=======FCM Token: $fcmToken=========');
+
+  FirebaseMessaging.onMessage.listen((RemoteMessage message) {
+    print('Foreground message received');
+    print(message.notification?.title);
+    print(message.notification?.body);
+    NotificationHelper.showNotification(message);
+  });
+
+  FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {
+    print('Notification opened from terminated/background state');
+  });
+
   await AppTranslations.loadTranslations();
   final sharedPreferences = await SharedPreferences.getInstance();
   
@@ -34,6 +71,7 @@ void main() async {
   Get.put(ThemeController(sharedPreferences: sharedPreferences));
   Get.put(AuthController(authRepo: authRepo));
   Get.put(UserController(userRepo: userRepo, authRepo: authRepo));
+  Get.put(ProductConroller());
   
   runApp(const MockMart());
 }

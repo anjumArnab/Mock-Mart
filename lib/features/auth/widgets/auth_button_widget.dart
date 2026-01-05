@@ -4,7 +4,7 @@ import 'package:mock_mart/theme/app_theme.dart';
 import 'package:mock_mart/utils/dimensions.dart';
 import 'package:mock_mart/utils/text_styles.dart';
 
-class AuthButton extends StatelessWidget {
+class AuthButtonWidget extends StatelessWidget {
   final String text;
   final VoidCallback? onPressed;
   final bool isLoading;
@@ -15,7 +15,7 @@ class AuthButton extends StatelessWidget {
   final double? borderRadius;
   final EdgeInsetsGeometry? padding;
 
-  const AuthButton({
+  const AuthButtonWidget({
     super.key,
     required this.text,
     this.onPressed,

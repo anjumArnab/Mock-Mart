@@ -2,15 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mock_mart/common/models/product_model.dart';
 import 'package:mock_mart/constants/size_config.dart';
-import 'package:mock_mart/features/homepage/widgets/build_banner.dart';
-import 'package:mock_mart/features/homepage/widgets/build_big_sale_banner.dart';
-import 'package:mock_mart/features/homepage/widgets/custom_search_bar.dart';
-import 'package:mock_mart/features/homepage/widgets/deal_of_today.dart';
-import 'package:mock_mart/features/homepage/widgets/featured_product.dart';
-import 'package:mock_mart/features/homepage/widgets/one_time_deal.dart';
-import 'package:mock_mart/features/homepage/widgets/product_tab.dart';
-import 'package:mock_mart/features/homepage/widgets/top_stores.dart';
-import 'package:mock_mart/features/homepage/widgets/user_exclusive.dart';
+import 'package:mock_mart/features/homescreen/widgets/banner_widget.dart';
+import 'package:mock_mart/features/homescreen/widgets/big_sale_banner_widget.dart';
+import 'package:mock_mart/features/homescreen/widgets/custom_search_bar_widget.dart';
+import 'package:mock_mart/features/homescreen/widgets/deal_of_today_widget.dart';
+import 'package:mock_mart/features/homescreen/widgets/featured_product_widget.dart';
+import 'package:mock_mart/features/homescreen/widgets/one_time_deal_widget.dart';
+import 'package:mock_mart/features/homescreen/widgets/product_tab_widget.dart';
+import 'package:mock_mart/features/homescreen/widgets/top_stores_widget.dart';
+import 'package:mock_mart/features/homescreen/widgets/user_exclusive_widget.dart';
 import 'package:mock_mart/helpers/route_helper.dart';
 import 'package:mock_mart/theme/app_theme.dart';
 import 'package:mock_mart/utils/dimensions.dart';
@@ -19,14 +19,14 @@ import 'package:mock_mart/utils/images.dart';
 import 'package:mock_mart/utils/text_styles.dart';
 
 
-class MainHomePage extends StatefulWidget {
-  const MainHomePage({super.key});
+class MainHomeScreen extends StatefulWidget {
+  const MainHomeScreen({super.key});
 
   @override
-  State<MainHomePage> createState() => _MainHomePageState();
+  State<MainHomeScreen> createState() => _MainHomeScreenState();
 }
 
-class _MainHomePageState extends State<MainHomePage>
+class _MainHomeScreenState extends State<MainHomeScreen>
     with SingleTickerProviderStateMixin {
   List<ProductModel> products = [
     ProductModel(
@@ -137,56 +137,56 @@ class _MainHomePageState extends State<MainHomePage>
           ),
           SliverPersistentHeader(
             pinned: true,
-            delegate: _SearchBarDelegate(CustomSearchBar()),
+            delegate: _SearchBarDelegate(CustomSearchBarWidget()),
           ),
           SliverToBoxAdapter(
             child: Gaps.verticalGapOf(Dimensions.spacingLarge),
           ),
 
-          SliverToBoxAdapter(child: OneTimeDeal(product: products[0])),
+          SliverToBoxAdapter(child: OneTimeDealWidget(product: products[0])),
           SliverToBoxAdapter(
             child: Gaps.verticalGapOf(Dimensions.spacingLarge),
           ),
 
-          SliverToBoxAdapter(child: BuildBigSaleBanner()),
+          SliverToBoxAdapter(child: BigSaleBannerWidget()),
           SliverToBoxAdapter(
             child: Gaps.verticalGapOf(Dimensions.spacingLarge),
           ),
 
-          SliverToBoxAdapter(child: FeaturedProduct(product: products[0])),
+          SliverToBoxAdapter(child: FeaturedProductWidget(product: products[0])),
           SliverToBoxAdapter(
             child: Gaps.verticalGapOf(Dimensions.spacingLarge),
           ),
 
-          SliverToBoxAdapter(child: DealOfToday(product: products[1])),
-
-          SliverToBoxAdapter(
-            child: Gaps.verticalGapOf(Dimensions.spacingLarge),
-          ),
-
-          SliverToBoxAdapter(child: BuildBanner(imagePath: Images.banner)),
-          SliverToBoxAdapter(
-            child: Gaps.verticalGapOf(Dimensions.spacingLarge),
-          ),
-
-          SliverToBoxAdapter(child: UserExclusive(product: products[2])),
-          SliverToBoxAdapter(
-            child: Gaps.verticalGapOf(Dimensions.spacingLarge),
-          ),
-          SliverToBoxAdapter(child: TopStores()),
+          SliverToBoxAdapter(child: DealOfTodayWidget(product: products[1])),
 
           SliverToBoxAdapter(
             child: Gaps.verticalGapOf(Dimensions.spacingLarge),
           ),
 
-          SliverToBoxAdapter(child: BuildBanner(imagePath: Images.banner01)),
+          SliverToBoxAdapter(child: BannerWidget(imagePath: Images.banner)),
+          SliverToBoxAdapter(
+            child: Gaps.verticalGapOf(Dimensions.spacingLarge),
+          ),
+
+          SliverToBoxAdapter(child: UserExclusiveWidget(product: products[2])),
+          SliverToBoxAdapter(
+            child: Gaps.verticalGapOf(Dimensions.spacingLarge),
+          ),
+          SliverToBoxAdapter(child: TopStoresWidget()),
+
+          SliverToBoxAdapter(
+            child: Gaps.verticalGapOf(Dimensions.spacingLarge),
+          ),
+
+          SliverToBoxAdapter(child: BannerWidget(imagePath: Images.banner01)),
           SliverToBoxAdapter(
             child: Gaps.verticalGapOf(Dimensions.spacingLarge),
           ),
 
           SliverPersistentHeader(
             delegate: _ProductTabDelegate(
-              ProductTab(product: products[0], products: products),
+              ProductTabWidget(product: products[0], products: products),
             ),
           ),
 

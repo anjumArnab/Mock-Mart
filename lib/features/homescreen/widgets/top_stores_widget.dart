@@ -6,8 +6,8 @@ import 'package:mock_mart/theme/app_theme.dart';
 import 'package:mock_mart/utils/dimensions.dart';
 import 'package:mock_mart/utils/text_styles.dart';
 
-class TopStores extends StatelessWidget {
-  const TopStores({super.key});
+class TopStoresWidget extends StatelessWidget {
+  const TopStoresWidget({super.key});
 
   @override
   Widget build(BuildContext context) {

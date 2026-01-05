@@ -4,14 +4,14 @@ import 'package:mock_mart/theme/app_theme.dart';
 import 'package:mock_mart/utils/dimensions.dart';
 import 'package:mock_mart/utils/images.dart';
 
-class BuildBigSaleBanner extends StatefulWidget {
-  const BuildBigSaleBanner({super.key});
+class BigSaleBannerWidget extends StatefulWidget {
+  const BigSaleBannerWidget({super.key});
 
   @override
-  State<BuildBigSaleBanner> createState() => _BuildBigSaleBannerState();
+  State<BigSaleBannerWidget> createState() => _BigSaleBannerWidgetState();
 }
 
-class _BuildBigSaleBannerState extends State<BuildBigSaleBanner> {
+class _BigSaleBannerWidgetState extends State<BigSaleBannerWidget> {
   int _currentCarouselIndex = 0;
   
   final List<String> carouselImages = [

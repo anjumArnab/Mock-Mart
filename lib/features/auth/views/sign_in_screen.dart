@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mock_mart/features/auth/controller/auth_controller.dart';
-import 'package:mock_mart/features/auth/widgets/auth_button.dart';
-import 'package:mock_mart/features/auth/widgets/auth_text_field.dart';
+import 'package:mock_mart/features/auth/widgets/auth_button_widget.dart';
+import 'package:mock_mart/features/auth/widgets/auth_text_field_widget.dart';
 import 'package:mock_mart/features/language/controllers/language_controller.dart';
 import 'package:mock_mart/helpers/route_helper.dart';
 import 'package:mock_mart/theme/app_theme.dart';
@@ -111,7 +111,7 @@ class _SignInScreenState extends State<SignInScreen> {
 
                         const SizedBox(height: 40),
 
-                        AuthTextField(
+                        AuthTextFieldWidget(
                           controller: _phoneController,
                           label: 'phone_number'.tr,
                           hint: 'hint_text'.tr,
@@ -127,7 +127,7 @@ class _SignInScreenState extends State<SignInScreen> {
 
                         const SizedBox(height: 20),
 
-                        AuthTextField(
+                        AuthTextFieldWidget(
                           controller: _passwordController,
                           label: 'password'.tr,
                           hint: 'enter_your_password'.tr,
@@ -192,7 +192,7 @@ class _SignInScreenState extends State<SignInScreen> {
 
                         const SizedBox(height: 32),
 
-                        AuthButton(
+                        AuthButtonWidget(
                           text: 'sign_in'.tr,
                           isLoading: authController.isLoading,
                           onPressed: () {

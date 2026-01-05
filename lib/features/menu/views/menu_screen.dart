@@ -8,8 +8,8 @@ import 'package:mock_mart/utils/dimensions.dart';
 import 'package:mock_mart/utils/gaps.dart';
 
 
-class MenuPage extends StatelessWidget {
-  const MenuPage({super.key});
+class MenuScreen extends StatelessWidget {
+  const MenuScreen({super.key});
 
   @override
   Widget build(BuildContext context) {

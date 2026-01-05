@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:mock_mart/theme/app_theme.dart';
 import 'package:mock_mart/utils/dimensions.dart';
 
-class BuildBanner extends StatelessWidget {
+class BannerWidget extends StatelessWidget {
   final String imagePath;
 
-  const BuildBanner({super.key, required this.imagePath});
+  const BannerWidget({super.key, required this.imagePath});
 
   @override
   Widget build(BuildContext context) {

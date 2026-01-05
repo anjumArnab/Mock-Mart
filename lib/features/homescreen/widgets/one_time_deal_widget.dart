@@ -7,10 +7,10 @@ import 'package:mock_mart/theme/app_theme.dart';
 import 'package:mock_mart/utils/dimensions.dart';
 import 'package:mock_mart/utils/text_styles.dart';
 
-class OneTimeDeal extends StatelessWidget{
+class OneTimeDealWidget extends StatelessWidget{
   final ProductModel product;
 
-  const OneTimeDeal({super.key, required this.product});
+  const OneTimeDealWidget({super.key, required this.product});
 
   @override
   Widget build(BuildContext context){

@@ -6,21 +6,21 @@ import 'package:mock_mart/common/widgets/product_tab_button.dart';
 import 'package:mock_mart/helpers/discounted_price_calc.dart';
 import 'package:mock_mart/utils/dimensions.dart';
 
-class ProductTab extends StatefulWidget {
+class ProductTabWidget extends StatefulWidget {
   final ProductModel product;
   final List<ProductModel> products;
 
-  const ProductTab({
+  const ProductTabWidget({
     super.key,
     required this.product,
     required this.products,
   });
 
   @override
-  State<ProductTab> createState() => _ProductTabState();
+  State<ProductTabWidget> createState() => _ProductTabWidgetState();
 }
 
-class _ProductTabState extends State<ProductTab> with SingleTickerProviderStateMixin {
+class _ProductTabWidgetState extends State<ProductTabWidget> with SingleTickerProviderStateMixin {
   late TabController _tabController;
 
   @override

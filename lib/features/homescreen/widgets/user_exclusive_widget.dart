@@ -8,9 +8,9 @@ import 'package:mock_mart/theme/app_theme.dart';
 import 'package:mock_mart/utils/dimensions.dart';
 import 'package:mock_mart/utils/text_styles.dart';
 
-class UserExclusive extends StatelessWidget {
+class UserExclusiveWidget extends StatelessWidget {
   final ProductModel product;
-  const UserExclusive({super.key, required this.product});
+  const UserExclusiveWidget({super.key, required this.product});
 
   @override
   Widget build(BuildContext context) {

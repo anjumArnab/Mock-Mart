@@ -2,7 +2,7 @@ import 'package:get/get.dart';
 import 'package:mock_mart/features/auth/views/sign_in_screen.dart';
 import 'package:mock_mart/features/auth/views/sign_up_screen.dart';
 import 'package:mock_mart/features/auth/views/verification_screen.dart';
-import 'package:mock_mart/features/homepage/views/home_page.dart';
+import 'package:mock_mart/features/homescreen/views/home_screen.dart';
 import 'package:mock_mart/features/profile/views/user_profile_page.dart';
 
 class RouteHelper {
@@ -52,11 +52,11 @@ class RouteHelper {
     ),
     GetPage(
       name: _main,
-      page: () => const HomePage(),
+      page: () => const HomeScreen(),
     ),
     GetPage(
       name: _home,
-      page: () => const HomePage(),
+      page: () => const HomeScreen(),
     ),
     GetPage(name: _userProfilePage, page: ()=> const UserProfilePage())
   ];

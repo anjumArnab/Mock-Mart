@@ -4,7 +4,7 @@ import 'package:mock_mart/utils/dimensions.dart';
 import 'package:mock_mart/utils/gaps.dart';
 import 'package:mock_mart/utils/text_styles.dart';
 
-class AuthTextField extends StatefulWidget {
+class AuthTextFieldWidget extends StatefulWidget {
   final TextEditingController controller;
   final String label;
   final String hint;
@@ -15,7 +15,7 @@ class AuthTextField extends StatefulWidget {
   final bool isRequired;
   final int? maxLength;
 
-  const AuthTextField({
+  const AuthTextFieldWidget({
     super.key,
     required this.controller,
     required this.label,
@@ -29,10 +29,10 @@ class AuthTextField extends StatefulWidget {
   });
 
   @override
-  State<AuthTextField> createState() => _AuthTextFieldState();
+  State<AuthTextFieldWidget> createState() => _AuthTextFieldState();
 }
 
-class _AuthTextFieldState extends State<AuthTextField> {
+class _AuthTextFieldState extends State<AuthTextFieldWidget> {
   bool _obscureText = true;
 
   @override
