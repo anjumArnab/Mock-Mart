@@ -38,6 +38,46 @@ class NotificationHelper {
     await _createNotificationChannel();
   }
 
+  static Future<void> initializeFirebaseMessaging() async {
+  FirebaseMessaging.onBackgroundMessage(firebaseMessagingBackgroundHandler);
+
+  await FirebaseMessaging.instance.requestPermission(
+    alert: true,
+    badge: true,
+    sound: true,
+  );
+
+  await FirebaseMessaging.instance.setForegroundNotificationPresentationOptions(
+    alert: true,
+    badge: true,
+    sound: true,
+  );
+
+  final fcmToken = await FirebaseMessaging.instance.getToken();
+  print('=======FCM Token: $fcmToken=========');
+
+  FirebaseMessaging.onMessage.listen((RemoteMessage message) {
+    print('Foreground message received');
+    print(message.notification?.title);
+    print(message.notification?.body);
+    showNotification(message);
+  });
+
+  FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {
+    if (message.data.containsKey('screen')) {
+      _handleNotificationNavigation(message.data['screen']);
+    }
+  });
+
+  final initialMessage = await FirebaseMessaging.instance.getInitialMessage();
+  if (initialMessage != null && initialMessage.data.containsKey('screen')) {
+    Future.delayed(const Duration(milliseconds: 500), () {
+      _handleNotificationNavigation(initialMessage.data['screen']);
+    });
+  }
+}
+
+
   static Future<void> _createNotificationChannel() async {
     const AndroidNotificationChannel channel = AndroidNotificationChannel(
       'high_importance_channel',
