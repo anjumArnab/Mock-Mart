@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mock_mart/features/language/controllers/language_controller.dart';
-import 'package:mock_mart/theme/app_theme.dart';
+import 'package:mock_mart/theme/custom_theme_colors.dart';
 import 'package:mock_mart/theme/theme_controller.dart';
 import 'package:mock_mart/utils/app_constants.dart';
 import 'package:mock_mart/utils/dimensions.dart';
@@ -20,7 +20,7 @@ class MenuScreen extends StatelessWidget {
         return Scaffold(
           appBar: AppBar(
             title: Text("menu".tr),
-            backgroundColor: AppTheme.primaryColor,
+            backgroundColor: Theme.of(context).primaryColor,
           ),
           body: ListView(
             children: [
@@ -29,12 +29,12 @@ class MenuScreen extends StatelessWidget {
                   "dark_mode".tr,
                   style: TextStyle(
                     fontSize: 16,
-                    color: AppTheme.getTextColor(context),
+                    color: Theme.of(context).extension<CustomThemeColors>()!.textColor,
                   ),
                 ),
                 subtitle: Text(
                   isDark ? "enabled".tr : "disabled".tr,
-                  style: TextStyle(color: AppTheme.getSecondaryTextColor(context)),
+                  style: TextStyle(color: Theme.of(context).primaryColor),
                 ),
                 value: isDark,
                 onChanged: (value) {
@@ -42,7 +42,7 @@ class MenuScreen extends StatelessWidget {
                 },
                 secondary: Icon(
                   isDark ? Icons.dark_mode : Icons.light_mode,
-                  color: AppTheme.primaryColor,
+                  color: Theme.of(context).primaryColor,
                 ),
               ),
               Row(

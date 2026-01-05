@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get_utils/src/extensions/internacionalization.dart';
-import 'package:mock_mart/theme/app_theme.dart';
 import 'package:mock_mart/utils/dimensions.dart';
 
 class UpdateButton extends StatelessWidget {
@@ -24,7 +23,7 @@ class UpdateButton extends StatelessWidget {
           padding: EdgeInsets.symmetric(
             vertical: Dimensions.paddingSizeDefault,
           ),
-          backgroundColor: AppTheme.primaryColor,
+          backgroundColor: Theme.of(context).colorScheme.primary,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(Dimensions.radiusDefault),
           ),

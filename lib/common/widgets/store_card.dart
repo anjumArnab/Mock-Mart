@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:mock_mart/theme/app_theme.dart';
+import 'package:mock_mart/theme/custom_theme_colors.dart';
 import 'package:mock_mart/utils/dimensions.dart';
 import 'package:mock_mart/utils/text_styles.dart';
-
 import '../../utils/images.dart';
 
 class StoreCard extends StatelessWidget {
@@ -26,7 +25,7 @@ class StoreCard extends StatelessWidget {
       height: Dimensions.storeCardHeight,
       margin: EdgeInsets.only(right: Dimensions.spacingDefault),
       decoration: BoxDecoration(
-        color: AppTheme.getCardColor(context),
+        color: Theme.of(context).extension<CustomThemeColors>()!.cardColor,
         borderRadius: BorderRadius.circular(Dimensions.storeCardBorderRadius),
       ),
       child: Column(
@@ -56,7 +55,7 @@ class StoreCard extends StatelessWidget {
                       width: Dimensions.storeCardLogoSize,
                       height: Dimensions.storeCardLogoSize,
                       decoration: BoxDecoration(
-                        color: AppTheme.getNegativeColor(context),
+                        color: Theme.of(context).extension<CustomThemeColors>()!.negativeColor,
                         borderRadius: BorderRadius.circular(Dimensions.radiusSmall),
                       ),
                       child: Icon(
@@ -73,21 +72,21 @@ class StoreCard extends StatelessWidget {
                           Text(
                             name,
                             style: productTitleTextStyle.copyWith(
-                              color: AppTheme.getTextColor(context),
+                              color: Theme.of(context).extension<CustomThemeColors>()!.textColor,
                             ),
                           ),
                           Row(
                             children: [
                               Icon(
                                 Icons.star,
-                                color: AppTheme.warning,
+                                color: Theme.of(context).colorScheme.secondary,
                                 size: Dimensions.storeCardIconSize,
                               ),
                               SizedBox(width: Dimensions.spacingExtraSmall),
                               Text(
                                 rating.toString(),
                                 style: productTitleTextStyle.copyWith(
-                                  color: AppTheme.getTextColor(context),
+                                  color: Theme.of(context).extension<CustomThemeColors>()!.textColor,
                                 ),
                               ),
                             ],
@@ -98,7 +97,7 @@ class StoreCard extends StatelessWidget {
                   ],
                 ),
                 SizedBox(height: Dimensions.spacingDefault),
-                Divider(color: AppTheme.getInactiveColor(context)),
+                Divider(color: Theme.of(context).extension<CustomThemeColors>()!.inactiveColor),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -106,14 +105,14 @@ class StoreCard extends StatelessWidget {
                       children: [
                         Icon(
                           Icons.inventory_2_outlined,
-                          color: AppTheme.success,
+                          color: Theme.of(context).extension<CustomThemeColors>()!.successColor,
                           size: Dimensions.storeCardIconSize,
                         ),
                         SizedBox(width: Dimensions.spacingExtraSmall),
                         Text(
                           products,
                           style: discountedPriceTextStyle.copyWith(
-                            color: AppTheme.success,
+                            color: Theme.of(context).extension<CustomThemeColors>()!.successColor,
                             decoration: TextDecoration.none,
                           ),
                         ),
@@ -122,7 +121,7 @@ class StoreCard extends StatelessWidget {
                     Text(
                       reviews,
                       style: discountedPriceTextStyle.copyWith(
-                        color: AppTheme.getSecondaryTextColor(context),
+                        color: Theme.of(context).extension<CustomThemeColors>()!.secondaryTextColor,
                         decoration: TextDecoration.none,
                       ),
                     ),

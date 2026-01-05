@@ -3,7 +3,7 @@ import 'package:mock_mart/common/models/product_model.dart';
 import 'package:mock_mart/common/widgets/product_card.dart';
 import 'package:mock_mart/constants/size_config.dart';
 import 'package:mock_mart/helpers/discounted_price_calc.dart';
-import 'package:mock_mart/theme/app_theme.dart';
+import 'package:mock_mart/theme/custom_theme_colors.dart';
 import 'package:mock_mart/utils/dimensions.dart';
 import 'package:mock_mart/utils/text_styles.dart';
 
@@ -16,7 +16,7 @@ class OneTimeDealWidget extends StatelessWidget{
   Widget build(BuildContext context){
     return Container(
       width: double.infinity,
-      decoration: BoxDecoration(color: AppTheme.getSectionBackground(context)),
+      decoration: BoxDecoration(color: Theme.of(context).extension<CustomThemeColors>()!.sectionBackground),
       child: Padding(
         padding: EdgeInsets.all(Dimensions.sectionBackgroundPadding),
         child: Column(
@@ -30,7 +30,7 @@ class OneTimeDealWidget extends StatelessWidget{
                     Text(
                       'One Time Deal',
                       style: sectionTitleTextStyle.copyWith(
-                        color: AppTheme.getTextColor(context),
+                        color: Theme.of(context).extension<CustomThemeColors>()!.textColor,
                       ),
                     ),
                     SizedBox(width: Dimensions.spacingSmall),
@@ -40,7 +40,7 @@ class OneTimeDealWidget extends StatelessWidget{
                         Icon(
                           Icons.bolt,
                           size: Dimensions.dealIconSize,
-                          color: AppTheme.secondaryColor,
+                          color: Theme.of(context).colorScheme.secondary,
                         ),
                         Container(
                           padding: EdgeInsets.symmetric(
@@ -48,7 +48,7 @@ class OneTimeDealWidget extends StatelessWidget{
                             vertical: Dimensions.dealBadgePaddingVertical,
                           ),
                           decoration: BoxDecoration(
-                            color: AppTheme.red,
+                            color: Theme.of(context).colorScheme.error,
                             borderRadius: BorderRadius.circular(
                               Dimensions.dealBadgeBorderRadius,
                             ),
@@ -75,7 +75,7 @@ class OneTimeDealWidget extends StatelessWidget{
                       Dimensions.timerBadgeBorderRadius,
                     ),
                     border: Border.all(
-                      color: AppTheme.getInactiveColor(context),
+                      color: Theme.of(context).extension<CustomThemeColors>()!.inactiveColor,
                     ),
                   ),
                   child: Row(
@@ -83,13 +83,13 @@ class OneTimeDealWidget extends StatelessWidget{
                       Text(
                         'Ends in ',
                         style: endsInLabelTextStyle.copyWith(
-                          color: AppTheme.getTextColor(context),
+                          color: Theme.of(context).extension<CustomThemeColors>()!.textColor,
                         ),
                       ),
                       Text(
                         '06:02:04:08',
                         style: endsInTimeTextStyle.copyWith(
-                          color: AppTheme.getTextColor(context),
+                          color: Theme.of(context).extension<CustomThemeColors>()!.textColor,
                         ),
                       ),
                     ],

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get_utils/src/extensions/internacionalization.dart';
-import 'package:mock_mart/theme/app_theme.dart';
+import 'package:mock_mart/theme/custom_theme_colors.dart';
 import 'package:mock_mart/utils/dimensions.dart';
 
 class CustomSearchBarWidget extends StatelessWidget {
@@ -11,9 +11,9 @@ class CustomSearchBarWidget extends StatelessWidget {
     return Container(
       margin: EdgeInsets.all(Dimensions.searchBarPadding),
       decoration: BoxDecoration(
-        color: AppTheme.getSearchBarBackground(context),
+        color: Theme.of(context).extension<CustomThemeColors>()!.searchBarBackground,
         borderRadius: BorderRadius.circular(Dimensions.searchBarBorderRadius),
-        border: Border.all(color: AppTheme.getInactiveColor(context)),
+        border: Border.all(color: Theme.of(context).extension<CustomThemeColors>()!.inactiveColor),
       ),
       child: Row(
         children: [
@@ -37,7 +37,7 @@ class CustomSearchBarWidget extends StatelessWidget {
           Container(
             margin: EdgeInsets.all(Dimensions.paddingSizeExtraSmall),
             decoration: BoxDecoration(
-              color: AppTheme.primaryColor,
+              color: Theme.of(context).colorScheme.primary,
               borderRadius: BorderRadius.circular(Dimensions.radiusSmall),
             ),
             child: IconButton(

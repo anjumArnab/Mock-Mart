@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get_utils/src/extensions/internacionalization.dart';
 import 'package:mock_mart/common/widgets/store_card.dart';
 import 'package:mock_mart/constants/size_config.dart';
-import 'package:mock_mart/theme/app_theme.dart';
+import 'package:mock_mart/theme/custom_theme_colors.dart';
 import 'package:mock_mart/utils/dimensions.dart';
 import 'package:mock_mart/utils/text_styles.dart';
 
@@ -21,7 +21,7 @@ class TopStoresWidget extends StatelessWidget {
               Text(
                 "top_stores".tr,
                 style: sectionTitleTextStyle.copyWith(
-                  color: AppTheme.getTextColor(context),
+                  color: Theme.of(context).extension<CustomThemeColors>()!.textColor,
                 ),
               ),
               TextButton(
@@ -29,7 +29,7 @@ class TopStoresWidget extends StatelessWidget {
                 child: Text(
                   "view_all".tr,
                   style: viewAllTextStyle.copyWith(
-                    color: AppTheme.getTextColor(context),
+                    color: Theme.of(context).extension<CustomThemeColors>()!.textColor,
                   ),
                 ),
               ),

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:mock_mart/common/models/product_model.dart';
 import 'package:mock_mart/constants/size_config.dart';
 import 'package:mock_mart/features/homescreen/controllers/product_controller.dart';
 import 'package:mock_mart/features/homescreen/widgets/banner_widget.dart';
@@ -13,7 +12,6 @@ import 'package:mock_mart/features/homescreen/widgets/product_tab_widget.dart';
 import 'package:mock_mart/features/homescreen/widgets/top_stores_widget.dart';
 import 'package:mock_mart/features/homescreen/widgets/user_exclusive_widget.dart';
 import 'package:mock_mart/helpers/route_helper.dart';
-import 'package:mock_mart/theme/app_theme.dart';
 import 'package:mock_mart/utils/dimensions.dart';
 import 'package:mock_mart/utils/gaps.dart';
 import 'package:mock_mart/utils/images.dart';
@@ -63,7 +61,7 @@ class _MainHomeScreenState extends State<MainHomeScreen>
               SliverAppBar(
                 expandedHeight: Dimensions.expandedHeight,
                 floating: false,
-                backgroundColor: AppTheme.primaryColor,
+                backgroundColor: Theme.of(context).colorScheme.primary,
                 flexibleSpace: FlexibleSpaceBar(
                   background: Padding(
                     padding: EdgeInsets.all(Dimensions.headerPadding),
@@ -91,7 +89,7 @@ class _MainHomeScreenState extends State<MainHomeScreen>
                             backgroundColor: Colors.white,
                             child: Icon(
                               Icons.person,
-                              color: AppTheme.primaryColor,
+                              color: Theme.of(context).colorScheme.primary,
                               size: Dimensions.headerAvatarIconSize,
                             ),
                           ),
@@ -102,7 +100,7 @@ class _MainHomeScreenState extends State<MainHomeScreen>
                 ),
                 bottom: TabBar(
                   controller: _tabController,
-                  indicatorColor: AppTheme.secondaryColor,
+                  indicatorColor: Theme.of(context).colorScheme.secondary,
                   indicatorWeight: Dimensions.tabBarIndicatorWeight,
                   labelColor: Colors.white,
                   unselectedLabelColor: Colors.white,

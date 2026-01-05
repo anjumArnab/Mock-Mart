@@ -4,7 +4,7 @@ import 'package:mock_mart/common/models/product_model.dart';
 import 'package:mock_mart/common/widgets/product_card.dart';
 import 'package:mock_mart/constants/size_config.dart';
 import 'package:mock_mart/helpers/discounted_price_calc.dart';
-import 'package:mock_mart/theme/app_theme.dart';
+import 'package:mock_mart/theme/custom_theme_colors.dart' show CustomThemeColors;
 import 'package:mock_mart/utils/dimensions.dart';
 import 'package:mock_mart/utils/text_styles.dart';
 
@@ -27,13 +27,13 @@ class FeaturedProductWidget extends StatelessWidget{
               Text(
                 "featured_products".tr,
                 style: sectionTitleTextStyle.copyWith(
-                  color: AppTheme.getTextColor(context),
+                  color: Theme.of(context).extension<CustomThemeColors>()!.textColor,
                 ),
               ),
               Text(
                 "view_all".tr,
                 style: viewAllTextStyle.copyWith(
-                  color: AppTheme.getTextColor(context),
+                  color: Theme.of(context).extension<CustomThemeColors>()!.textColor,
                 ),
               ),
             ],

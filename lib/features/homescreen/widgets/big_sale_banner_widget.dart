@@ -1,6 +1,6 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
-import 'package:mock_mart/theme/app_theme.dart';
+import 'package:mock_mart/theme/custom_theme_colors.dart';
 import 'package:mock_mart/utils/dimensions.dart';
 import 'package:mock_mart/utils/images.dart';
 
@@ -80,8 +80,8 @@ class _BigSaleBannerWidgetState extends State<BigSaleBannerWidget> {
                   Dimensions.carouselIndicatorBorderRadius,
                 ),
                 color: _currentCarouselIndex == entry.key
-                    ? AppTheme.primaryColor
-                    : AppTheme.getInactiveColor(context),
+                    ? Theme.of(context).colorScheme.primary
+                    : Theme.of(context).extension<CustomThemeColors>()!.inactiveColor,
               ),
             );
           }).toList(),

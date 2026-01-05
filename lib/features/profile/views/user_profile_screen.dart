@@ -5,7 +5,7 @@ import 'package:mock_mart/features/profile/widgets/custom_text_field.dart';
 import 'package:mock_mart/features/profile/widgets/image_avatar.dart';
 import 'package:mock_mart/features/profile/widgets/update_button.dart';
 import 'package:mock_mart/helpers/date_converter.dart';
-import 'package:mock_mart/theme/app_theme.dart';
+import 'package:mock_mart/theme/custom_theme_colors.dart';
 import 'package:mock_mart/utils/dimensions.dart';
 import 'package:mock_mart/utils/text_styles.dart';
 import 'dart:io';
@@ -16,15 +16,15 @@ class UserProfileScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppTheme.getBackgroundColor(context),
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       appBar: AppBar(
-        backgroundColor: AppTheme.getBackgroundColor(context),
+        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
         elevation: 0,
         title: Text(
           'profile'.tr,
           style: sectionTitleTextStyle.copyWith(
             fontSize: Dimensions.fontSizeLarge,
-            color: AppTheme.getTextColor(context),
+            color: Theme.of(context).extension<CustomThemeColors>()!.textColor,
           ),
         ),
         centerTitle: true,
@@ -43,13 +43,13 @@ class UserProfileScreen extends StatelessWidget {
                   Icon(
                     Icons.error_outline,
                     size: 64,
-                    color: AppTheme.getSecondaryTextColor(context),
+                    color: Theme.of(context).extension<CustomThemeColors>()!.secondaryTextColor,
                   ),
                   SizedBox(height: Dimensions.spacingDefault),
                   Text(
                     'failed_to_load_profile'.tr,
                     style: tabBarTextStyle.copyWith(
-                      color: AppTheme.getSecondaryTextColor(context),
+                      color: Theme.of(context).extension<CustomThemeColors>()!.secondaryTextColor,
                     ),
                   ),
                   SizedBox(height: Dimensions.spacingDefault),
@@ -80,7 +80,7 @@ class UserProfileScreen extends StatelessWidget {
                             children: [
                               CircleAvatar(
                                 radius: Dimensions.avatarSizeLarge,
-                                backgroundColor: AppTheme.primaryColor.withOpacity(0.1),
+                                backgroundColor: Theme.of(context).colorScheme.primary.withOpacity(0.1),
                                 backgroundImage: profile.imageUrl != null
                                     ? NetworkImage(profile.imageUrl!)
                                     : null,
@@ -88,7 +88,7 @@ class UserProfileScreen extends StatelessWidget {
                                     ? Icon(
                                         Icons.person,
                                         size: Dimensions.iconSizeLarge,
-                                        color: AppTheme.primaryColor,
+                                        color: Theme.of(context).colorScheme.primary,
                                       )
                                     : null,
                               ),
@@ -102,10 +102,10 @@ class UserProfileScreen extends StatelessWidget {
                                   child: Container(
                                     padding: EdgeInsets.all(Dimensions.paddingSizeExtraSmall),
                                     decoration: BoxDecoration(
-                                      color: AppTheme.primaryColor,
+                                      color: Theme.of(context).colorScheme.primary,
                                       shape: BoxShape.circle,
                                       border: Border.all(
-                                        color: AppTheme.getBackgroundColor(context),
+                                        color: Theme.of(context).scaffoldBackgroundColor,
                                         width: 2,
                                       ),
                                     ),
@@ -124,14 +124,14 @@ class UserProfileScreen extends StatelessWidget {
                             profile.fullName,
                             style: userNameTextStyle.copyWith(
                               fontSize: Dimensions.fontSizeExtraLarge,
-                              color: AppTheme.getTextColor(context),
+                              color: Theme.of(context).extension<CustomThemeColors>()!.textColor,
                             ),
                           ),
                           SizedBox(height: Dimensions.spacingExtraSmall),
                           Text(
                             profile.email ?? '',
                             style: tabBarTextStyle.copyWith(
-                              color: AppTheme.getSecondaryTextColor(context),
+                              color: Theme.of(context).extension<CustomThemeColors>()!.secondaryTextColor,
                             ),
                           ),
                           if (profile.phone != null && profile.phone!.isNotEmpty) ...[
@@ -139,7 +139,7 @@ class UserProfileScreen extends StatelessWidget {
                             Text(
                               profile.phone!,
                               style: tabBarTextStyle.copyWith(
-                                color: AppTheme.getSecondaryTextColor(context),
+                                color: Theme.of(context).extension<CustomThemeColors>()!.secondaryTextColor,
                               ),
                             ),
                           ],
@@ -154,7 +154,7 @@ class UserProfileScreen extends StatelessWidget {
                       margin: EdgeInsets.symmetric(horizontal: Dimensions.paddingSizeDefault),
                       padding: EdgeInsets.all(Dimensions.paddingSizeDefault),
                       decoration: BoxDecoration(
-                        color: AppTheme.getCardColor(context),
+                        color: Theme.of(context).extension<CustomThemeColors>()!.cardColor,
                         borderRadius: BorderRadius.circular(Dimensions.radiusDefault),
                       ),
                       child: Padding(
@@ -164,7 +164,7 @@ class UserProfileScreen extends StatelessWidget {
                             Icon(
                               Icons.calendar_today,
                               size: Dimensions.iconSizeDefault,
-                              color: AppTheme.primaryColor,
+                              color: Theme.of(context).colorScheme.primary,
                             ),
                             SizedBox(width: Dimensions.spacingDefault),
                             Expanded(
@@ -174,7 +174,7 @@ class UserProfileScreen extends StatelessWidget {
                                   Text(
                                     'member_since'.tr,
                                     style: tabBarTextStyle.copyWith(
-                                      color: AppTheme.getSecondaryTextColor(context),
+                                      color: Theme.of(context).extension<CustomThemeColors>()!.secondaryTextColor,
                                       fontSize: Dimensions.fontSizeSmall,
                                     ),
                                   ),
@@ -182,7 +182,7 @@ class UserProfileScreen extends StatelessWidget {
                                   Text(
                                    DateConverter.formatDate(profile.createdAt),
                                     style: tabBarTextStyle.copyWith(
-                                      color: AppTheme.getTextColor(context),
+                                      color: Theme.of(context).extension<CustomThemeColors>()!.textColor,
                                       fontWeight: FontWeight.w500,
                                     ),
                                   ),
@@ -243,7 +243,7 @@ class UserProfileScreen extends StatelessWidget {
             bottom: MediaQuery.of(context).viewInsets.bottom,
           ),
           decoration: BoxDecoration(
-            color: AppTheme.getBackgroundColor(context),
+            color: Theme.of(context).scaffoldBackgroundColor,
             borderRadius: BorderRadius.only(
               topLeft: Radius.circular(Dimensions.radiusLarge),
               topRight: Radius.circular(Dimensions.radiusLarge),
@@ -260,7 +260,7 @@ class UserProfileScreen extends StatelessWidget {
                     width: 40,
                     height: 4,
                     decoration: BoxDecoration(
-                      color: AppTheme.getSecondaryTextColor(context),
+                      color: Theme.of(context).extension<CustomThemeColors>()!.secondaryTextColor,
                       borderRadius: BorderRadius.circular(2),
                     ),
                   ),
@@ -270,7 +270,7 @@ class UserProfileScreen extends StatelessWidget {
                   'edit_profile'.tr,
                   style: sectionTitleTextStyle.copyWith(
                     fontSize: Dimensions.fontSizeLarge,
-                    color: AppTheme.getTextColor(context),
+                    color: Theme.of(context).extension<CustomThemeColors>()!.textColor,
                   ),
                 ),
                 SizedBox(height: Dimensions.spacingLarge),

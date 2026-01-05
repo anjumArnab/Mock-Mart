@@ -4,7 +4,7 @@ import 'package:mock_mart/features/auth/controller/auth_controller.dart';
 import 'package:mock_mart/features/auth/models/sign_up_body.dart';
 import 'package:mock_mart/features/auth/widgets/auth_button_widget.dart';
 import 'package:mock_mart/features/auth/widgets/auth_text_field_widget.dart';
-import 'package:mock_mart/theme/app_theme.dart';
+import 'package:mock_mart/theme/custom_theme_colors.dart';
 import 'package:mock_mart/utils/text_styles.dart';
 
 class SignUpScreen extends StatefulWidget {
@@ -37,14 +37,14 @@ class _SignUpScreenState extends State<SignUpScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppTheme.getBackgroundColor(context),
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
         leading: IconButton(
           icon: Icon(
             Icons.arrow_back_ios,
-            color: AppTheme.getTextColor(context),
+            color: Theme.of(context).extension<CustomThemeColors>()!.textColor,
           ),
           onPressed: () => Get.back(),
         ),
@@ -63,7 +63,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       'create_account'.tr,
                       style: encodeSansBold.copyWith(
                         fontSize: 28,
-                        color: AppTheme.getTextColor(context),
+                        color: Theme.of(context).extension<CustomThemeColors>()!.textColor,
                       ),
                     ),
                     
@@ -73,7 +73,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       'sign_up_to_get_started'.tr,
                       style: encodeSansRegular.copyWith(
                         fontSize: 16,
-                        color: AppTheme.getSecondaryTextColor(context),
+                        color: Theme.of(context).extension<CustomThemeColors>()!.secondaryTextColor,
                       ),
                     ),
                     
@@ -183,7 +183,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             onChanged: (value) {
                               authController.toggleTerms(value: value);
                             },
-                            activeColor: AppTheme.primaryColor,
+                            activeColor: Theme.of(context).primaryColor,
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(4),
                             ),
@@ -197,7 +197,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                 'i_agree_to_the'.tr,
                                 style: interRegular.copyWith(
                                   fontSize: 14,
-                                  color: AppTheme.getSecondaryTextColor(context),
+                                  color: Theme.of(context).extension<CustomThemeColors>()!.secondaryTextColor,
                                 ),
                               ),
                               GestureDetector(
@@ -207,7 +207,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                   'terms_and_conditions'.tr,
                                   style: interSemiBold.copyWith(
                                     fontSize: 14,
-                                    color: AppTheme.primaryColor,
+                                    color: Theme.of(context).primaryColor,
                                   ),
                                 ),
                               ),
@@ -229,7 +229,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                               'terms_required'.tr,
                               'please_accept_the_terms_and_conditions'.tr,
                               snackPosition: SnackPosition.BOTTOM,
-                              backgroundColor: AppTheme.red,
+                              backgroundColor: Theme.of(context).colorScheme.error,
                               colorText: Colors.white,
                             );
                             return;
@@ -258,7 +258,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           'already_have_an_account'.tr,
                           style: interRegular.copyWith(
                             fontSize: 14,
-                            color: AppTheme.getSecondaryTextColor(context),
+                            color: Theme.of(context).extension<CustomThemeColors>()!.secondaryTextColor,
                           ),
                         ),
                         TextButton(
@@ -269,7 +269,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             'sign_in'.tr,
                             style: interSemiBold.copyWith(
                               fontSize: 14,
-                              color: AppTheme.primaryColor,
+                              color: Theme.of(context).primaryColor,
                             ),
                           ),
                         ),

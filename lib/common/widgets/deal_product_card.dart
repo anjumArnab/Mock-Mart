@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mock_mart/theme/app_theme.dart';
+import 'package:mock_mart/theme/custom_theme_colors.dart';
 import 'package:mock_mart/utils/dimensions.dart';
 import 'package:mock_mart/utils/text_styles.dart';
 
@@ -55,13 +55,13 @@ class DealProductCard extends StatelessWidget {
                 child: Container(
                   padding: EdgeInsets.all(Dimensions.productCardFavoriteIconPadding),
                   decoration: BoxDecoration(
-                    color: AppTheme.getCardColor(context),
+                    color: Theme.of(context).extension<CustomThemeColors>()!.cardColor,
                     shape: BoxShape.circle,
                   ),
                   child: Icon(
                     Icons.favorite_border,
                     size: Dimensions.productCardFavoriteIconSize,
-                    color: AppTheme.getNegativeColor(context),
+                    color: Theme.of(context).extension<CustomThemeColors>()!.negativeColor,
                   ),
                 ),
               ),
@@ -82,7 +82,7 @@ class DealProductCard extends StatelessWidget {
                     Text(
                       '$rating ($reviews Reviews)',
                       style: productTitleTextStyle.copyWith(
-                        color: AppTheme.getTextColor(context),
+                        color: Theme.of(context).extension<CustomThemeColors>()!.textColor,
                       ),
                     ),
                     SizedBox(width: Dimensions.spacingSmall),
@@ -98,13 +98,13 @@ class DealProductCard extends StatelessWidget {
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                   style: productPriceTextStyle.copyWith(
-                    color: AppTheme.getTextColor(context),
+                    color: Theme.of(context).extension<CustomThemeColors>()!.textColor,
                   ),
                 ),
                 Text(
                   '\$$price',
                   style: productPriceTextStyle.copyWith(
-                    color: AppTheme.getTextColor(context),
+                    color: Theme.of(context).extension<CustomThemeColors>()!.textColor,
                   ),
                 ),
                 Row(
@@ -112,7 +112,7 @@ class DealProductCard extends StatelessWidget {
                     Text(
                       oldPrice,
                       style: discountedPriceTextStyle.copyWith(
-                        color: AppTheme.getGreyTextColor(context),
+                        color: Theme.of(context).extension<CustomThemeColors>()!.greyTextColor,
                       ),
                     ),
                     SizedBox(width: Dimensions.spacingSmall),
@@ -122,7 +122,7 @@ class DealProductCard extends StatelessWidget {
                         vertical: Dimensions.discountBadgePaddingVertical,
                       ),
                       decoration: BoxDecoration(
-                        color: AppTheme.getNegativeColor(context),
+                        color: Theme.of(context).extension<CustomThemeColors>()!.negativeColor,
                         borderRadius: BorderRadius.circular(
                           Dimensions.discountBadgeBorderRadius,
                         ),
@@ -130,7 +130,7 @@ class DealProductCard extends StatelessWidget {
                       child: Text(
                         discount,
                         style: discountPercentageTextStyle.copyWith(
-                          color: AppTheme.red,
+                          color: Theme.of(context).colorScheme.error,
                         ),
                       ),
                     ),
@@ -138,7 +138,7 @@ class DealProductCard extends StatelessWidget {
                       alignment: Alignment.topRight,
                       child: Container(
                       decoration: BoxDecoration(
-                        color: AppTheme.primaryColor,
+                        color: Theme.of(context).colorScheme.primary,
                         borderRadius: BorderRadius.circular(
                           Dimensions.radiusSmall,
                         ),

@@ -1,6 +1,5 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
-import 'package:mock_mart/theme/app_theme.dart';
 
 class ImageAvatar extends StatelessWidget {
   final File? localImage;
@@ -35,10 +34,10 @@ class ImageAvatar extends StatelessWidget {
         children: [
           CircleAvatar(
             radius: 50,
-            backgroundColor: AppTheme.primaryColor.withOpacity(0.1),
+            backgroundColor: Theme.of(context).colorScheme.primary.withOpacity(0.1),
             backgroundImage: _imageProvider,
             child: !_hasImage
-                ? Icon(Icons.person, size: 50, color: AppTheme.primaryColor)
+                ? Icon(Icons.person, size: 50, color: Theme.of(context).colorScheme.primary)
                 : null,
           ),
           Positioned(
@@ -47,7 +46,7 @@ class ImageAvatar extends StatelessWidget {
             child: Container(
               padding: const EdgeInsets.all(8),
               decoration: BoxDecoration(
-                color: AppTheme.primaryColor.withOpacity(0.1),
+                color: Theme.of(context).colorScheme.primary.withOpacity(0.1),
                 shape: BoxShape.circle,
               ),
               child: const Icon(

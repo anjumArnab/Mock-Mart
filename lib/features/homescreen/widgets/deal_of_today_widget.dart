@@ -3,7 +3,7 @@ import 'package:mock_mart/common/models/product_model.dart';
 import 'package:mock_mart/common/widgets/deal_product_card.dart';
 import 'package:mock_mart/common/widgets/gradient_card.dart';
 import 'package:mock_mart/helpers/discounted_price_calc.dart';
-import 'package:mock_mart/theme/app_theme.dart';
+import 'package:mock_mart/theme/custom_theme_colors.dart';
 import 'package:mock_mart/utils/dimensions.dart';
 
 class DealOfTodayWidget extends StatelessWidget{
@@ -19,7 +19,7 @@ class DealOfTodayWidget extends StatelessWidget{
       padding: EdgeInsets.symmetric(horizontal: Dimensions.paddingSizeDefault),
       child: Container(
         decoration: BoxDecoration(
-          color: AppTheme.getSectionBackground(context),
+          color: Theme.of(context).extension<CustomThemeColors>()!.sectionBackground,
           borderRadius: BorderRadius.circular(Dimensions.radiusSmall),
         ),
         child: Padding(

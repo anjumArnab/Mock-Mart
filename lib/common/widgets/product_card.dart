@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:mock_mart/theme/app_theme.dart';
+import 'package:mock_mart/theme/custom_theme_colors.dart';
 import 'package:mock_mart/utils/dimensions.dart';
+import 'package:mock_mart/utils/images.dart';
 import 'package:mock_mart/utils/text_styles.dart';
 
-import '../../utils/images.dart';
 
 class ProductCard extends StatelessWidget {
   final String title;
@@ -47,13 +47,13 @@ class ProductCard extends StatelessWidget {
               child: Container(
                 padding: EdgeInsets.all(Dimensions.productCardFavoriteIconPadding),
                 decoration: BoxDecoration(
-                  color: AppTheme.getCardColor(context),
+                  color: Theme.of(context).extension<CustomThemeColors>()!.cardColor,
                   shape: BoxShape.circle,
                 ),
                 child: Icon(
                   Icons.favorite_border,
                   size: Dimensions.productCardFavoriteIconSize,
-                  color: AppTheme.getNegativeColor(context),
+                  color: Theme.of(context).extension<CustomThemeColors>()!.negativeColor,
                 ),
               ),
             ),
@@ -67,7 +67,7 @@ class ProductCard extends StatelessWidget {
               Text(
                 title,
                 style: productTitleTextStyle.copyWith(
-                  color: AppTheme.getTextColor(context),
+                  color: Theme.of(context).extension<CustomThemeColors>()!.textColor,
                 ),
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
@@ -76,7 +76,7 @@ class ProductCard extends StatelessWidget {
               Text(
                 price,
                 style: productPriceTextStyle.copyWith(
-                  color: AppTheme.getTextColor(context),
+                  color: Theme.of(context).extension<CustomThemeColors>()!.textColor,
                 ),
               ),
               Row(
@@ -84,7 +84,7 @@ class ProductCard extends StatelessWidget {
                   Text(
                     oldPrice,
                     style: discountedPriceTextStyle.copyWith(
-                      color: AppTheme.getGreyTextColor(context),
+                      color: Theme.of(context).extension<CustomThemeColors>()!.greyTextColor,
                     ),
                   ),
                   SizedBox(width: Dimensions.spacingSmall),
@@ -94,13 +94,13 @@ class ProductCard extends StatelessWidget {
                       vertical: Dimensions.discountBadgePaddingVertical,
                     ),
                     decoration: BoxDecoration(
-                      color: AppTheme.getNegativeColor(context),
+                      color: Theme.of(context).extension<CustomThemeColors>()!.negativeColor,
                       borderRadius: BorderRadius.circular(Dimensions.discountBadgeBorderRadius),
                     ),
                     child: Text(
                       discount,
                       style: discountPercentageTextStyle.copyWith(
-                        color: AppTheme.red,
+                        color: Theme.of(context).colorScheme.error,
                       ),
                     ),
                   ),

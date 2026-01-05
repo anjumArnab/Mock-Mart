@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mock_mart/constants/size_config.dart';
-import 'package:mock_mart/theme/app_theme.dart';
+import 'package:mock_mart/theme/custom_theme_colors.dart';
 import 'package:mock_mart/utils/dimensions.dart';
 import 'package:mock_mart/utils/text_styles.dart';
 
@@ -29,28 +29,28 @@ class OTPInputFieldWidget extends StatelessWidget {
         maxLength: 1,
         style: interBold.copyWith(
           fontSize: 24,
-          color: AppTheme.getTextColor(context),
+          color: Theme.of(context).extension<CustomThemeColors>()!.textColor,
         ),
         decoration: InputDecoration(
           counterText: '',
           filled: true,
-          fillColor: AppTheme.getCardColor(context),
+          fillColor: Theme.of(context).extension<CustomThemeColors>()!.cardColor,
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(Dimensions.radiusDefault),
             borderSide: BorderSide(
-              color: AppTheme.getInactiveColor(context),
+              color: Theme.of(context).extension<CustomThemeColors>()!.inactiveColor,
             ),
           ),
           enabledBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(Dimensions.radiusDefault),
             borderSide: BorderSide(
-              color: AppTheme.getInactiveColor(context),
+              color: Theme.of(context).extension<CustomThemeColors>()!.inactiveColor,
             ),
           ),
           focusedBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(Dimensions.radiusDefault),
             borderSide: BorderSide(
-              color: AppTheme.primaryColor,
+              color: Theme.of(context).primaryColor,
               width: 2,
             ),
           ),

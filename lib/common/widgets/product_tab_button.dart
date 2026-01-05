@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mock_mart/theme/app_theme.dart';
+import 'package:mock_mart/theme/custom_theme_colors.dart';
 import 'package:mock_mart/utils/dimensions.dart';
 import 'package:mock_mart/utils/text_styles.dart';
 
@@ -26,8 +26,8 @@ class ProductTabButton extends StatelessWidget {
         ),
         decoration: BoxDecoration(
           color: isActive
-              ? AppTheme.primaryColor
-              : AppTheme.getInactiveColor(context),
+              ? Theme.of(context).colorScheme.primary
+              : Theme.of(context).extension<CustomThemeColors>()!.inactiveColor,
           borderRadius: BorderRadius.circular(Dimensions.productTabBorderRadius),
         ),
         child: Text(
@@ -35,7 +35,7 @@ class ProductTabButton extends StatelessWidget {
           style: productTabTextStyle.copyWith(
             color: isActive
                 ? Colors.white
-                : AppTheme.getSecondaryTextColor(context),
+                : Theme.of(context).extension<CustomThemeColors>()!.secondaryTextColor,
             fontWeight: isActive ? FontWeight.bold : FontWeight.w600,
           ),
         ),

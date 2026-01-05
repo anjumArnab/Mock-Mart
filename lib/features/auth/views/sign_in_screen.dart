@@ -5,7 +5,7 @@ import 'package:mock_mart/features/auth/widgets/auth_button_widget.dart';
 import 'package:mock_mart/features/auth/widgets/auth_text_field_widget.dart';
 import 'package:mock_mart/features/language/controllers/language_controller.dart';
 import 'package:mock_mart/helpers/route_helper.dart';
-import 'package:mock_mart/theme/app_theme.dart';
+import 'package:mock_mart/theme/custom_theme_colors.dart';
 import 'package:mock_mart/theme/theme_controller.dart';
 import 'package:mock_mart/utils/app_constants.dart';
 import 'package:mock_mart/utils/dimensions.dart';
@@ -38,26 +38,26 @@ class _SignInScreenState extends State<SignInScreen> {
         final isDark = themeController.isDarkMode;
         
         return Scaffold(
-          backgroundColor: AppTheme.getBackgroundColor(context),
+          backgroundColor: Theme.of(context).scaffoldBackgroundColor,
           appBar: AppBar(
             actions: [
               IconButton(
                 icon: Icon(
                   isDark ? Icons.dark_mode : Icons.light_mode,
-                  color: AppTheme.primaryColor,
+                  color: Theme.of(context).primaryColor,
                 ),
                 onPressed: () => themeController.toggleTheme(),
                 tooltip: isDark ? "enabled".tr : "disabled".tr,
               ),
               Icon(
                 Icons.translate,
-                color: AppTheme.primaryColor,
+                color: Theme.of(context).primaryColor,
               ),
               Gaps.horizontalGapOf(Dimensions.paddingSizeSmall),
               DropdownButton<String>(
                 value: Get.find<LanguageController>().locale.languageCode,
                 underline: SizedBox(),
-                icon: Icon(Icons.arrow_drop_down, color: AppTheme.primaryColor),
+                icon: Icon(Icons.arrow_drop_down, color: Theme.of(context).primaryColor),
                 items: AppConstants.languages.map((lang) {
                   return DropdownMenuItem(
                     value: lang.languageCode,
@@ -65,7 +65,7 @@ class _SignInScreenState extends State<SignInScreen> {
                       lang.languageName!,
                       style: interRegular.copyWith(
                         fontSize: 14,
-                        color: AppTheme.getTextColor(context),
+                        color: Theme.of(context).extension<CustomThemeColors>()!.textColor,
                       ),
                     ),
                   );
@@ -95,7 +95,7 @@ class _SignInScreenState extends State<SignInScreen> {
                           'welcome_back'.tr,
                           style: encodeSansBold.copyWith(
                             fontSize: 28,
-                            color: AppTheme.getTextColor(context),
+                            color: Theme.of(context).extension<CustomThemeColors>()!.textColor,
                           ),
                         ),
 
@@ -105,7 +105,7 @@ class _SignInScreenState extends State<SignInScreen> {
                           'sign_in_to_continue'.tr,
                           style: encodeSansRegular.copyWith(
                             fontSize: 16,
-                            color: AppTheme.getSecondaryTextColor(context),
+                            color: Theme.of(context).extension<CustomThemeColors>()!.secondaryTextColor,
                           ),
                         ),
 
@@ -159,7 +159,7 @@ class _SignInScreenState extends State<SignInScreen> {
                                     onChanged: (value) {
                                       authController.toggleRememberMe(value: value);
                                     },
-                                    activeColor: AppTheme.primaryColor,
+                                    activeColor: Theme.of(context).primaryColor,
                                     shape: RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(4),
                                     ),
@@ -170,7 +170,7 @@ class _SignInScreenState extends State<SignInScreen> {
                                   'remember_me'.tr,
                                   style: interRegular.copyWith(
                                     fontSize: 14,
-                                    color: AppTheme.getSecondaryTextColor(context),
+                                    color: Theme.of(context).extension<CustomThemeColors>()!.secondaryTextColor,
                                   ),
                                 ),
                               ],
@@ -183,7 +183,7 @@ class _SignInScreenState extends State<SignInScreen> {
                                 'forgot_password'.tr,
                                 style: interSemiBold.copyWith(
                                   fontSize: 14,
-                                  color: AppTheme.primaryColor,
+                                  color: Theme.of(context).primaryColor,
                                 ),
                               ),
                             ),
@@ -215,7 +215,7 @@ class _SignInScreenState extends State<SignInScreen> {
                               'dont_have_an_account'.tr,
                               style: interRegular.copyWith(
                                 fontSize: 14,
-                                color: AppTheme.getSecondaryTextColor(context),
+                                color: Theme.of(context).extension<CustomThemeColors>()!.secondaryTextColor,
                               ),
                             ),
                             TextButton(
@@ -226,7 +226,7 @@ class _SignInScreenState extends State<SignInScreen> {
                                 'sign_up'.tr,
                                 style: interSemiBold.copyWith(
                                   fontSize: 14,
-                                  color: AppTheme.primaryColor,
+                                  color: Theme.of(context).primaryColor,
                                 ),
                               ),
                             ),

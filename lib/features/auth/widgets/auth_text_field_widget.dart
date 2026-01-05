@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mock_mart/theme/app_theme.dart';
+import 'package:mock_mart/theme/custom_theme_colors.dart';
 import 'package:mock_mart/utils/dimensions.dart';
 import 'package:mock_mart/utils/gaps.dart';
 import 'package:mock_mart/utils/text_styles.dart';
@@ -52,7 +52,7 @@ class _AuthTextFieldState extends State<AuthTextFieldWidget> {
           maxLength: widget.maxLength,
           style: interRegular.copyWith(
             fontSize: 14,
-            color: AppTheme.getTextColor(context),
+            color: Theme.of(context).extension<CustomThemeColors>()!.textColor,
           ),
           decoration: InputDecoration(
             hintText: widget.hint,
@@ -60,7 +60,7 @@ class _AuthTextFieldState extends State<AuthTextFieldWidget> {
             hintStyle: interRegular,
             prefixIcon: Icon(
               widget.icon,
-              color: AppTheme.primaryColor,
+              color: Theme.of(context).primaryColor,
             ),
             suffixIcon: widget.isPassword
                 ? IconButton(
@@ -68,7 +68,7 @@ class _AuthTextFieldState extends State<AuthTextFieldWidget> {
                       _obscureText
                           ? Icons.visibility_off_outlined
                           : Icons.visibility_outlined,
-                      color: AppTheme.getSecondaryTextColor(context),
+                      color: Theme.of(context).extension<CustomThemeColors>()!.secondaryTextColor,
                     ),
                     onPressed: () {
                       setState(() {
@@ -78,23 +78,23 @@ class _AuthTextFieldState extends State<AuthTextFieldWidget> {
                   )
                 : null,
             filled: true,
-            fillColor: AppTheme.getCardColor(context),
+            fillColor: Theme.of(context).extension<CustomThemeColors>()!.cardColor,
             border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(Dimensions.radiusDefault),
               borderSide: BorderSide(
-                color: AppTheme.getInactiveColor(context),
+                color: Theme.of(context).extension<CustomThemeColors>()!.inactiveColor,
               ),
             ),
             enabledBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(Dimensions.radiusDefault),
               borderSide: BorderSide(
-                color: AppTheme.getInactiveColor(context),
+                color: Theme.of(context).extension<CustomThemeColors>()!.inactiveColor,
               ),
             ),
             focusedBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(Dimensions.radiusDefault),
               borderSide: BorderSide(
-                color: AppTheme.primaryColor,
+                color: Theme.of(context).primaryColor,
                 width: 2,
               ),
             ),

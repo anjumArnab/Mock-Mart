@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:mock_mart/theme/app_theme.dart';
 import 'package:mock_mart/utils/dimensions.dart';
 
 class BannerWidget extends StatelessWidget {
@@ -14,7 +13,7 @@ class BannerWidget extends StatelessWidget {
       height: Dimensions.bannerHeightSmall,
       width: double.infinity,
       decoration: BoxDecoration(
-        color: AppTheme.primaryColor,
+        color: Theme.of(context).colorScheme.primary,
         borderRadius: BorderRadius.circular(Dimensions.bannerBorderRadius),
       ),
       child: ClipRRect(

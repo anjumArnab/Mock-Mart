@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:mock_mart/constants/size_config.dart';
-import 'package:mock_mart/theme/app_theme.dart';
 import 'package:mock_mart/utils/dimensions.dart';
 import 'package:mock_mart/utils/text_styles.dart';
 
@@ -36,7 +35,7 @@ class AuthButtonWidget extends StatelessWidget {
       child: ElevatedButton(
         onPressed: isLoading ? null : onPressed,
         style: ElevatedButton.styleFrom(
-          backgroundColor: backgroundColor ?? AppTheme.primaryColor,
+          backgroundColor: backgroundColor ?? Theme.of(context).primaryColor,
           foregroundColor: foregroundColor ?? Colors.white,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(borderRadius!),

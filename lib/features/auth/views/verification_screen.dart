@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'package:mock_mart/features/auth/controller/auth_controller.dart';
 import 'package:mock_mart/features/auth/widgets/auth_button_widget.dart';
 import 'package:mock_mart/features/auth/widgets/otp_input_field_widget.dart';
-import 'package:mock_mart/theme/app_theme.dart';
+import 'package:mock_mart/theme/custom_theme_colors.dart';
 import 'package:mock_mart/utils/dimensions.dart';
 import 'package:mock_mart/utils/gaps.dart';
 import 'package:mock_mart/utils/text_styles.dart';
@@ -42,14 +42,14 @@ class _VerificationScreenState extends State<VerificationScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppTheme.getBackgroundColor(context),
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
         leading: IconButton(
           icon: Icon(
             Icons.arrow_back_ios,
-            color: AppTheme.getTextColor(context),
+            color: Theme.of(context).extension<CustomThemeColors>()!.textColor,
           ),
           onPressed: () => Get.back(),
         ),
@@ -68,13 +68,13 @@ class _VerificationScreenState extends State<VerificationScreen> {
                     width: 80,
                     height: 80,
                     decoration: BoxDecoration(
-                      color: AppTheme.primaryColor.withOpacity(0.1),
+                      color: Theme.of(context).primaryColor.withOpacity(0.1),
                       shape: BoxShape.circle,
                     ),
                     child: Icon(
                       Icons.message_outlined,
                       size: 40,
-                      color: AppTheme.primaryColor,
+                      color: Theme.of(context).primaryColor,
                     ),
                   ),
                   
@@ -84,7 +84,7 @@ class _VerificationScreenState extends State<VerificationScreen> {
                     'verification_code'.tr,
                     style: encodeSansBold.copyWith(
                       fontSize: 28,
-                      color: AppTheme.getTextColor(context),
+                      color: Theme.of(context).extension<CustomThemeColors>()!.textColor,
                     ),
                   ),
                   
@@ -95,7 +95,7 @@ class _VerificationScreenState extends State<VerificationScreen> {
                     textAlign: TextAlign.center,
                     style: encodeSansRegular.copyWith(
                       fontSize: 16,
-                      color: AppTheme.getSecondaryTextColor(context),
+                      color: Theme.of(context).extension<CustomThemeColors>()!.secondaryTextColor,
                     ),
                   ),
                   
@@ -105,7 +105,7 @@ class _VerificationScreenState extends State<VerificationScreen> {
                     widget.phone,
                     style: interSemiBold.copyWith(
                       fontSize: 16,
-                      color: AppTheme.getTextColor(context),
+                      color: Theme.of(context).extension<CustomThemeColors>()!.textColor,
                     ),
                   ),
                   
@@ -148,7 +148,7 @@ class _VerificationScreenState extends State<VerificationScreen> {
                         'didnt_receive_code'.tr,
                         style: interRegular.copyWith(
                           fontSize: 14,
-                          color: AppTheme.getSecondaryTextColor(context),
+                          color: Theme.of(context).extension<CustomThemeColors>()!.secondaryTextColor,
                         ),
                       ),
                       TextButton(
@@ -157,7 +157,7 @@ class _VerificationScreenState extends State<VerificationScreen> {
                             'otp_sent'.tr,
                             'verification_code_has_been_resent'.tr,
                             snackPosition: SnackPosition.BOTTOM,
-                            backgroundColor: AppTheme.success,
+                            backgroundColor: Colors.green,
                             colorText: Colors.white,
                           );
                         },
@@ -165,7 +165,7 @@ class _VerificationScreenState extends State<VerificationScreen> {
                           'resend'.tr,
                           style: interSemiBold.copyWith(
                             fontSize: 14,
-                            color: AppTheme.primaryColor,
+                            color: Theme.of(context).primaryColor,
                           ),
                         ),
                       ),
@@ -185,7 +185,7 @@ class _VerificationScreenState extends State<VerificationScreen> {
                           'invalid_otp'.tr,
                           'please_enter_the_complete_6_digit_code'.tr,
                           snackPosition: SnackPosition.BOTTOM,
-                          backgroundColor: AppTheme.red,
+                          backgroundColor: Theme.of(context).colorScheme.error,
                           colorText: Colors.white,
                         );
                         return;

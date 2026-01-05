@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get_utils/src/extensions/internacionalization.dart';
-import 'package:mock_mart/theme/app_theme.dart';
+import 'package:mock_mart/theme/custom_theme_colors.dart';
 import 'package:mock_mart/utils/dimensions.dart';
 
 class CustomBottomNavBar extends StatelessWidget {
@@ -20,7 +20,7 @@ class CustomBottomNavBar extends StatelessWidget {
     return Container(
       height: Dimensions.bottomNavBarHeight,
       decoration: BoxDecoration(
-        color: AppTheme.getBackgroundColor(context),
+        color: Theme.of(context).scaffoldBackgroundColor,
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -96,7 +96,7 @@ class BottomNavItem extends StatelessWidget {
           vertical: Dimensions.bottomNavBarPillPaddingVertical,
         ),
         decoration: BoxDecoration(
-          color: isSelected ? AppTheme.primaryColor : Colors.transparent,
+          color: isSelected ? Theme.of(context).colorScheme.primary : Colors.transparent,
           borderRadius:
           BorderRadius.circular(Dimensions.bottomNavBarPillRadius),
         ),
@@ -111,14 +111,14 @@ class BottomNavItem extends StatelessWidget {
                   size: Dimensions.bottomNavBarIconSize,
                   color: isSelected
                       ? Colors.white
-                      : AppTheme.getSecondaryTextColor(context),
+                      : Theme.of(context).extension<CustomThemeColors>()!.secondaryTextColor
                 ),
                 if (badgeCount != null && badgeCount! > 0)
                   Positioned(
                     right: -8,
                     top: -8,
                     child: Badge.count(
-                      backgroundColor: AppTheme.primaryColor,
+                      backgroundColor: Theme.of(context).colorScheme.primary,
                       count: badgeCount!,
                     ),
                   ),
