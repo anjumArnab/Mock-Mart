@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mock_mart/features/homescreen/controllers/product_controller.dart';
 import 'package:mock_mart/features/language/controllers/language_controller.dart';
+import 'package:mock_mart/features/map/controllers/coordinate_controller.dart';
+import 'package:mock_mart/features/map/repo/coordinate_repo.dart';
 import 'package:mock_mart/features/profile/controllers/user_controller.dart';
 import 'package:mock_mart/features/profile/repo/user_repo.dart';
 import 'package:mock_mart/theme/theme_controller.dart';
@@ -60,11 +62,14 @@ void main() async {
 
   final userRepo = UserRepo(apiClient: apiClient);
 
+  final coordinateRepo=CoordinateRepo(apiClient: apiClient);
+
   Get.put(LanguageController());
   Get.put(ThemeController(sharedPreferences: sharedPreferences));
   Get.put(AuthController(authRepo: authRepo));
   Get.put(UserController(userRepo: userRepo, authRepo: authRepo));
   Get.put(ProductController());
+  Get.put(CoordinateController(coordinateRepo: coordinateRepo));
 
   runApp(const MockMart());
 }
@@ -131,9 +136,9 @@ class _MockMartState extends State<MockMart> {
           darkTheme: darkTheme,
           themeMode: themeController.themeMode,
           initialRoute: authController.isLoggedIn()
-              ? RouteHelper.getMainRoute()
+             ? RouteHelper.getMainRoute()
               : RouteHelper.getSignInRoute(),
-          getPages: RouteHelper.routes,
+           getPages: RouteHelper.routes,
         );
       },
     );
