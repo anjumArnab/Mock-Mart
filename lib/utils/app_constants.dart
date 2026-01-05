@@ -3,7 +3,7 @@ import '../common/models/language_model.dart';
 class AppConstants {
 
   // Base URL
-  static const String baseUrl = 'BASE_URL';
+  static const String baseUrl = 'https://grofresh-test.6amdev.xyz';
   
   // API Endpoints
   static const String configUri = '/api/v1/config';
