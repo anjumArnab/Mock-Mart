@@ -1,5 +1,4 @@
 import 'package:firebase_core/firebase_core.dart';
-import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mock_mart/features/homescreen/controllers/product_controller.dart';
@@ -29,23 +28,7 @@ void main() async {
   );
 
   await NotificationHelper.initialize();
-
-  FirebaseMessaging.onBackgroundMessage(firebaseMessagingBackgroundHandler);
-
-  await FirebaseMessaging.instance.requestPermission(
-    alert: true,
-    badge: true,
-    sound: true,
-  );
-
-  await FirebaseMessaging.instance.setForegroundNotificationPresentationOptions(
-    alert: true,
-    badge: true,
-    sound: true,
-  );
-
-  final fcmToken = await FirebaseMessaging.instance.getToken();
-  print('=======FCM Token: $fcmToken=========');
+  await NotificationHelper.initializeFirebaseMessaging();
 
   await AppTranslations.loadTranslations();
   final sharedPreferences = await SharedPreferences.getInstance();
@@ -74,50 +57,8 @@ void main() async {
   runApp(const MockMart());
 }
 
-class MockMart extends StatefulWidget {
+class MockMart extends StatelessWidget {
   const MockMart({super.key});
-
-  @override
-  State<MockMart> createState() => _MockMartState();
-}
-
-class _MockMartState extends State<MockMart> {
-  @override
-  void initState() {
-    super.initState();
-    _setupNotificationListeners();
-  }
-
-  void _setupNotificationListeners() {
-    FirebaseMessaging.onMessage.listen((RemoteMessage message) {
-      print('Foreground message received');
-      print(message.notification?.title);
-      print(message.notification?.body);
-      NotificationHelper.showNotification(message);
-    });
-
-    FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {
-      print('Notification opened from terminated or background state');
-      if (message.data.containsKey('screen')) {
-        _handleNotificationRoute(message.data['screen']);
-      }
-    });
-
-    FirebaseMessaging.instance.getInitialMessage().then((RemoteMessage? message) {
-      if (message != null && message.data.containsKey('screen')) {
-        print('App opened from terminated state via notification');
-        Future.delayed(const Duration(milliseconds: 500), () {
-          _handleNotificationRoute(message.data['screen']);
-        });
-      }
-    });
-  }
-
-  void _handleNotificationRoute(String screen) {
-    if (screen == 'profile') {
-      Get.toNamed(RouteHelper.getUserProfileScreenRoute());
-    }
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -137,8 +78,8 @@ class _MockMartState extends State<MockMart> {
           themeMode: themeController.themeMode,
           initialRoute: authController.isLoggedIn()
              ? RouteHelper.getMainRoute()
-              : RouteHelper.getSignInRoute(),
-           getPages: RouteHelper.routes,
+             : RouteHelper.getSignInRoute(),
+          getPages: RouteHelper.routes,
         );
       },
     );
