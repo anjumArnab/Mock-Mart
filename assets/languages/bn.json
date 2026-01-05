@@ -85,5 +85,7 @@
   "phone": "ফোন",
   "user_found": "ব্যবহারকারী পাওয়া গেছে",
   "profile": "প্রোফাইল",
-  "user_name": "ব্যবহারকারীর নাম"
+  "user_name": "ব্যবহারকারীর নাম",
+  "failed_to_load_branches": "শাখাসমূহ লোড করা ব্যর্থ হয়েছে",
+  "an_error_occurred_while_fetching_branches": "শাখাসমূহ সংগ্রহ করার সময় একটি ত্রুটি ঘটেছে"
 }

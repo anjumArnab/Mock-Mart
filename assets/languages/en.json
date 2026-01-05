@@ -85,5 +85,7 @@
   "phone": "Phone",
   "user_found": "User Found",
   "profile": "Profile",
-  "user_name": "User Name"
+  "user_name": "User Name",
+  "failed_to_load_branches": "Failed to load branches",
+  "an_error_occurred_while_fetching_branches": "An error occured while fetching branches"
 }
