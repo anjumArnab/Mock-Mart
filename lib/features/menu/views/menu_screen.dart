@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mock_mart/features/language/controllers/language_controller.dart';
+import 'package:mock_mart/helpers/route_helper.dart';
 import 'package:mock_mart/theme/custom_theme_colors.dart';
 import 'package:mock_mart/theme/theme_controller.dart';
 import 'package:mock_mart/utils/app_constants.dart';
 import 'package:mock_mart/utils/dimensions.dart';
 import 'package:mock_mart/utils/gaps.dart';
-
 
 class MenuScreen extends StatelessWidget {
   const MenuScreen({super.key});
@@ -16,7 +16,7 @@ class MenuScreen extends StatelessWidget {
     return GetBuilder<ThemeController>(
       builder: (themeController) {
         final isDark = themeController.isDarkMode;
-        
+
         return Scaffold(
           appBar: AppBar(
             title: Text("menu".tr),
@@ -29,7 +29,9 @@ class MenuScreen extends StatelessWidget {
                   "dark_mode".tr,
                   style: TextStyle(
                     fontSize: 16,
-                    color: Theme.of(context).extension<CustomThemeColors>()!.textColor,
+                    color: Theme.of(
+                      context,
+                    ).extension<CustomThemeColors>()!.textColor,
                   ),
                 ),
                 subtitle: Text(
@@ -60,11 +62,17 @@ class MenuScreen extends StatelessWidget {
                     }).toList(),
                     onChanged: (String? code) {
                       if (code != null) {
-                        Get.find<LanguageController>().setLanguage(Locale(code));
+                        Get.find<LanguageController>().setLanguage(
+                          Locale(code),
+                        );
                       }
                     },
                   ),
                 ],
+              ),
+              IconButton(
+                onPressed: () => Get.toNamed(RouteHelper.getMapScreen()),
+                icon: Icon(Icons.map_rounded, size: 50),
               ),
             ],
           ),
