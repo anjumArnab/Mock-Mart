@@ -1,5 +1,7 @@
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:get/get.dart';
+import 'package:mock_mart/helpers/route_helper.dart';
 
 class NotificationHelper {
   static final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
@@ -25,8 +27,10 @@ class NotificationHelper {
     await flutterLocalNotificationsPlugin.initialize(
       initializationSettings,
       onDidReceiveNotificationResponse: (NotificationResponse response) async {
-        if (response.payload != null) {
-          print('Notification payload: ${response.payload}');
+        // Handle notification tap
+        if (response.payload != null && response.payload!.isNotEmpty) {
+          print('Notification tapped with payload: ${response.payload}');
+          _handleNotificationNavigation(response.payload!);
         }
       },
     );
@@ -45,8 +49,7 @@ class NotificationHelper {
 
     await flutterLocalNotificationsPlugin
         .resolvePlatformSpecificImplementation<
-        AndroidFlutterLocalNotificationsPlugin
-    >()
+        AndroidFlutterLocalNotificationsPlugin>()
         ?.createNotificationChannel(channel);
   }
 
@@ -57,11 +60,11 @@ class NotificationHelper {
         notification.hashCode,
         notification.title,
         notification.body,
-        const NotificationDetails(
+        NotificationDetails(
           android: AndroidNotificationDetails(
-            'test_channel',
-            'Test Notifications',
-            channelDescription: 'This channel is using for testing',
+            'high_importance_channel',
+            'High Importance Notifications',
+            channelDescription: 'This channel is used for important notifications',
             importance: Importance.high,
             priority: Priority.high,
             icon: '@mipmap/ic_launcher',
@@ -72,12 +75,19 @@ class NotificationHelper {
             presentSound: true,
           ),
         ),
-        payload: message.data.toString(),
+        payload: message.data['screen'] ?? '',
       );
+    }
+  }
+
+  static void _handleNotificationNavigation(String screen) {
+    if (screen == 'profile') {
+      Get.toNamed(RouteHelper.getUserProfilePageRoute());
     }
   }
 }
 
+// Background message handler
 @pragma('vm:entry-point')
 Future<void> firebaseMessagingBackgroundHandler(RemoteMessage message) async {
   print('Handling a background message: ${message.messageId}');
