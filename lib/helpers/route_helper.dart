@@ -12,7 +12,7 @@ class RouteHelper {
   static const String _verification = '/verification';
   static const String _forgotPassword = '/forgot-password';
   static const String _main = '/main';
-  static const String _userProfileScreen = '/user-profile-screeb';
+  static const String _userProfileScreen = '/user-profile-screen';
 
   // Route getters
   static String getMainRoute() => _main;
