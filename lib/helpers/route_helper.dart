@@ -3,7 +3,7 @@ import 'package:mock_mart/features/auth/views/sign_in_screen.dart';
 import 'package:mock_mart/features/auth/views/sign_up_screen.dart';
 import 'package:mock_mart/features/auth/views/verification_screen.dart';
 import 'package:mock_mart/features/homescreen/views/home_screen.dart';
-import 'package:mock_mart/features/profile/views/user_profile_page.dart';
+import 'package:mock_mart/features/profile/views/user_profile_screen.dart';
 
 class RouteHelper {
   static const String _home = '/home';
@@ -12,7 +12,7 @@ class RouteHelper {
   static const String _verification = '/verification';
   static const String _forgotPassword = '/forgot-password';
   static const String _main = '/main';
-  static const String _userProfilePage = '/user-profile-page';
+  static const String _userProfileScreen = '/user-profile-screeb';
 
   // Route getters
   static String getMainRoute() => _main;
@@ -21,7 +21,7 @@ class RouteHelper {
   
   static String getSignUpRoute() => _signUp;
 
-  static String getUserProfilePageRoute() => _userProfilePage;
+  static String getUserProfileScreenRoute() => _userProfileScreen;
   
   static String getVerificationRoute({String? phone}) {
     if (phone != null) {
@@ -58,6 +58,6 @@ class RouteHelper {
       name: _home,
       page: () => const HomeScreen(),
     ),
-    GetPage(name: _userProfilePage, page: ()=> const UserProfilePage())
+    GetPage(name: _userProfileScreen, page: ()=> const UserProfileScreen())
   ];
 }

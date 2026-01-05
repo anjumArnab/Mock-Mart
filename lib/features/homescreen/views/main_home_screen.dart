@@ -84,7 +84,7 @@ class _MainHomeScreenState extends State<MainHomeScreen>
                         ),
                         GestureDetector(
                           onTap: () => Get.toNamed(
-                            RouteHelper.getUserProfilePageRoute(),
+                            RouteHelper.getUserProfileScreenRoute(),
                           ),
                           child: CircleAvatar(
                             radius: Dimensions.headerAvatarRadius,

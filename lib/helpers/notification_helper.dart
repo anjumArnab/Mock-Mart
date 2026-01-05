@@ -82,7 +82,7 @@ class NotificationHelper {
 
   static void _handleNotificationNavigation(String screen) {
     if (screen == 'profile') {
-      Get.toNamed(RouteHelper.getUserProfilePageRoute());
+      Get.toNamed(RouteHelper.getUserProfileScreenRoute());
     }
   }
 }

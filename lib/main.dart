@@ -109,7 +109,7 @@ class _MockMartState extends State<MockMart> {
 
   void _handleNotificationRoute(String screen) {
     if (screen == 'profile') {
-      Get.toNamed(RouteHelper.getUserProfilePageRoute());
+      Get.toNamed(RouteHelper.getUserProfileScreenRoute());
     }
   }
 
