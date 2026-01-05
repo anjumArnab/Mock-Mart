@@ -3,6 +3,7 @@ import 'package:mock_mart/features/auth/views/sign_in_screen.dart';
 import 'package:mock_mart/features/auth/views/sign_up_screen.dart';
 import 'package:mock_mart/features/auth/views/verification_screen.dart';
 import 'package:mock_mart/features/homescreen/views/home_screen.dart';
+import 'package:mock_mart/features/map/views/map_screen.dart';
 import 'package:mock_mart/features/profile/views/user_profile_screen.dart';
 
 class RouteHelper {
@@ -13,6 +14,7 @@ class RouteHelper {
   static const String _forgotPassword = '/forgot-password';
   static const String _main = '/main';
   static const String _userProfileScreen = '/user-profile-screen';
+  static const String _mapScreen = '/map-screen';
 
   // Route getters
   static String getMainRoute() => _main;
@@ -33,6 +35,8 @@ class RouteHelper {
   static String getForgotPasswordRoute() => _forgotPassword;
   
   static String getHomeRoute() => _home;
+
+  static String getMapScreen() => _mapScreen;
 
   static List<GetPage> routes = [
     GetPage(
@@ -58,6 +62,7 @@ class RouteHelper {
       name: _home,
       page: () => const HomeScreen(),
     ),
-    GetPage(name: _userProfileScreen, page: ()=> const UserProfileScreen())
+    GetPage(name: _userProfileScreen, page: ()=> const UserProfileScreen()),
+     GetPage(name: _mapScreen, page: ()=> const MapScreen())
   ];
 }
