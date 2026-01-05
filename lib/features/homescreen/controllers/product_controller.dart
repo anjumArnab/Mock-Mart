@@ -2,7 +2,7 @@ import 'package:get/get.dart';
 import 'package:mock_mart/common/models/product_model.dart';
 import 'package:mock_mart/utils/images.dart';
 
-class ProductConroller extends GetxController implements GetxService {
+class ProductController extends GetxController implements GetxService {
   List<ProductModel> products = [
     ProductModel(
       title: 'Blue Color Short Dress for boys',
