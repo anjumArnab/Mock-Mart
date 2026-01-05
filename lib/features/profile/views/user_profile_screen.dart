@@ -10,8 +10,8 @@ import 'package:mock_mart/utils/dimensions.dart';
 import 'package:mock_mart/utils/text_styles.dart';
 import 'dart:io';
 
-class UserProfilePage extends StatelessWidget {
-  const UserProfilePage({super.key});
+class UserProfileScreen extends StatelessWidget {
+  const UserProfileScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
