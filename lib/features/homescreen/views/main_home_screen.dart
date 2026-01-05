@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mock_mart/constants/size_config.dart';
@@ -7,10 +9,12 @@ import 'package:mock_mart/features/homescreen/widgets/big_sale_banner_widget.dar
 import 'package:mock_mart/features/homescreen/widgets/custom_search_bar_widget.dart';
 import 'package:mock_mart/features/homescreen/widgets/deal_of_today_widget.dart';
 import 'package:mock_mart/features/homescreen/widgets/featured_product_widget.dart';
+import 'package:mock_mart/features/homescreen/widgets/profile_avatar_widget.dart';
 import 'package:mock_mart/features/homescreen/widgets/one_time_deal_widget.dart';
 import 'package:mock_mart/features/homescreen/widgets/product_tab_widget.dart';
 import 'package:mock_mart/features/homescreen/widgets/top_stores_widget.dart';
 import 'package:mock_mart/features/homescreen/widgets/user_exclusive_widget.dart';
+import 'package:mock_mart/features/profile/controllers/user_controller.dart';
 import 'package:mock_mart/helpers/route_helper.dart';
 import 'package:mock_mart/utils/dimensions.dart';
 import 'package:mock_mart/utils/gaps.dart';
@@ -55,155 +59,111 @@ class _MainHomeScreenState extends State<MainHomeScreen>
 
     return GetBuilder<ProductController>(
       builder: (productController) {
-        return SafeArea(
-          child: CustomScrollView(
-            slivers: [
-              SliverAppBar(
-                expandedHeight: Dimensions.expandedHeight,
-                floating: false,
-                backgroundColor: Theme.of(context).colorScheme.primary,
-                flexibleSpace: FlexibleSpaceBar(
-                  background: Padding(
-                    padding: EdgeInsets.all(Dimensions.headerPadding),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisAlignment: MainAxisAlignment.center,
+        return GetBuilder<UserController>(
+          builder: (userController) {
+            return SafeArea(
+              child: CustomScrollView(
+                slivers: [
+                  SliverAppBar(
+                    expandedHeight: Dimensions.expandedHeight,
+                    backgroundColor: Theme.of(context).colorScheme.primary,
+                    flexibleSpace: FlexibleSpaceBar(
+                      background: Padding(
+                        padding: EdgeInsets.all(Dimensions.headerPadding),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Text(
-                              "welcome_text".tr,
-                              style: helloWelcomeTextStyle,
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text("welcome_text".tr, style: helloWelcomeTextStyle),
+                                SizedBox(height: Dimensions.headerSpacing),
+                                Text(
+                                  userController.profileModel?.fullName ?? "user_name".tr,
+                                  style: userNameTextStyle,
+                                ),
+                              ],
                             ),
-                            SizedBox(height: Dimensions.headerSpacing),
-                            Text("name".tr, style: userNameTextStyle),
+                            ProfileAvatarWidget(
+                                onTap: ()=>Get.toNamed(
+                                RouteHelper.getUserProfileScreenRoute(),
+                              ),
+                    localImage: userController.pickedFile != null
+                        ? File(userController.pickedFile!.path)
+                        : null,
+                    networkImage: userController.profileModel!.imageUrl,
+                  ),
                           ],
                         ),
-                        GestureDetector(
-                          onTap: () => Get.toNamed(
-                            RouteHelper.getUserProfileScreenRoute(),
-                          ),
-                          child: CircleAvatar(
-                            radius: Dimensions.headerAvatarRadius,
-                            backgroundColor: Colors.white,
-                            child: Icon(
-                              Icons.person,
-                              color: Theme.of(context).colorScheme.primary,
-                              size: Dimensions.headerAvatarIconSize,
-                            ),
-                          ),
-                        ),
-                      ],
+                      ),
+                    ),
+                    bottom: TabBar(
+                      controller: _tabController,
+                      indicatorColor: Theme.of(context).colorScheme.secondary,
+                      indicatorWeight: Dimensions.tabBarIndicatorWeight,
+                      labelColor: Colors.white,
+                      unselectedLabelColor: Colors.white,
+                      labelStyle: tabBarTextStyle.copyWith(fontWeight: FontWeight.bold),
+                      unselectedLabelStyle: tabBarTextStyle,
+                      tabs: _tabs.map((t) => Tab(text: t.tr)).toList(),
                     ),
                   ),
-                ),
-                bottom: TabBar(
-                  controller: _tabController,
-                  indicatorColor: Theme.of(context).colorScheme.secondary,
-                  indicatorWeight: Dimensions.tabBarIndicatorWeight,
-                  labelColor: Colors.white,
-                  unselectedLabelColor: Colors.white,
-                  labelStyle: tabBarTextStyle.copyWith(
-                    fontWeight: FontWeight.bold,
+                  SliverPersistentHeader(
+                    pinned: true,
+                    delegate: _SearchBarDelegate(CustomSearchBarWidget()),
                   ),
-                  unselectedLabelStyle: tabBarTextStyle,
-                  tabs: [
-                    Tab(text: _tabs[0].tr),
-                    Tab(text: _tabs[1].tr),
-                    Tab(text: _tabs[2].tr),
-                    Tab(text: _tabs[3].tr),
-                    Tab(text: _tabs[4].tr),
-                    Tab(text: _tabs[5].tr),
-                  ],
-                ),
-              ),
-              SliverPersistentHeader(
-                pinned: true,
-                delegate: _SearchBarDelegate(CustomSearchBarWidget()),
-              ),
-              SliverToBoxAdapter(
-                child: Gaps.verticalGapOf(Dimensions.spacingLarge),
-              ),
 
-              SliverToBoxAdapter(
-                child: OneTimeDealWidget(
-                  product: productController.products[0],
-                ),
-              ),
+                  SliverToBoxAdapter(child: Gaps.verticalGapOf(Dimensions.spacingLarge)),
 
-              ///products[0]
-              SliverToBoxAdapter(
-                child: Gaps.verticalGapOf(Dimensions.spacingLarge),
-              ),
-
-              SliverToBoxAdapter(child: BigSaleBannerWidget()),
-              SliverToBoxAdapter(
-                child: Gaps.verticalGapOf(Dimensions.spacingLarge),
-              ),
-
-              SliverToBoxAdapter(
-                child: FeaturedProductWidget(
-                  product: productController.products[0],
-                ),
-              ),
-              SliverToBoxAdapter(
-                child: Gaps.verticalGapOf(Dimensions.spacingLarge),
-              ),
-
-              SliverToBoxAdapter(
-                child: DealOfTodayWidget(
-                  product: productController.products[1],
-                ),
-              ),
-
-              SliverToBoxAdapter(
-                child: Gaps.verticalGapOf(Dimensions.spacingLarge),
-              ),
-
-              SliverToBoxAdapter(child: BannerWidget(imagePath: Images.banner)),
-              SliverToBoxAdapter(
-                child: Gaps.verticalGapOf(Dimensions.spacingLarge),
-              ),
-
-              SliverToBoxAdapter(
-                child: UserExclusiveWidget(
-                  product: productController.products[2],
-                ),
-              ),
-              SliverToBoxAdapter(
-                child: Gaps.verticalGapOf(Dimensions.spacingLarge),
-              ),
-              SliverToBoxAdapter(child: TopStoresWidget()),
-
-              SliverToBoxAdapter(
-                child: Gaps.verticalGapOf(Dimensions.spacingLarge),
-              ),
-
-              SliverToBoxAdapter(
-                child: BannerWidget(imagePath: Images.banner01),
-              ),
-              SliverToBoxAdapter(
-                child: Gaps.verticalGapOf(Dimensions.spacingLarge),
-              ),
-
-              SliverPersistentHeader(
-                delegate: _ProductTabDelegate(
-                  ProductTabWidget(
-                    product: productController.products[0],
-                    products: productController.products,
+                  SliverToBoxAdapter(
+                    child: OneTimeDealWidget(product: productController.products[0]),
                   ),
-                ),
-              ),
 
-              SliverToBoxAdapter(
-                child: Gaps.verticalGapOf(Dimensions.spacingLarge),
+                  SliverToBoxAdapter(child: Gaps.verticalGapOf(Dimensions.spacingLarge)),
+                  SliverToBoxAdapter(child: BigSaleBannerWidget()),
+                  SliverToBoxAdapter(child: Gaps.verticalGapOf(Dimensions.spacingLarge)),
+
+                  SliverToBoxAdapter(
+                    child: FeaturedProductWidget(product: productController.products[0]),
+                  ),
+
+                  SliverToBoxAdapter(child: Gaps.verticalGapOf(Dimensions.spacingLarge)),
+
+                  SliverToBoxAdapter(
+                    child: DealOfTodayWidget(product: productController.products[1]),
+                  ),
+
+                  SliverToBoxAdapter(child: Gaps.verticalGapOf(Dimensions.spacingLarge)),
+                  SliverToBoxAdapter(child: BannerWidget(imagePath: Images.banner)),
+                  SliverToBoxAdapter(child: Gaps.verticalGapOf(Dimensions.spacingLarge)),
+
+                  SliverToBoxAdapter(
+                    child: UserExclusiveWidget(product: productController.products[2]),
+                  ),
+
+                  SliverToBoxAdapter(child: Gaps.verticalGapOf(Dimensions.spacingLarge)),
+                  SliverToBoxAdapter(child: TopStoresWidget()),
+                  SliverToBoxAdapter(child: Gaps.verticalGapOf(Dimensions.spacingLarge)),
+
+                  SliverToBoxAdapter(child: BannerWidget(imagePath: Images.banner01)),
+                  SliverToBoxAdapter(child: Gaps.verticalGapOf(Dimensions.spacingLarge)),
+
+                  SliverPersistentHeader(
+                    delegate: _ProductTabDelegate(
+                      ProductTabWidget(
+                        product: productController.products[0],
+                        products: productController.products,
+                      ),
+                    ),
+                  ),
+
+                  SliverToBoxAdapter(child: Gaps.verticalGapOf(Dimensions.spacingLarge)),
+                  /// SliverToBoxAdapter(child: SizedBox(height: Dimensions.scrollBottomPadding)),
+                ],
               ),
-              SliverToBoxAdapter(
-                child: SizedBox(height: Dimensions.scrollBottomPadding),
-              ),
-            ],
-          ),
+            );
+          },
         );
       },
     );
@@ -216,17 +176,13 @@ class _SearchBarDelegate extends SliverPersistentHeaderDelegate {
   _SearchBarDelegate(this.child);
 
   @override
-  double get minExtent => Dimensions.persistentHeaderHeight;
+  double get minExtent => Dimensions.persistentHeaderExtent;
 
   @override
-  double get maxExtent => Dimensions.persistentHeaderHeight;
+  double get maxExtent => Dimensions.persistentHeaderExtent;
 
   @override
-  Widget build(
-    BuildContext context,
-    double shrinkOffset,
-    bool overlapsContent,
-  ) {
+  Widget build(BuildContext context, double shrinkOffset, bool overlapsContent) {
     return child;
   }
 
@@ -240,17 +196,13 @@ class _ProductTabDelegate extends SliverPersistentHeaderDelegate {
   _ProductTabDelegate(this.child);
 
   @override
-  double get minExtent => 650;
+  double get minExtent => Dimensions.productTabExtent;
 
   @override
-  double get maxExtent => 650;
+  double get maxExtent => Dimensions.productTabExtent;
 
   @override
-  Widget build(
-    BuildContext context,
-    double shrinkOffset,
-    bool overlapsContent,
-  ) {
+  Widget build(BuildContext context, double shrinkOffset, bool overlapsContent) {
     return child;
   }
 
