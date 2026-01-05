@@ -79,5 +79,11 @@
   "verification_code_has_been_resent": "Verification code has been resent",
   "verify": "Verify",
   "invalid_otp": "Invalid OTP",
-  "please_enter_the_complete_6_digit_code": "Please enter the complete 6-digit code"
+  "please_enter_the_complete_6_digit_code": "Please enter the complete 6-digit code",
+  "member_since": "Member Since",
+  "update_profile": "Update Profile",
+  "phone": "Phone",
+  "user_found": "User Found",
+  "profile": "Profile",
+  "user_name": "User Name"
 }

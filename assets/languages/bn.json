@@ -40,7 +40,7 @@
   "welcome_back": "আবার স্বাগতম!",
   "sign_in_to_continue": "চালিয়ে যেতে সাইন ইন করুন",
   "phone_number": "ফোন নম্বর",
-  "hint_text": "+৮৮০১XXXXXXXXX",
+  "hint_text": "+8801XXXXXXXXX",
   "please_enter_your_phone_number": "আপনার ফোন নম্বর লিখুন",
   "password": "পাসওয়ার্ড",
   "enter_your_password": "আপনার পাসওয়ার্ড লিখুন",
@@ -79,5 +79,11 @@
   "verification_code_has_been_resent": "যাচাইকরণ কোড পুনরায় পাঠানো হয়েছে",
   "verify": "যাচাই করুন",
   "invalid_otp": "অবৈধ OTP",
-  "please_enter_the_complete_6_digit_code": "অনুগ্রহ করে সম্পূর্ণ 6-সংখ্যার কোড লিখুন"
+  "please_enter_the_complete_6_digit_code": "অনুগ্রহ করে সম্পূর্ণ 6-সংখ্যার কোড লিখুন",
+  "member_since": "থেকে সদস্য",
+  "update_profile": "প্রোফাইল আপডেট করুন",
+  "phone": "ফোন",
+  "user_found": "ব্যবহারকারী পাওয়া গেছে",
+  "profile": "প্রোফাইল",
+  "user_name": "ব্যবহারকারীর নাম"
 }
