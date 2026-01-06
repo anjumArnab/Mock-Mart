@@ -92,7 +92,7 @@ class _MainHomeScreenState extends State<MainHomeScreen>
                     localImage: userController.pickedFile != null
                         ? File(userController.pickedFile!.path)
                         : null,
-                    networkImage: userController.profileModel!.imageUrl,
+                    networkImage: userController.profileModel?.imageUrl,
                   ),
                           ],
                         ),
