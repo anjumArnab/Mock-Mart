@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:get/get.dart';
 import 'package:mock_mart/features/map/controllers/coordinate_controller.dart';
+import 'package:flutter_polyline_points/flutter_polyline_points.dart';
 
 class MapScreen extends StatefulWidget {
   const MapScreen({super.key});
@@ -48,7 +49,7 @@ class _MapScreenState extends State<MapScreen> {
         break;
       }
       else {
-        // Zooming out by 0.1 zoom level per iteration
+        // Zooming out by 0.3 zoom level per iteration
         final double zoomLevel = await controller.getZoomLevel() - 0.3;
         controller.animateCamera(CameraUpdate.newCameraPosition(CameraPosition(
           target: centerBounds,
@@ -167,7 +168,7 @@ class _MapScreenState extends State<MapScreen> {
 
           return RepaintBoundary(
             child: GoogleMap(
-               initialCameraPosition: initialCameraPosition,
+              initialCameraPosition: initialCameraPosition,
               mapType: MapType.normal,
               onMapCreated: (controller) => _onMapCreated(controller, points),
               markers: branchMarkers,
