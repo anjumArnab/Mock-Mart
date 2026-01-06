@@ -15,6 +15,11 @@ class MapScreen extends StatefulWidget {
 class _MapScreenState extends State<MapScreen> {
   GoogleMapController? _mapController;
 
+  // Animation configuration
+  static const double _zoomPadding = 10;
+  static const double _zoomStepSize = 0.7;
+  static const int _animationDurationMs = 800;
+
   LatLngBounds boundWithMaximumLatLngPoint(List<LatLng> list) {
     assert(list.isNotEmpty);
     var s = list.first.latitude,
@@ -31,42 +36,66 @@ class _MapScreenState extends State<MapScreen> {
     return LatLngBounds(southwest: LatLng(s, w), northeast: LatLng(n, e));
   }
 
-  Future<void> zoomToFit(GoogleMapController? controller, LatLngBounds? bounds, LatLng centerBounds, double bearing, {double padding = 0.5}) async {
+  final LatLng dhakaHub = LatLng(23.6830, 90.3203);
+
+  Future<void> zoomToFit(
+      GoogleMapController? controller,
+      LatLngBounds? bounds,
+      LatLng centerBounds,
+      double bearing, {
+        double padding = _zoomPadding,
+        double zoomStep = _zoomStepSize,
+        int animationDuration = _animationDurationMs,
+      }) async {
     if (controller == null || bounds == null) return;
 
     bool keepZoomingOut = true;
 
-    while(keepZoomingOut) {
+    while (keepZoomingOut) {
       final LatLngBounds screenBounds = await controller.getVisibleRegion();
-      if(fits(bounds, screenBounds)) {
+      if (fits(bounds, screenBounds)) {
         keepZoomingOut = false;
         final double zoomLevel = await controller.getZoomLevel() - padding;
-        controller.animateCamera(CameraUpdate.newCameraPosition(CameraPosition(
-          target: centerBounds,
-          zoom: zoomLevel,
-          bearing: bearing,
-        )));
+        controller.animateCamera(
+          CameraUpdate.newCameraPosition(
+            CameraPosition(
+              target: dhakaHub,
+              zoom: zoomLevel,
+              bearing: bearing,
+            ),
+          ),
+        );
         break;
-      }
-      else {
-        // Zooming out by 0.3 zoom level per iteration
-        final double zoomLevel = await controller.getZoomLevel() - 0.3;
-        controller.animateCamera(CameraUpdate.newCameraPosition(CameraPosition(
-          target: centerBounds,
-          zoom: zoomLevel,
-        )));
+      } else {
+        // Zooming out by specified zoom step per iteration
+        final double zoomLevel = await controller.getZoomLevel() - zoomStep;
+        controller.animateCamera(
+          CameraUpdate.newCameraPosition(
+            CameraPosition(
+              target: dhakaHub,
+              zoom: zoomLevel,
+            ),
+          ),
+        );
       }
     }
   }
 
   bool fits(LatLngBounds fitBounds, LatLngBounds screenBounds) {
-    final bool northEastLatitudeCheck = screenBounds.northeast.latitude >= fitBounds.northeast.latitude;
-    final bool northEastLongitudeCheck = screenBounds.northeast.longitude >= fitBounds.northeast.longitude;
+    final bool northEastLatitudeCheck =
+        screenBounds.northeast.latitude >= fitBounds.northeast.latitude;
+    final bool northEastLongitudeCheck =
+        screenBounds.northeast.longitude >= fitBounds.northeast.longitude;
 
-    final bool southWestLatitudeCheck = screenBounds.southwest.latitude <= fitBounds.southwest.latitude;
-    final bool southWestLongitudeCheck = screenBounds.southwest.longitude <= fitBounds.southwest.longitude;
+    final bool southWestLatitudeCheck =
+        screenBounds.southwest.latitude <= fitBounds.southwest.latitude;
+    final bool southWestLongitudeCheck =
+        screenBounds.southwest.longitude <= fitBounds.southwest.longitude;
 
-    return northEastLatitudeCheck && northEastLongitudeCheck && southWestLatitudeCheck && southWestLongitudeCheck;
+    return northEastLatitudeCheck &&
+        northEastLongitudeCheck &&
+        southWestLatitudeCheck &&
+        southWestLongitudeCheck;
   }
 
   void _onMapCreated(GoogleMapController controller, List<LatLng> points) async {
@@ -83,7 +112,15 @@ class _MapScreenState extends State<MapScreen> {
         (bounds.northeast.longitude + bounds.southwest.longitude) / 2,
       );
 
-      await zoomToFit(_mapController, bounds, centerBounds, 0.0, padding: 0.5);
+      await zoomToFit(
+        _mapController,
+        bounds,
+        dhakaHub,
+        0.0,
+        padding: _zoomPadding,
+        zoomStep: _zoomStepSize,
+      //  animationDuration: _animationDurationMs,
+      );
     }
   }
 
