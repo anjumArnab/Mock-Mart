@@ -7,9 +7,50 @@ import 'package:mock_mart/theme/theme_controller.dart';
 import 'package:mock_mart/utils/app_constants.dart';
 import 'package:mock_mart/utils/dimensions.dart';
 import 'package:mock_mart/utils/gaps.dart';
+import 'package:mock_mart/utils/text_styles.dart';
 
-class MenuScreen extends StatelessWidget {
+class MenuScreen extends StatefulWidget {
   const MenuScreen({super.key});
+
+  @override
+  State<MenuScreen> createState() => _MenuScreenState();
+}
+
+class _MenuScreenState extends State<MenuScreen>
+    with SingleTickerProviderStateMixin {
+  late AnimationController _controller;
+  late Animation<double> _sizeAnimation;
+
+  bool isExpanded = true;
+
+  void toggleAnimation() {
+    if (isExpanded) {
+      _controller.reverse();
+    } else {
+      _controller.forward();
+    }
+    isExpanded = !isExpanded;
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 300),
+    );
+
+    _sizeAnimation = Tween<double>(
+      begin: 100,
+      end: 450,
+    ).animate(CurvedAnimation(parent: _controller, curve: Curves.easeInOut));
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -39,7 +80,7 @@ class MenuScreen extends StatelessWidget {
                   style: TextStyle(color: Theme.of(context).primaryColor),
                 ),
                 value: isDark,
-                onChanged: (value) {
+                onChanged: (_) {
                   themeController.toggleTheme();
                 },
                 secondary: Icon(
@@ -47,10 +88,11 @@ class MenuScreen extends StatelessWidget {
                   color: Theme.of(context).primaryColor,
                 ),
               ),
+
               Row(
                 children: [
                   Gaps.horizontalGapOf(Dimensions.paddingSizeDefault),
-                  Icon(Icons.translate),
+                  const Icon(Icons.translate),
                   Gaps.horizontalGapOf(Dimensions.paddingSizeDefault),
                   DropdownButton<String>(
                     value: Get.find<LanguageController>().locale.languageCode,
@@ -70,11 +112,39 @@ class MenuScreen extends StatelessWidget {
                   ),
                 ],
               ),
+
               IconButton(
                 onPressed: () => Get.toNamed(RouteHelper.getMapScreen()),
-                icon: Icon(Icons.map_rounded, size: 50),
+                icon: const Icon(Icons.map_rounded, size: 50),
+              ),
+
+              Gaps.verticalGapOf(75),
+
+              AnimatedBuilder(
+                animation: _sizeAnimation,
+                builder: (context, child) {
+                  return Container(
+                    width: _sizeAnimation.value,
+                    height: _sizeAnimation.value,
+                    decoration: BoxDecoration(
+                      color: Colors.blue,
+                      borderRadius: BorderRadius.circular(16),
+                    ),
+                  );
+                },
+              ),
+
+              Gaps.verticalGapOf(75),
+
+              IconButton(
+                onPressed: () => Get.toNamed(RouteHelper.getAnimationScreen()),
+                icon: const Icon(Icons.animation_outlined, size: 50),
               ),
             ],
+          ),
+          floatingActionButton: FloatingActionButton(
+            onPressed: toggleAnimation,
+            child: const Icon(Icons.play_arrow),
           ),
         );
       },
