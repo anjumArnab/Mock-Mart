@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:get/get.dart';
 import 'package:mock_mart/features/map/controllers/coordinate_controller.dart';
-import 'package:flutter_polyline_points/flutter_polyline_points.dart';
 
 class MapScreen extends StatefulWidget {
   const MapScreen({super.key});
@@ -119,7 +118,6 @@ class _MapScreenState extends State<MapScreen> {
         0.0,
         padding: _zoomPadding,
         zoomStep: _zoomStepSize,
-      //  animationDuration: _animationDurationMs,
       );
     }
   }
@@ -142,6 +140,68 @@ class _MapScreenState extends State<MapScreen> {
     );
 
     return {polyline};
+  }
+
+  LatLng calculateCentroid(List<LatLng> points) {
+    double latitudeSum = 0;
+    double longitudeSum = 0;
+    for (var point in points) {
+      latitudeSum += point.latitude;
+      longitudeSum += point.longitude;
+    }
+    double latitudeAvg = latitudeSum / points.length;
+    double longitudeAvg = longitudeSum / points.length;
+    return LatLng(latitudeAvg, longitudeAvg);
+  }
+
+  List<LatLng> sortPointsClockwise(List<LatLng> points) {
+    if (points.length < 3) return points;
+
+    final centroid = calculateCentroid(points);
+
+    // Create a copy to avoid modifying the original list
+    final sortedPoints = List<LatLng>.from(points);
+
+    sortedPoints.sort((a, b) {
+      // Calculate angle for point 'a'
+      final angleA = atan2(a.latitude - centroid.latitude, a.longitude - centroid.longitude);
+      // Calculate angle for point 'b'
+      final angleB = atan2(b.latitude - centroid.latitude, b.longitude - centroid.longitude);
+
+      // Sort in ascending order
+      return angleA.compareTo(angleB);
+    });
+
+    return sortedPoints;
+  }
+
+  // Create polygon from branch points
+  Set<Polygon> _createPolygon(List<LatLng> points) {
+    if (points.length < 3) {
+      return {}; // Need at least 3 points to form a polygon
+    }
+
+    // Sort points to create a proper polygon shape
+    final sortedPoints = sortPointsClockwise(points);
+
+    // Close the polygon by adding the first point at the end if needed
+    final List<LatLng> finalPoints = List<LatLng>.from(sortedPoints);
+    if (finalPoints.isNotEmpty && finalPoints.first != finalPoints.last) {
+      finalPoints.add(finalPoints.first);
+    }
+
+    final PolygonId polygonId = PolygonId('branches_polygon');
+
+    final Polygon polygon = Polygon(
+      polygonId: polygonId,
+      points: finalPoints,
+      strokeColor: Colors.blue,
+      strokeWidth: 3,
+      fillColor: Colors.blue.withOpacity(0.15),
+      geodesic: true,
+    );
+
+    return {polygon};
   }
 
   @override
@@ -188,15 +248,15 @@ class _MapScreenState extends State<MapScreen> {
             final lat = double.tryParse(branch.latitude) ?? 0;
             final lng = double.tryParse(branch.longitude) ?? 0;
             return Marker(
-              markerId: MarkerId(branch.name ?? 'branch_${branch.id}'),
+              markerId: MarkerId(branch.name),
               position: LatLng(lat, lng),
               infoWindow: InfoWindow(
-                title: branch.name ?? 'Branch',
-                snippet: branch.address ?? '',
+                title: branch.name,
+                snippet: branch.address,
               ),
               onTap: () => Get.snackbar(
-                branch.name ?? 'Branch',
-                branch.address ?? '',
+                branch.name,
+                branch.address,
                 snackPosition: SnackPosition.BOTTOM,
               ),
             );
@@ -212,6 +272,7 @@ class _MapScreenState extends State<MapScreen> {
               myLocationButtonEnabled: true,
               myLocationEnabled: true,
               polylines: _createPolylines(),
+              polygons: _createPolygon(points),
             ),
           );
         },
