@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:mock_mart/features/animation/views/animation_screen.dart';
 import 'package:mock_mart/features/auth/views/sign_in_screen.dart';
 import 'package:mock_mart/features/auth/views/sign_up_screen.dart';
 import 'package:mock_mart/features/auth/views/verification_screen.dart';
@@ -15,6 +16,7 @@ class RouteHelper {
   static const String _main = '/main';
   static const String _userProfileScreen = '/user-profile-screen';
   static const String _mapScreen = '/map-screen';
+  static const String _animationScreen = '/animated-screen';
 
   // Route getters
   static String getMainRoute() => _main;
@@ -37,6 +39,8 @@ class RouteHelper {
   static String getHomeRoute() => _home;
 
   static String getMapScreen() => _mapScreen;
+
+  static String getAnimationScreen() => _animationScreen;
 
   static List<GetPage> routes = [
     GetPage(
@@ -63,6 +67,7 @@ class RouteHelper {
       page: () => const HomeScreen(),
     ),
     GetPage(name: _userProfileScreen, page: ()=> const UserProfileScreen()),
-     GetPage(name: _mapScreen, page: ()=> const MapScreen())
+     GetPage(name: _mapScreen, page: ()=> const MapScreen()),
+    GetPage(name: _animationScreen, page: ()=> const AnimationScreen())
   ];
 }
