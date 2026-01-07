@@ -7,7 +7,6 @@ import 'package:mock_mart/theme/theme_controller.dart';
 import 'package:mock_mart/utils/app_constants.dart';
 import 'package:mock_mart/utils/dimensions.dart';
 import 'package:mock_mart/utils/gaps.dart';
-import 'package:mock_mart/utils/text_styles.dart';
 
 class MenuScreen extends StatefulWidget {
   const MenuScreen({super.key});
@@ -42,7 +41,7 @@ class _MenuScreenState extends State<MenuScreen>
 
     _sizeAnimation = Tween<double>(
       begin: 100,
-      end: 450,
+      end: 500,
     ).animate(CurvedAnimation(parent: _controller, curve: Curves.easeInOut));
   }
 
@@ -119,32 +118,11 @@ class _MenuScreenState extends State<MenuScreen>
               ),
 
               Gaps.verticalGapOf(75),
-
-              AnimatedBuilder(
-                animation: _sizeAnimation,
-                builder: (context, child) {
-                  return Container(
-                    width: _sizeAnimation.value,
-                    height: _sizeAnimation.value,
-                    decoration: BoxDecoration(
-                      color: Colors.blue,
-                      borderRadius: BorderRadius.circular(16),
-                    ),
-                  );
-                },
-              ),
-
-              Gaps.verticalGapOf(75),
-
               IconButton(
                 onPressed: () => Get.toNamed(RouteHelper.getAnimationScreen()),
                 icon: const Icon(Icons.animation_outlined, size: 50),
               ),
             ],
-          ),
-          floatingActionButton: FloatingActionButton(
-            onPressed: toggleAnimation,
-            child: const Icon(Icons.play_arrow),
           ),
         );
       },
